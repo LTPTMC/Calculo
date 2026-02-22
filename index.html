@@ -119,14 +119,14 @@ strong{color:var(--text)}
   .logo-image{height:34px}
   .site-title{font-size:1rem}
   .nav-section{gap:8px;min-width:0}
-  .nav-section .tab{display:none}
+  .nav-section .tab{display:inline-flex}
   #loginBtn,#userBtn{margin-left:0 !important;padding:8px 12px !important;font-size:13px;max-width:48vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .section{padding:16px;padding-bottom:120px;min-height:calc(100vh - 160px)}
   .chart{padding:22px 16px}
   .result-value{font-size:40px}
   .modal-content{width:94%;padding:18px}
   .modal-grid{grid-template-columns:1fr}
-  .bottom-nav{padding:10px 8px calc(10px + env(safe-area-inset-bottom, 0px))}
+  .bottom-nav{display:flex;padding:10px 8px calc(10px + env(safe-area-inset-bottom, 0px))}
   .bottom-nav-item{flex:1;min-width:0;padding:8px 4px}
   .bottom-nav-item svg{width:22px;height:22px}
   .bottom-nav-item .nav-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px;line-height:1.2;max-width:100%}
@@ -138,6 +138,8 @@ strong{color:var(--text)}
 }
 
 @media (max-width:640px){
+  .nav-section .tab{display:none}
+  .bottom-nav{display:flex}
   h2{font-size:1.25rem;margin-bottom:18px}
   .label-text{font-size:10px;margin-bottom:6px}
   input[type=number],input[type=text]{padding:13px;padding-right:42px;font-size:17px}
@@ -278,6 +280,13 @@ strong{color:var(--text)}
   </header>
 
   <div class="header-spacer"></div>
+
+  <div id="launchCountdownBanner" style="display:none;max-width:1200px;margin:12px auto 0;padding:0 20px">
+    <div style="background:linear-gradient(135deg, rgba(59,130,246,0.12), rgba(168,85,247,0.12));border:1px solid rgba(59,130,246,0.35);border-radius:14px;padding:14px 16px;text-align:center">
+      <div id="launchBannerTitle" style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px"></div>
+      <div id="launchBannerTimer" style="font-size:13px;color:var(--muted)"></div>
+    </div>
+  </div>
 
   <!-- Home -->
   <section id="home" class="section active">
@@ -426,7 +435,7 @@ strong{color:var(--text)}
               </div>
               <h3 style="font-size:1.1rem;font-weight:700;color:var(--text)">Multi-Broker Support</h3>
             </div>
-            <p style="color:var(--muted);line-height:1.6">Vorkonfigurierte Gebührenmodelle für Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers und benutzerdefinierte Broker.</p>
+            <p style="color:var(--muted);line-height:1.6">Vorkonfigurierte Gebührenmodelle für Finanzen.net Zero, Smartbroker+, justTRADE, Trade Republic, Scalable Capital, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers und benutzerdefinierte Broker.</p>
           </div>
           <div style="background:var(--input-bg);border:1px solid var(--border);border-radius:12px;padding:24px">
             <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
@@ -459,7 +468,7 @@ strong{color:var(--text)}
           </div>
           <div style="background:var(--input-bg);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px">
             <h3 id="faqQ2" style="font-size:1.1rem;font-weight:700;margin-bottom:12px;color:var(--text)">Welche Broker werden unterstützt?</h3>
-            <p id="faqA2" style="color:var(--muted);line-height:1.6">Wir bieten vorkonfigurierte Gebührenmodelle für Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB und Interactive Brokers. Du kannst auch eigene Gebühren für jeden beliebigen Broker eingeben.</p>
+            <p id="faqA2" style="color:var(--muted);line-height:1.6">Wir bieten vorkonfigurierte Gebührenmodelle für Finanzen.net Zero, Smartbroker+, justTRADE, Trade Republic, Scalable Capital, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB und Interactive Brokers. Du kannst auch eigene Gebühren für jeden beliebigen Broker eingeben.</p>
           </div>
           <div style="background:var(--input-bg);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px">
             <h3 id="faqQ3" style="font-size:1.1rem;font-weight:700;margin-bottom:12px;color:var(--text)">Wie wird die Steuer berechnet?</h3>
@@ -1433,6 +1442,8 @@ strong{color:var(--text)}
               <option value="finanzenzero">Finanzen.net Zero</option>
               <option value="smartbrokerplus">Smartbroker+</option>
               <option value="justtrade">justTRADE</option>
+              <option value="traderepublic">Trade Republic</option>
+              <option value="scalablecapital">Scalable Capital</option>
               <option value="flatex">Flatex</option>
               <option value="comdirect">Comdirect</option>
               <option value="ing">ING</option>
@@ -1952,10 +1963,6 @@ strong{color:var(--text)}
 
   <!-- Bottom Nav -->
   <nav class="bottom-nav">
-    <div class="bottom-nav-item mobile-home" onclick="showSection('home')">
-      <svg fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11.5L12 4l9 7.5"></path><path d="M5 10.5V20h14v-9.5"></path></svg>
-      <span class="nav-text">Home</span>
-    </div>
     <div class="bottom-nav-item active" onclick="showSection('trading')">
       <svg fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
       <span class="nav-text">Rechner</span>
@@ -1967,10 +1974,6 @@ strong{color:var(--text)}
     <div class="bottom-nav-item" onclick="showSection('etf')">
       <svg fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 9h18M3 15h18M6 6h12v12H6z"/></svg>
       <span class="nav-text">ETF Vergleich</span>
-    </div>
-    <div class="bottom-nav-item" onclick="showSection('settings')">
-      <svg fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v6m0 6v6M5.3 5.3l4.2 4.2m4.2 4.2l4.2 4.2M1 12h6m6 0h6M5.3 18.7l4.2-4.2m4.2-4.2l4.2-4.2"></path></svg>
-      <span class="nav-text" id="settingsNavText">Einstellungen</span>
     </div>
   </nav>
 
@@ -2427,6 +2430,151 @@ strong{color:var(--text)}
   </div>
 
   <script>
+  const LAUNCH_SCHEDULE = {
+    public: new Date('2026-03-15T00:00:00+01:00'),
+    pro: new Date('2026-04-01T00:00:00+02:00')
+  };
+
+  let launchCountdownIntervalId = null;
+
+  function isPublicLaunchLive() {
+    return Date.now() >= LAUNCH_SCHEDULE.public.getTime();
+  }
+
+  function isProLaunchLive() {
+    return Date.now() >= LAUNCH_SCHEDULE.pro.getTime();
+  }
+
+  function getActiveLanguage() {
+    return (typeof aktuelleSprache === 'string' && aktuelleSprache)
+      ? aktuelleSprache
+      : (localStorage.getItem('sprache') || 'de');
+  }
+
+  function formatCountdown(ms) {
+    const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    return `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
+  }
+
+  function getLaunchTexts(lang) {
+    const texts = {
+      de: {
+        siteTitle: 'Calculo startet am 15.03.2026',
+        siteTimer: 'Website-Launch in',
+        proTitle: 'Calculo Pro ist ab 01.04.2026 verfügbar',
+        proTimer: 'Pro-Start in',
+        proLocked: 'Calculo Pro ist aktuell noch nicht verfügbar. Pro startet am 01.04.2026.'
+      },
+      en: {
+        siteTitle: 'Calculo launches on 03/15/2026',
+        siteTimer: 'Website launch in',
+        proTitle: 'Calculo Pro is available from 04/01/2026',
+        proTimer: 'Pro launch in',
+        proLocked: 'Calculo Pro is not available yet. Pro launches on 04/01/2026.'
+      },
+      es: {
+        siteTitle: 'Calculo se lanza el 15/03/2026',
+        siteTimer: 'Lanzamiento del sitio en',
+        proTitle: 'Calculo Pro estará disponible el 01/04/2026',
+        proTimer: 'Lanzamiento Pro en',
+        proLocked: 'Calculo Pro aún no está disponible. Pro se lanza el 01/04/2026.'
+      },
+      fr: {
+        siteTitle: 'Calculo sera lancé le 15/03/2026',
+        siteTimer: 'Lancement du site dans',
+        proTitle: 'Calculo Pro sera disponible le 01/04/2026',
+        proTimer: 'Lancement Pro dans',
+        proLocked: 'Calculo Pro n’est pas encore disponible. Pro sera lancé le 01/04/2026.'
+      }
+    };
+    return texts[lang] || texts.de;
+  }
+
+  function updateLaunchCountdownBanner() {
+    const banner = document.getElementById('launchCountdownBanner');
+    const title = document.getElementById('launchBannerTitle');
+    const timer = document.getElementById('launchBannerTimer');
+    if (!banner || !title || !timer) return;
+
+    const now = Date.now();
+    const lang = getActiveLanguage();
+    const texts = getLaunchTexts(lang);
+
+    if (now < LAUNCH_SCHEDULE.public.getTime()) {
+      title.textContent = texts.siteTitle;
+      timer.textContent = `${texts.siteTimer}: ${formatCountdown(LAUNCH_SCHEDULE.public.getTime() - now)}`;
+      banner.style.display = 'block';
+      return;
+    }
+
+    if (now < LAUNCH_SCHEDULE.pro.getTime()) {
+      title.textContent = texts.proTitle;
+      timer.textContent = `${texts.proTimer}: ${formatCountdown(LAUNCH_SCHEDULE.pro.getTime() - now)}`;
+      banner.style.display = 'block';
+      return;
+    }
+
+    banner.style.display = 'none';
+  }
+
+  function startLaunchCountdownBanner() {
+    if (launchCountdownIntervalId) {
+      clearInterval(launchCountdownIntervalId);
+      launchCountdownIntervalId = null;
+    }
+    updateLaunchCountdownBanner();
+    if (!isProLaunchLive()) {
+      launchCountdownIntervalId = setInterval(updateLaunchCountdownBanner, 1000);
+    }
+  }
+
+  function applyPrelaunchProUI() {
+    const prelaunch = !isProLaunchLive();
+
+    const proFeatureTitle = document.getElementById('featureProTitle');
+    if (proFeatureTitle && proFeatureTitle.parentElement) {
+      proFeatureTitle.parentElement.style.display = prelaunch ? 'none' : '';
+    }
+
+    const proStatLabel = document.getElementById('statLabel3');
+    if (proStatLabel && proStatLabel.parentElement) {
+      proStatLabel.parentElement.style.display = prelaunch ? 'none' : '';
+    }
+
+    const proAccountFree = document.getElementById('proAccountFree');
+    if (proAccountFree) {
+      proAccountFree.style.display = prelaunch ? 'none' : proAccountFree.style.display;
+    }
+
+    const proAccountActive = document.getElementById('proAccountActive');
+    if (proAccountActive) {
+      proAccountActive.style.display = prelaunch ? 'none' : proAccountActive.style.display;
+    }
+
+    const trialInfoBox = document.getElementById('trialInfoBox');
+    if (trialInfoBox) {
+      trialInfoBox.style.display = prelaunch ? 'none' : '';
+    }
+
+    const sparProTeaser = document.getElementById('sparProTeaser');
+    if (sparProTeaser) {
+      sparProTeaser.style.display = prelaunch ? 'none' : '';
+    }
+
+    document.querySelectorAll('.upgrade-pro').forEach(button => {
+      button.style.display = prelaunch ? 'none' : '';
+    });
+  }
+
+  function getProLockedMessage() {
+    const lang = getActiveLanguage();
+    return getLaunchTexts(lang).proLocked;
+  }
+
 // Navigation
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -2465,7 +2613,7 @@ function showSection(id) {
   
   // Aktualisiere ETF-Ansicht wenn ETF-Sektion geöffnet wird
   if (id === 'etf') {
-    const isPro = localStorage.getItem('isPro') === 'true';
+    const isPro = isProLaunchLive() && localStorage.getItem('isPro') === 'true';
     if (isPro) {
       document.getElementById('etfFreeView').style.display = 'none';
       document.getElementById('etfProView').style.display = 'block';
@@ -3477,6 +3625,11 @@ function bindUpgradeButtons() {
 }
 
 function upgradeToPro(targetId) {
+  if (!isProLaunchLive()) {
+    alert(getProLockedMessage());
+    return;
+  }
+
   // Simuliere Pro-Upgrade (in Produktion würde hier eine Zahlungsabwicklung erfolgen)
   const messages = {
     de: { confirm: 'Calculo Pro 3 Tage kostenlos testen?\n\n• Testphase: 3 Tage kostenlos\n• Keine Zahlung während der Testphase\n• Jederzeit kündbar\n\nℹ️ Nach 3 Tagen läuft das Abo automatisch, wenn du nicht kündigst.\n\nPreise nach der Testphase:\n• Monatlich: 1,99€/Monat\n• Jährlich: 18,99€/Jahr (2 Monate gratis)\n\n(Dies ist eine Demo - keine echte Zahlung)', success: 'Willkommen bei Calculo Pro! 🎉\n\nDeine 3-tägige kostenlose Testphase hat begonnen.\nAlle Premium-Features sind jetzt freigeschaltet.\n\nℹ️ Denk daran: Das Abo läuft nach 3 Tagen automatisch, wenn du nicht kündigst.' },
@@ -3586,7 +3739,11 @@ function versteckeAlleProFeatures() {
 }
 
 function updateProStatus() {
-  const isPro = localStorage.getItem('isPro') === 'true';
+  const storedIsPro = localStorage.getItem('isPro') === 'true';
+  const isPro = isProLaunchLive() && storedIsPro;
+  if (!isProLaunchLive() && storedIsPro) {
+    localStorage.setItem('isPro', 'false');
+  }
   
   if (isPro) {
     document.getElementById('proAccountFree').style.display = 'none';
@@ -3601,6 +3758,8 @@ function updateProStatus() {
     document.getElementById('etfFreeView').style.display = 'block';
     document.getElementById('etfProView').style.display = 'none';
   }
+
+  applyPrelaunchProUI();
 }
 
 function setTheme(theme) {
@@ -3676,6 +3835,7 @@ document.addEventListener('DOMContentLoaded', function() {
   updateAnalyseWerteContainer();
   
   // Pro-Status laden
+  startLaunchCountdownBanner();
   updateProStatus();
   bindUpgradeButtons();
   
@@ -5109,6 +5269,14 @@ const BROKER_GEBUEHREN_MODELLE = {
     direkt: { typ: 'free-ab', ab: 500, sonst: { typ: 'fixed', wert: 1.0 } },
     xetra: { typ: 'fixed', wert: 5.0 }
   },
+  traderepublic: {
+    direkt: { typ: 'fixed', wert: 1.0 },
+    xetra: { typ: 'fixed', wert: 1.0 }
+  },
+  scalablecapital: {
+    direkt: { typ: 'fixed', wert: 0.99 },
+    xetra: { typ: 'fixed', wert: 0.99 }
+  },
   flatex: {
     direkt: { typ: 'fixed', wert: 5.9 },
     xetra: { typ: 'fixed', wert: 5.9 }
@@ -5260,6 +5428,18 @@ function aendereBroker() {
       break;
     case 'justtrade':
       fixkostenInput.value = '0.00';
+      variableInput.value = '0';
+      fixkostenInput.disabled = true;
+      variableInput.disabled = true;
+      break;
+    case 'traderepublic':
+      fixkostenInput.value = '1.00';
+      variableInput.value = '0';
+      fixkostenInput.disabled = true;
+      variableInput.disabled = true;
+      break;
+    case 'scalablecapital':
+      fixkostenInput.value = '0.99';
       variableInput.value = '0';
       fixkostenInput.disabled = true;
       variableInput.disabled = true;
@@ -5678,6 +5858,8 @@ const uebersetzungen = {
     brokerFinanzenZero: 'Finanzen.net Zero',
     brokerSmartbrokerPlus: 'Smartbroker+',
     brokerJustTrade: 'justTRADE',
+    brokerTradeRepublic: 'Trade Republic',
+    brokerScalableCapital: 'Scalable Capital',
     brokerFlatex: 'Flatex',
     brokerComdirect: 'Comdirect',
     brokerIng: 'ING',
@@ -5922,7 +6104,7 @@ const uebersetzungen = {
     fastSpeed: 'Blitzschnell',
     fastSpeedDesc: 'Keine Ladezeiten, sofortige Berechnungen. Arbeitet komplett offline nach dem ersten Laden.',
     multiBroker: 'Multi-Broker Support',
-    multiBrokerDesc: 'Vorkonfigurierte Gebührenmodelle für Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers und benutzerdefinierte Broker.',
+    multiBrokerDesc: 'Vorkonfigurierte Gebührenmodelle für Finanzen.net Zero, Smartbroker+, justTRADE, Trade Republic, Scalable Capital, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers und benutzerdefinierte Broker.',
     tradingHistory: 'Trading Historie',
     tradingHistoryDesc: 'Speichere und verfolge all deine Trades mit detaillierten Informationen zu Gewinn, Rendite und Zeitpunkt.',
     noPositionsSaved: 'Noch keine Positionen gespeichert',
@@ -5963,7 +6145,7 @@ const uebersetzungen = {
     faqQ1: 'Wie werden meine Daten gespeichert?',
     faqA1: 'Bei Anmeldung speichern wir Account-Daten sicher in der Cloud (Firebase/Firestore). Ohne Anmeldung bleiben Daten lokal im Browser.',
     faqQ2: 'Welche Broker werden unterstützt?',
-    faqA2: 'Wir bieten vorkonfigurierte Gebührenmodelle für Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB und Interactive Brokers. Du kannst auch eigene Gebühren für jeden beliebigen Broker eingeben.',
+    faqA2: 'Wir bieten vorkonfigurierte Gebührenmodelle für Finanzen.net Zero, Smartbroker+, justTRADE, Trade Republic, Scalable Capital, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB und Interactive Brokers. Du kannst auch eigene Gebühren für jeden beliebigen Broker eingeben.',
     faqQ3: 'Wie wird die Steuer berechnet?',
     faqA3: 'Die Abgeltungssteuer in Deutschland beträgt 26,375% (25% Abgeltungssteuer + 5,5% Solidaritätszuschlag). Der Freibetrag von 1.000€ pro Jahr wird automatisch berücksichtigt.',
     faqQ4: 'Kann ich zwischen Brutto und Netto wechseln?',
@@ -6295,6 +6477,8 @@ const uebersetzungen = {
     brokerFinanzenZero: 'Finanzen.net Zero',
     brokerSmartbrokerPlus: 'Smartbroker+',
     brokerJustTrade: 'justTRADE',
+    brokerTradeRepublic: 'Trade Republic',
+    brokerScalableCapital: 'Scalable Capital',
     brokerFlatex: 'Flatex',
     brokerComdirect: 'Comdirect',
     brokerIng: 'ING',
@@ -6569,7 +6753,7 @@ const uebersetzungen = {
     fastSpeed: 'Lightning Fast',
     fastSpeedDesc: 'No loading times, instant calculations. Works completely offline after first load.',
     multiBroker: 'Multi-Broker Support',
-    multiBrokerDesc: 'Pre-configured fee models for Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers and custom brokers.',
+    multiBrokerDesc: 'Pre-configured fee models for Finanzen.net Zero, Smartbroker+, justTRADE, Trade Republic, Scalable Capital, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers and custom brokers.',
     tradingHistory: 'Trading History',
     noPositionsSaved: 'No positions saved yet',
     saveFirstPosition: 'Save your first position to see it here',
@@ -6610,7 +6794,7 @@ const uebersetzungen = {
     faqQ1: 'How is my data stored?',
     faqA1: 'When you sign in, account data is stored securely in the cloud (Firebase/Firestore). Without login, data stays local in your browser.',
     faqQ2: 'Which brokers are supported?',
-    faqA2: 'We offer pre-configured fee models for Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB and Interactive Brokers. You can also enter custom fees for any broker.',
+    faqA2: 'We offer pre-configured fee models for Finanzen.net Zero, Smartbroker+, justTRADE, Trade Republic, Scalable Capital, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB and Interactive Brokers. You can also enter custom fees for any broker.',
     faqQ3: 'How is the tax calculated?',
     faqA3: 'The capital gains tax in Germany is 26.375% (25% capital gains tax + 5.5% solidarity surcharge). The allowance of €1,000 per year is automatically taken into account.',
     faqQ4: 'Can I switch between gross and net?',
@@ -6949,6 +7133,8 @@ const uebersetzungen = {
     brokerFinanzenZero: 'Finanzen.net Zero',
     brokerSmartbrokerPlus: 'Smartbroker+',
     brokerJustTrade: 'justTRADE',
+    brokerTradeRepublic: 'Trade Republic',
+    brokerScalableCapital: 'Scalable Capital',
     brokerFlatex: 'Flatex',
     brokerComdirect: 'Comdirect',
     brokerIng: 'ING',
@@ -7223,7 +7409,7 @@ const uebersetzungen = {
     fastSpeed: 'Ultrarrápido',
     fastSpeedDesc: 'Sin tiempos de carga, cálculos instantáneos. Funciona completamente sin conexión después de la primera carga.',
     multiBroker: 'Soporte Multi-Broker',
-    multiBrokerDesc: 'Modelos de comisiones preconfigurados para Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers y brokers personalizados.',
+    multiBrokerDesc: 'Modelos de comisiones preconfigurados para Finanzen.net Zero, Smartbroker+, justTRADE, Trade Republic, Scalable Capital, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers y brokers personalizados.',
     tradingHistory: 'Historial de Trading',
     noPositionsSaved: 'Aún no hay posiciones guardadas',
     saveFirstPosition: 'Guarda tu primera posición para verla aquí',
@@ -7264,7 +7450,7 @@ const uebersetzungen = {
     faqQ1: '¿Cómo se almacenan mis datos?',
     faqA1: 'Al iniciar sesión, los datos de cuenta se almacenan de forma segura en la nube (Firebase/Firestore). Sin inicio de sesión, los datos quedan locales en tu navegador.',
     faqQ2: '¿Qué brokers son compatibles?',
-    faqA2: 'Ofrecemos modelos de comisiones preconfigurados para Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB e Interactive Brokers. También puedes introducir comisiones personalizadas para cualquier broker.',
+    faqA2: 'Ofrecemos modelos de comisiones preconfigurados para Finanzen.net Zero, Smartbroker+, justTRADE, Trade Republic, Scalable Capital, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB e Interactive Brokers. También puedes introducir comisiones personalizadas para cualquier broker.',
     faqQ3: '¿Cómo se calculan los impuestos?',
     faqA3: 'El impuesto sobre plusvalías en Alemania es del 26,375% (25% impuesto sobre plusvalías + 5,5% recargo de solidaridad). La desgravación de 1.000€ al año se tiene en cuenta automáticamente.',
     faqQ4: '¿Puedo cambiar entre bruto y neto?',
@@ -7591,6 +7777,8 @@ const uebersetzungen = {
     brokerFinanzenZero: 'Finanzen.net Zero',
     brokerSmartbrokerPlus: 'Smartbroker+',
     brokerJustTrade: 'justTRADE',
+    brokerTradeRepublic: 'Trade Republic',
+    brokerScalableCapital: 'Scalable Capital',
     brokerFlatex: 'Flatex',
     brokerComdirect: 'Comdirect',
     brokerIng: 'ING',
@@ -7865,7 +8053,7 @@ const uebersetzungen = {
     fastSpeed: 'Ultra Rapide',
     fastSpeedDesc: 'Aucun temps de chargement, calculs instantanés. Fonctionne complètement hors ligne après le premier chargement.',
     multiBroker: 'Support Multi-Courtiers',
-    multiBrokerDesc: 'Modèles de frais préconfigurés pour Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers et courtiers personnalisés.',
+    multiBrokerDesc: 'Modèles de frais préconfigurés pour Finanzen.net Zero, Smartbroker+, justTRADE, Trade Republic, Scalable Capital, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers et courtiers personnalisés.',
     tradingHistory: 'Historique de Trading',
     noPositionsSaved: 'Aucune position enregistrée',
     saveFirstPosition: 'Enregistrez votre première position pour la voir ici',
@@ -7906,7 +8094,7 @@ const uebersetzungen = {
     faqQ1: 'Comment mes données sont-elles stockées?',
     faqA1: 'Lorsque vous vous connectez, les donnees de compte sont stockees de facon securisee dans le cloud (Firebase/Firestore). Sans connexion, les donnees restent locales dans votre navigateur.',
     faqQ2: 'Quels courtiers sont pris en charge?',
-    faqA2: 'Nous proposons des modèles de frais préconfigurés pour Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB et Interactive Brokers. Vous pouvez également saisir des frais personnalisés pour n\'importe quel courtier.',
+    faqA2: 'Nous proposons des modèles de frais préconfigurés pour Finanzen.net Zero, Smartbroker+, justTRADE, Trade Republic, Scalable Capital, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB et Interactive Brokers. Vous pouvez également saisir des frais personnalisés pour n\'importe quel courtier.',
     faqQ3: 'Comment les impôts sont-ils calculés?',
     faqA3: 'L\'impôt sur les plus-values en Allemagne est de 26,375% (25% impôt sur les plus-values + 5,5% contribution de solidarité). L\'abattement de 1.000€ par an est automatiquement pris en compte.',
     faqQ4: 'Puis-je basculer entre brut et net?',
@@ -8048,10 +8236,6 @@ function aktualisiereSprachAnzeige() {
   if (bottomNavItems[2]) {
     const textSpan = bottomNavItems[2].querySelector('.nav-text');
     if (textSpan) textSpan.textContent = t('etfComparison');
-  }
-  if (bottomNavItems[3]) {
-    const textSpan = bottomNavItems[3].querySelector('.nav-text');
-    if (textSpan) textSpan.textContent = t('settings');
   }
   
   // ===== HOME SEITE =====
@@ -8774,6 +8958,8 @@ function aktualisiereSprachAnzeige() {
       if (opt.value === 'finanzenzero') opt.textContent = t('brokerFinanzenZero');
       if (opt.value === 'smartbrokerplus') opt.textContent = t('brokerSmartbrokerPlus');
       if (opt.value === 'justtrade') opt.textContent = t('brokerJustTrade');
+      if (opt.value === 'traderepublic') opt.textContent = t('brokerTradeRepublic');
+      if (opt.value === 'scalablecapital') opt.textContent = t('brokerScalableCapital');
       if (opt.value === 'flatex') opt.textContent = t('brokerFlatex');
       if (opt.value === 'comdirect') opt.textContent = t('brokerComdirect');
       if (opt.value === 'ing') opt.textContent = t('brokerIng');
@@ -9639,6 +9825,8 @@ function translatePageText() {
     'Finanzen.net Zero': t('brokerFinanzenZero'),
     'Smartbroker+': t('brokerSmartbrokerPlus'),
     'justTRADE': t('brokerJustTrade'),
+    'Trade Republic': t('brokerTradeRepublic'),
+    'Scalable Capital': t('brokerScalableCapital'),
     'Flatex': t('brokerFlatex'),
     'Comdirect': t('brokerComdirect'),
     'ING': t('brokerIng'),
@@ -9800,6 +9988,8 @@ function translatePageText() {
     'Finanzen.net Zero': 'Finanzen.net Zero',
     'Smartbroker+': 'Smartbroker+',
     'justTRADE': 'justTRADE',
+    'Trade Republic': 'Trade Republic',
+    'Scalable Capital': 'Scalable Capital',
     'Flatex': 'Flatex',
     'Comdirect': 'Comdirect',
     'ING': 'ING',
@@ -10452,6 +10642,8 @@ document.addEventListener('DOMContentLoaded', function() {
   ladeFreibetrag();
   ladeGebuehren();
   aktualisiereLoginStatus();
+  startLaunchCountdownBanner();
+  applyPrelaunchProUI();
   
   // Kurze Verzögerung, damit alle Elemente sicher geladen sind
   setTimeout(function() {
