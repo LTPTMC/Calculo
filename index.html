@@ -3624,7 +3624,7 @@ function bindUpgradeButtons() {
   });
 }
 
-function upgradeToPro(targetId) {
+async function upgradeToPro(targetId) {
   if (!isProLaunchLive()) {
     alert(getProLockedMessage());
     return;
@@ -3644,6 +3644,53 @@ function upgradeToPro(targetId) {
   const confirmed = confirm(msg.confirm);
   
   if (confirmed) {
+    try {
+      if (typeof window.firebaseRequestProActivation !== 'function') {
+        throw new Error('SERVER_GUARD_NOT_READY');
+      }
+      await window.firebaseRequestProActivation();
+    } catch (error) {
+      console.error('Serverseitige Pro-Prüfung fehlgeschlagen:', error);
+      const code = (error && error.code) ? String(error.code) : '';
+      const errorMessages = {
+        de: {
+          unauthenticated: 'Bitte melde dich zuerst an, um Pro zu aktivieren.',
+          failedPrecondition: getProLockedMessage(),
+          fallback: 'Pro konnte serverseitig nicht freigeschaltet werden. Bitte versuche es später erneut.'
+        },
+        en: {
+          unauthenticated: 'Please sign in first to activate Pro.',
+          failedPrecondition: getProLockedMessage(),
+          fallback: 'Pro could not be activated server-side. Please try again later.'
+        },
+        es: {
+          unauthenticated: 'Por favor, inicia sesión primero para activar Pro.',
+          failedPrecondition: getProLockedMessage(),
+          fallback: 'No se pudo activar Pro en el servidor. Inténtalo de nuevo más tarde.'
+        },
+        fr: {
+          unauthenticated: 'Veuillez vous connecter d’abord pour activer Pro.',
+          failedPrecondition: getProLockedMessage(),
+          fallback: 'Pro n’a pas pu être activé côté serveur. Réessayez plus tard.'
+        }
+      };
+
+      const langErrors = errorMessages[lang] || errorMessages.de;
+      if (code.includes('unauthenticated')) {
+        alert(langErrors.unauthenticated);
+        if (typeof oeffneLoginModal === 'function') {
+          oeffneLoginModal();
+        }
+        return;
+      }
+      if (code.includes('failed-precondition')) {
+        alert(langErrors.failedPrecondition);
+        return;
+      }
+      alert(langErrors.fallback);
+      return;
+    }
+
     localStorage.setItem('isPro', 'true');
     updateProStatus();
     alert(msg.success);
@@ -10656,6 +10703,7 @@ document.addEventListener('DOMContentLoaded', function() {
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
     import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
     import { getFirestore, doc, setDoc, getDoc, collection, getDocs, deleteDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-functions.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAd4B0gt6D1cgErq-up419M8ARDejI57zQ",
@@ -10669,6 +10717,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+    const functions = getFunctions(app, 'europe-west3');
 
     window.firebaseAuth = auth;
     window.firebaseDb = db;
@@ -10724,6 +10773,12 @@ document.addEventListener('DOMContentLoaded', function() {
       const snap = await getDocs(col);
       const deletes = snap.docs.map((docSnap) => deleteDoc(docSnap.ref));
       await Promise.all(deletes);
+    };
+
+    window.firebaseRequestProActivation = async () => {
+      const callable = httpsCallable(functions, 'requestProActivation');
+      const result = await callable({});
+      return result.data;
     };
 
     onAuthStateChanged(auth, async (user) => {
