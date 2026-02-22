@@ -112,6 +112,67 @@ strong{color:var(--text)}
 .modal-close{background:rgba(255,255,255,0.05);border:none;border-radius:50%;width:40px;height:40px;cursor:pointer;color:var(--muted);font-size:20px}
 .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
 .modal-result{background:rgba(255,255,255,0.02);border-radius:12px;padding:20px;margin:24px 0;text-align:center}
+
+@media (max-width:1024px){
+  .site-header{height:72px;padding:10px 14px}
+  .header-spacer{height:72px}
+  .logo-image{height:34px}
+  .site-title{font-size:1rem}
+  .nav-section{gap:8px;min-width:0}
+  .nav-section .tab{display:none}
+  #loginBtn,#userBtn{margin-left:0 !important;padding:8px 12px !important;font-size:13px;max-width:48vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .section{padding:16px;padding-bottom:120px;min-height:calc(100vh - 160px)}
+  .chart{padding:22px 16px}
+  .result-value{font-size:40px}
+  .modal-content{width:94%;padding:18px}
+  .modal-grid{grid-template-columns:1fr}
+  .bottom-nav{padding:10px 8px calc(10px + env(safe-area-inset-bottom, 0px))}
+  .bottom-nav-item{flex:1;min-width:0;padding:8px 4px}
+  .bottom-nav-item svg{width:22px;height:22px}
+  .bottom-nav-item .nav-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px;line-height:1.2;max-width:100%}
+  .mobile-home{display:flex}
+}
+
+@media (min-width:1025px){
+  .mobile-home{display:none}
+}
+
+@media (max-width:640px){
+  h2{font-size:1.25rem;margin-bottom:18px}
+  .label-text{font-size:10px;margin-bottom:6px}
+  input[type=number],input[type=text]{padding:13px;padding-right:42px;font-size:17px}
+  .input-unit{right:12px;font-size:14px}
+  .btn-row{flex-direction:column}
+  .btn-row .btn{width:100%}
+  .result-value{font-size:34px}
+  .result-badge{font-size:14px;padding:7px 12px}
+  .info-card{padding:14px}
+  .info-row{gap:12px;align-items:flex-start}
+  .modal-content{width:96%;padding:16px;max-height:88vh;overflow-y:auto}
+}
+
+@media (max-width:380px){
+  .site-header{padding:8px 10px}
+  .logo-image{height:30px}
+  .site-title{font-size:0.9rem}
+  #loginBtn,#userBtn{padding:6px 10px !important;font-size:12px}
+  .bottom-nav{padding:8px 4px calc(8px + env(safe-area-inset-bottom, 0px))}
+  .bottom-nav-item{padding:6px 2px;font-size:9px;gap:2px}
+  .bottom-nav-item svg{width:20px;height:20px}
+  .bottom-nav-item .nav-text{font-size:9px}
+  h2{font-size:1.1rem;margin-bottom:14px}
+  .label-text{font-size:9px}
+  input[type=number],input[type=text]{padding:11px;padding-right:38px;font-size:16px}
+  .input-unit{font-size:13px;right:10px}
+  .btn{padding:12px 16px;font-size:13px}
+  .result-value{font-size:30px}
+  .result-label{font-size:11px}
+  .result-badge{font-size:12px;padding:6px 10px}
+  .info-card{padding:12px}
+  .modal-content{width:98%;padding:14px;max-height:90vh}
+  .modal-title{font-size:18px}
+  .modal-close{width:36px;height:36px;font-size:18px}
+}
   </style>
   <script>
 /*!
@@ -347,7 +408,7 @@ strong{color:var(--text)}
               </div>
               <h3 style="font-size:1.1rem;font-weight:700;color:var(--text)">100% Datenschutz</h3>
             </div>
-            <p style="color:var(--muted);line-height:1.6">Alle Daten bleiben lokal in deinem Browser gespeichert. Keine Cloud, keine Server, vollständige Kontrolle.</p>
+            <p style="color:var(--muted);line-height:1.6">Account-Daten werden sicher in der Cloud gespeichert (Firebase). Ohne Anmeldung bleiben Daten lokal im Browser.</p>
           </div>
           <div style="background:var(--input-bg);border:1px solid var(--border);border-radius:12px;padding:24px">
             <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
@@ -365,7 +426,7 @@ strong{color:var(--text)}
               </div>
               <h3 style="font-size:1.1rem;font-weight:700;color:var(--text)">Multi-Broker Support</h3>
             </div>
-            <p style="color:var(--muted);line-height:1.6">Vorkonfigurierte Gebührenmodelle für Trade Republic, Scalable Capital und benutzerdefinierte Broker.</p>
+            <p style="color:var(--muted);line-height:1.6">Vorkonfigurierte Gebührenmodelle für Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers und benutzerdefinierte Broker.</p>
           </div>
           <div style="background:var(--input-bg);border:1px solid var(--border);border-radius:12px;padding:24px">
             <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
@@ -394,11 +455,11 @@ strong{color:var(--text)}
         <div style="max-width:700px;margin:0 auto">
           <div style="background:var(--input-bg);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px">
             <h3 id="faqQ1" style="font-size:1.1rem;font-weight:700;margin-bottom:12px;color:var(--text)">Wie werden meine Daten gespeichert?</h3>
-            <p id="faqA1" style="color:var(--muted);line-height:1.6">Alle Daten werden ausschließlich lokal in deinem Browser gespeichert (localStorage). Es werden keine Daten an externe Server übertragen. Du hast volle Kontrolle über deine Informationen.</p>
+            <p id="faqA1" style="color:var(--muted);line-height:1.6">Bei Anmeldung speichern wir Account-Daten sicher in der Cloud (Firebase/Firestore). Ohne Anmeldung bleiben Daten lokal im Browser.</p>
           </div>
           <div style="background:var(--input-bg);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px">
             <h3 id="faqQ2" style="font-size:1.1rem;font-weight:700;margin-bottom:12px;color:var(--text)">Welche Broker werden unterstützt?</h3>
-            <p id="faqA2" style="color:var(--muted);line-height:1.6">Wir bieten vorkonfigurierte Gebührenmodelle für Trade Republic (1€ pro Order) und Scalable Capital (0,99€ pro Order). Du kannst auch eigene Gebühren für jeden beliebigen Broker eingeben.</p>
+            <p id="faqA2" style="color:var(--muted);line-height:1.6">Wir bieten vorkonfigurierte Gebührenmodelle für Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB und Interactive Brokers. Du kannst auch eigene Gebühren für jeden beliebigen Broker eingeben.</p>
           </div>
           <div style="background:var(--input-bg);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px">
             <h3 id="faqQ3" style="font-size:1.1rem;font-weight:700;margin-bottom:12px;color:var(--text)">Wie wird die Steuer berechnet?</h3>
@@ -532,7 +593,7 @@ strong{color:var(--text)}
           <input id="posname" type="text" placeholder="z.B. Apple Long, Bitcoin Short..." style="font-size:14px;font-weight:400">
         </label>
 
-        <button class="btn btn-primary" onclick="speicherePosition()" style="width:100%;margin-top:16px">
+        <button id="savePositionBtn" class="btn btn-primary" onclick="speicherePosition()" style="width:100%;margin-top:16px">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
           Position speichern
         </button>
@@ -780,7 +841,7 @@ strong{color:var(--text)}
                   <h4 id="etfFeature1Title" style="font-size:clamp(16px,2.5vw,18px);font-weight:800;color:var(--text);margin-bottom:clamp(10px,2vw,14px);text-align:center">📊 Rendite-Analysen</h4>
                   <p id="etfFeature1Desc" style="font-size:clamp(13px,2vw,15px);color:var(--muted);line-height:1.6;font-weight:500;text-align:center">Professionelle Charts mit 10 Jahren vollständiger Kurshistorie. Erkenne Trends und Muster auf den ersten Blick.</p>
                   <div style="margin-top:clamp(14px,2.5vw,18px);padding:clamp(10px,2vw,12px);background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:10px;text-align:center">
-                    <div style="font-size:clamp(11px,2vw,12px);color:var(--purple);font-weight:700">� 10 Jahre Vollständige Daten</div>
+                    <div style="font-size:clamp(11px,2vw,12px);color:var(--purple);font-weight:700">✓ 10 Jahre Vollständige Daten</div>
                   </div>
                 </div>
               </div>
@@ -795,7 +856,7 @@ strong{color:var(--text)}
                   <h4 id="etfFeature2Title" style="font-size:clamp(16px,2.5vw,18px);font-weight:800;color:var(--text);margin-bottom:clamp(10px,2vw,14px);text-align:center">⚖️ Vergleich-Tool</h4>
                   <p id="etfFeature2Desc" style="font-size:clamp(13px,2vw,15px);color:var(--muted);line-height:1.6;font-weight:500;text-align:center">Vergleiche unbegrenzt viele ETFs nebeneinander. Renditen, Gebühren, Risiken auf einen Blick.</p>
                   <div style="margin-top:clamp(14px,2.5vw,18px);padding:clamp(10px,2vw,12px);background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:10px;text-align:center">
-                    <div style="font-size:clamp(11px,2vw,12px);color:var(--blue);font-weight:700">� Alle 1.247 ETFs Freischalten</div>
+                    <div style="font-size:clamp(11px,2vw,12px);color:var(--blue);font-weight:700">✓ Alle 1.247 ETFs Freischalten</div>
                   </div>
                 </div>
               </div>
@@ -1369,8 +1430,16 @@ strong{color:var(--text)}
             <span style="color:var(--muted)">Aktueller Broker</span>
             <select id="brokerAuswahl" onchange="aendereBroker()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);padding:8px 12px;border-radius:8px;color:inherit;font-weight:600">
               <option value="custom">Benutzerdefiniert</option>
-              <option value="traderepublic">Trade Republic</option>
-              <option value="scalable">Scalable Capital</option>
+              <option value="finanzenzero">Finanzen.net Zero</option>
+              <option value="smartbrokerplus">Smartbroker+</option>
+              <option value="justtrade">justTRADE</option>
+              <option value="flatex">Flatex</option>
+              <option value="comdirect">Comdirect</option>
+              <option value="ing">ING</option>
+              <option value="consorsbank">Consorsbank</option>
+              <option value="commerzbank">Commerzbank</option>
+              <option value="dkb">DKB</option>
+              <option value="interactivebrokers">Interactive Brokers</option>
             </select>
           </div>
         </div>
@@ -1790,7 +1859,7 @@ strong{color:var(--text)}
 
         <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">5. Registrierung und lokale Speicherung</h3>
         <p style="margin-bottom:16px;color:var(--muted)">
-          Sofern eine Registrierung angeboten wird, erfolgt diese lokal in deinem Browser. Eingaben, Einstellungen und Berechnungen werden ausschliesslich lokal gespeichert (localStorage). Es findet keine Uebertragung an externe Server oder Dritte statt.
+          Sofern eine Registrierung angeboten wird, erfolgt diese ueber Firebase Auth. Dabei werden E-Mail und Passwort (verschluesselt) sowie Profilangaben wie das Land gespeichert. Weitere App-Daten koennen lokal im Browser gespeichert werden.
         </p>
 
         <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">6. Nutzerpflichten</h3>
@@ -1846,27 +1915,27 @@ strong{color:var(--text)}
 
         <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">3. Verarbeitete Daten</h3>
         <p style="margin-bottom:16px;color:var(--muted)">
-          Verarbeitet werden ausschliesslich die Daten, die du selbst eingibst (z. B. Trading- und Sparwerte, Einstellungen sowie optional E-Mail und Passwort zur lokalen Anmeldung).
+          Verarbeitet werden die von dir eingegebenen Daten, die fuer Anmeldung und Profil noetig sind (z. B. E-Mail, Passwort-Hash, Land) sowie optional lokal gespeicherte Einstellungen.
         </p>
 
         <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">4. Lokale Speicherung</h3>
         <p style="margin-bottom:16px;color:var(--muted)">
-          Alle Daten werden ausschliesslich lokal in deinem Browser gespeichert (localStorage). Es erfolgt keine Uebertragung an externe Server oder Dritte.
+          Account-Daten werden in der Cloud (Firebase/Firestore) gespeichert. Lokale App-Daten koennen im Browser gespeichert werden.
         </p>
 
         <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">5. Keine Drittanbieter, kein Tracking</h3>
         <p style="margin-bottom:16px;color:var(--muted)">
-          Es werden keine Cookies von Drittanbietern, keine Analyse-Tools und kein Tracking eingesetzt. Dein Nutzungsverhalten wird nicht aufgezeichnet.
+          Es werden keine Tracking- oder Analyse-Tools eingesetzt. Fuer Anmeldung und Profildaten nutzen wir Firebase (Google) als Dienstleister.
         </p>
 
         <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">6. Datensicherheit</h3>
         <p style="margin-bottom:16px;color:var(--muted)">
-          Da die Daten nur lokal auf deinem Geraet gespeichert werden, liegt die Sicherheit der Daten in deiner Verantwortung. Bitte schuetze dein Geraet vor unbefugtem Zugriff.
+          Wir setzen technische und organisatorische Massnahmen ein, um Account-Daten zu schuetzen. Bitte schuetze zusaetzlich dein Geraet und deine Zugangsdaten.
         </p>
 
         <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">7. Deine Rechte</h3>
         <p style="margin-bottom:16px;color:var(--muted)">
-          Du kannst deine lokal gespeicherten Daten jederzeit in den Browser-Einstellungen loeschen. Wenn du Fragen hast, kannst du uns ueber die genannten Kontaktdaten erreichen.
+          Du kannst deine Account-Daten loeschen oder berichtigen lassen. Lokal gespeicherte Daten kannst du in den Browser-Einstellungen entfernen. Bei Fragen erreichst du uns ueber die genannten Kontaktdaten.
         </p>
 
         <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">8. Aenderungen</h3>
@@ -1883,6 +1952,10 @@ strong{color:var(--text)}
 
   <!-- Bottom Nav -->
   <nav class="bottom-nav">
+    <div class="bottom-nav-item mobile-home" onclick="showSection('home')">
+      <svg fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11.5L12 4l9 7.5"></path><path d="M5 10.5V20h14v-9.5"></path></svg>
+      <span class="nav-text">Home</span>
+    </div>
     <div class="bottom-nav-item active" onclick="showSection('trading')">
       <svg fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
       <span class="nav-text">Rechner</span>
@@ -2735,12 +2808,11 @@ function berechneTrading() {
   const bruttoGewinn = ((z - e) * s) * hebel;
   
   // Gebühren und Steuern
-  const fixkosten = parseFloat(localStorage.getItem('fixkosten') || 0);
-  const variableGebuehr = parseFloat(localStorage.getItem('variableGebuehr') || 0);
+  const broker = localStorage.getItem('broker') || 'custom';
   const landDaten = getLandSteuerdaten();
   const steuersatz = landDaten.steuersatz;
   
-  const gebuehren = (fixkosten * 2) + ((e * s + z * s) * variableGebuehr / 100);
+  const gebuehren = berechneGesamtGebuehren(e, s, z, broker);
   
   let steuern = 0;
   const gewinnNachGebuehren = bruttoGewinn - gebuehren;
@@ -2794,8 +2866,7 @@ function berechneTrading() {
   }
   
   // Break-Even berechnen (Einstiegskurs + Gebühren pro Aktie)
-  const gebuehrenProAktie = s > 0 ? gebuehren / (2 * s) : 0;
-  const breakEven = e + gebuehrenProAktie;
+  const breakEven = berechneBreakEvenKurs(e, s, broker);
   const breakEvenEl = document.getElementById('breakEven');
   if (breakEvenEl) {
     breakEvenEl.textContent = breakEven.toFixed(4) + ' ' + symbol;
@@ -2829,9 +2900,9 @@ function toggleTradingAnzeige() {
   berechneTrading();
 }
 
-function speicherePosition() {
+async function speicherePosition() {
   // Prüfe ob User angemeldet ist
-  const aktuellerUser = localStorage.getItem('aktuellerUser');
+  const aktuellerUser = window.firebaseCurrentUser;
   if (!aktuellerUser) {
     oeffneLoginModal();
     return;
@@ -2858,13 +2929,12 @@ function speicherePosition() {
   const bruttoGewinn = ((z - e) * s) * hebel;
   
   // Gebühren und Steuern berechnen
-  const fixkosten = parseFloat(localStorage.getItem('fixkosten') || 0);
-  const variableGebuehr = parseFloat(localStorage.getItem('variableGebuehr') || 0);
+  const broker = localStorage.getItem('broker') || 'custom';
   const landDaten = getLandSteuerdaten();
   const steuersatz = landDaten.steuersatz; // Länderspezifischer Steuersatz
   
   // Gebühren: Kauf + Verkauf
-  const gebuehren = (fixkosten * 2) + ((e * s + z * s) * variableGebuehr / 100);
+  const gebuehren = berechneGesamtGebuehren(e, s, z, broker);
   
   // Steuern auf den Gewinn (nur wenn positiv)
   let steuern = 0;
@@ -2897,6 +2967,14 @@ function speicherePosition() {
   let positionen = JSON.parse(localStorage.getItem('gespeichertePositionen') || '[]');
   positionen.unshift(position); // Am Anfang einfügen
   localStorage.setItem('gespeichertePositionen', JSON.stringify(positionen));
+
+  if (window.firebaseSavePosition && aktuellerUser && aktuellerUser.uid) {
+    try {
+      await window.firebaseSavePosition(aktuellerUser.uid, position);
+    } catch (err) {
+      console.error('Firebase speichern fehlgeschlagen', err);
+    }
+  }
   
   console.log('Position gespeichert:', position);
   console.log('Gesamt Positionen:', positionen.length);
@@ -2907,9 +2985,30 @@ function speicherePosition() {
   zeigeGespeichertePositionen();
 }
 
-function zeigeGespeichertePositionen() {
+async function zeigeGespeichertePositionen() {
   console.log('zeigeGespeichertePositionen() aufgerufen');
-  const positionen = JSON.parse(localStorage.getItem('gespeichertePositionen') || '[]');
+  let positionen = JSON.parse(localStorage.getItem('gespeichertePositionen') || '[]');
+  const aktuellerUser = window.firebaseCurrentUser;
+  if (aktuellerUser && window.firebaseLoadPositions) {
+    try {
+      const remotePositionen = await window.firebaseLoadPositions(aktuellerUser.uid);
+      if (Array.isArray(remotePositionen)) {
+        positionen = remotePositionen.map((pos) => {
+          const normalisiert = Object.assign({}, pos);
+          if (normalisiert.createdAt && typeof normalisiert.createdAt.toDate === 'function') {
+            normalisiert.datum = normalisiert.createdAt.toDate().toISOString();
+          }
+          if (typeof normalisiert.id === 'string' && !isNaN(Number(normalisiert.id))) {
+            normalisiert.id = Number(normalisiert.id);
+          }
+          return normalisiert;
+        });
+        localStorage.setItem('gespeichertePositionen', JSON.stringify(positionen));
+      }
+    } catch (err) {
+      console.error('Firebase laden fehlgeschlagen', err);
+    }
+  }
   console.log('Geladene Positionen aus localStorage:', positionen.length);
   
   const container = document.getElementById('gespeichertePositionen');
@@ -3047,24 +3146,40 @@ function oeffneLoeschAlleModal() {
   document.getElementById('loeschAlleModal').classList.add('active');
 }
 
-function bestaetigeLoeschenAlle() {
+async function bestaetigeLoeschenAlle() {
   localStorage.removeItem('gespeichertePositionen');
   console.log('Alle Positionen gelöscht');
+  const aktuellerUser = window.firebaseCurrentUser;
+  if (window.firebaseDeleteAllPositions && aktuellerUser && aktuellerUser.uid) {
+    try {
+      await window.firebaseDeleteAllPositions(aktuellerUser.uid);
+    } catch (err) {
+      console.error('Firebase loeschen fehlgeschlagen', err);
+    }
+  }
   closeModal('loeschAlleModal');
   zeigeGespeichertePositionen();
 }
 
-function toggleGewinnAnzeige(posId) {
+async function toggleGewinnAnzeige(posId) {
   let positionen = JSON.parse(localStorage.getItem('gespeichertePositionen') || '[]');
-  const pos = positionen.find(p => p.id === posId);
+  const pos = positionen.find(p => String(p.id) === String(posId));
   if (pos) {
     pos.zeigeNetto = !pos.zeigeNetto;
     localStorage.setItem('gespeichertePositionen', JSON.stringify(positionen));
+    const aktuellerUser = window.firebaseCurrentUser;
+    if (window.firebaseSavePosition && aktuellerUser && aktuellerUser.uid) {
+      try {
+        await window.firebaseSavePosition(aktuellerUser.uid, pos);
+      } catch (err) {
+        console.error('Firebase update fehlgeschlagen', err);
+      }
+    }
     zeigeGespeichertePositionen();
   }
 }
 
-function loeschePosition(posId) {
+async function loeschePosition(posId) {
   console.log('=== loeschePosition aufgerufen ===');
   console.log('Typ von posId:', typeof posId);
   console.log('Wert von posId:', posId);
@@ -3074,8 +3189,8 @@ function loeschePosition(posId) {
   const vorher = positionen.length;
   
   positionen = positionen.filter(p => {
-    console.log('Vergleiche:', p.id, '!==', posId, '=', p.id !== posId);
-    return p.id !== posId;
+    console.log('Vergleiche:', p.id, '!==', posId, '=', String(p.id) !== String(posId));
+    return String(p.id) !== String(posId);
   });
   
   const nachher = positionen.length;
@@ -3083,6 +3198,14 @@ function loeschePosition(posId) {
   
   localStorage.setItem('gespeichertePositionen', JSON.stringify(positionen));
   console.log('Position gelöscht, aktualisiere Anzeige');
+  const aktuellerUser = window.firebaseCurrentUser;
+  if (window.firebaseDeletePosition && aktuellerUser && aktuellerUser.uid) {
+    try {
+      await window.firebaseDeletePosition(aktuellerUser.uid, posId);
+    } catch (err) {
+      console.error('Firebase loeschen fehlgeschlagen', err);
+    }
+  }
   zeigeGespeichertePositionen();
 }
 
@@ -3094,7 +3217,7 @@ window.oeffneLoeschAlleModal = oeffneLoeschAlleModal;
 window.bestaetigeLoeschen = bestaetigeLoeschen;
 window.bestaetigeLoeschenAlle = bestaetigeLoeschenAlle;
 
-function loescheAllePositionen() {
+async function loescheAllePositionen() {
   const positionen = JSON.parse(localStorage.getItem('gespeichertePositionen') || '[]');
   if (positionen.length === 0) {
     const msgs = {
@@ -3110,6 +3233,14 @@ function loescheAllePositionen() {
   if (confirm(t('deleteAllWarning').replace('{count}', positionen.length))) {
     localStorage.removeItem('gespeichertePositionen');
     console.log('Alle Positionen gelöscht');
+    const aktuellerUser = window.firebaseCurrentUser;
+    if (window.firebaseDeleteAllPositions && aktuellerUser && aktuellerUser.uid) {
+      try {
+        await window.firebaseDeleteAllPositions(aktuellerUser.uid);
+      } catch (err) {
+        console.error('Firebase loeschen fehlgeschlagen', err);
+      }
+    }
     zeigeGespeichertePositionen();
   }
 }
@@ -4961,21 +5092,217 @@ function ladeFreibetrag() {
 }
 
 // Broker und Gebühren
+const BROKER_GEBUEHREN_MODELLE = {
+  finanzenzero: {
+    direkt: { typ: 'free-ab', ab: 500, sonst: { typ: 'fixed', wert: 1.0 } },
+    xetra: { typ: 'fixed', wert: 4.9 }
+  },
+  smartbrokerplus: {
+    direkt: { typ: 'free-ab', ab: 500, sonst: { typ: 'fixed', wert: 1.0 } },
+    xetra: { typ: 'staffel', stufen: [
+      { bis: 5000, gebuehr: 4.0 },
+      { bis: 25000, gebuehr: 9.0 },
+      { bis: Infinity, gebuehr: 19.0 }
+    ] }
+  },
+  justtrade: {
+    direkt: { typ: 'free-ab', ab: 500, sonst: { typ: 'fixed', wert: 1.0 } },
+    xetra: { typ: 'fixed', wert: 5.0 }
+  },
+  flatex: {
+    direkt: { typ: 'fixed', wert: 5.9 },
+    xetra: { typ: 'fixed', wert: 5.9 }
+  },
+  comdirect: {
+    direkt: { typ: 'percent', fix: 4.9, prozent: 0.25, min: 9.9, max: 59.9 },
+    xetra: { typ: 'percent', fix: 4.9, prozent: 0.25, min: 9.9, max: 59.9, boersenplatz: 2.9 }
+  },
+  ing: {
+    direkt: { typ: 'percent', fix: 4.9, prozent: 0.25, min: 9.9, max: 69.9 },
+    xetra: { typ: 'percent', fix: 4.9, prozent: 0.25, min: 9.9, max: 69.9, boersenplatz: 2.9 }
+  },
+  consorsbank: {
+    direkt: { typ: 'percent', fix: 4.95, prozent: 0.25, min: 9.95, max: 69.0 },
+    xetra: { typ: 'percent', fix: 4.95, prozent: 0.25, min: 9.95, max: 69.0, boersenplatz: 2.95 }
+  },
+  commerzbank: {
+    direkt: { typ: 'percent', fix: 4.9, prozent: 0.25, min: 9.9, max: 59.9 },
+    xetra: { typ: 'percent', fix: 4.9, prozent: 0.25, min: 9.9, max: 59.9, boersenplatz: 2.9 }
+  },
+  dkb: {
+    direkt: { typ: 'fixed', wert: 10.0 },
+    xetra: { typ: 'fixed', wert: 10.0 }
+  },
+  interactivebrokers: {
+    direkt: { typ: 'percent', fix: 0.0, prozent: 0.05, min: 1.25, max: 29.0 },
+    xetra: { typ: 'percent', fix: 0.0, prozent: 0.05, min: 1.25, max: 29.0 }
+  }
+};
+
+function berechneOrderGebuehrNachModell(orderwert, modell) {
+  if (!modell || orderwert <= 0) return 0;
+  if (modell.typ === 'fixed') {
+    return Math.max(0, modell.wert || 0);
+  }
+  if (modell.typ === 'staffel') {
+    const stufen = Array.isArray(modell.stufen) ? modell.stufen : [];
+    for (const stufe of stufen) {
+      if (orderwert <= stufe.bis) {
+        return Math.max(0, stufe.gebuehr || 0);
+      }
+    }
+    return 0;
+  }
+  if (modell.typ === 'free-ab') {
+    if (orderwert >= (modell.ab || 0)) return 0;
+    return berechneOrderGebuehrNachModell(orderwert, modell.sonst);
+  }
+  if (modell.typ === 'percent') {
+    const fix = modell.fix || 0;
+    const prozent = modell.prozent || 0;
+    const boersenplatz = modell.boersenplatz || 0;
+    let gebuehr = fix + (orderwert * prozent / 100) + boersenplatz;
+    if (typeof modell.min === 'number') gebuehr = Math.max(modell.min, gebuehr);
+    if (typeof modell.max === 'number') gebuehr = Math.min(modell.max, gebuehr);
+    return Math.max(0, gebuehr);
+  }
+  return 0;
+}
+
+function berechneOrderGebuehr(orderwert, broker) {
+  if (orderwert <= 0) return 0;
+
+  if (broker === 'custom') {
+    const fixkosten = parseFloat(localStorage.getItem('fixkosten') || 0);
+    const variableGebuehr = parseFloat(localStorage.getItem('variableGebuehr') || 0);
+    return Math.max(0, fixkosten + (orderwert * variableGebuehr / 100));
+  }
+
+  const modell = BROKER_GEBUEHREN_MODELLE[broker];
+  if (!modell) {
+    const fixkosten = parseFloat(localStorage.getItem('fixkosten') || 0);
+    const variableGebuehr = parseFloat(localStorage.getItem('variableGebuehr') || 0);
+    return Math.max(0, fixkosten + (orderwert * variableGebuehr / 100));
+  }
+
+  const ausfuehrung = localStorage.getItem('orderAusfuehrung') || 'auto';
+  if (ausfuehrung === 'direkthandel') {
+    return berechneOrderGebuehrNachModell(orderwert, modell.direkt);
+  }
+  if (ausfuehrung === 'xetra') {
+    return berechneOrderGebuehrNachModell(orderwert, modell.xetra);
+  }
+
+  const direktGebuehr = berechneOrderGebuehrNachModell(orderwert, modell.direkt);
+  const xetraGebuehr = berechneOrderGebuehrNachModell(orderwert, modell.xetra);
+  return Math.min(direktGebuehr, xetraGebuehr);
+}
+
+function berechneGesamtGebuehren(einstieg, stueck, ziel, broker) {
+  const kaufwert = Math.max(0, einstieg * stueck);
+  const verkaufswert = Math.max(0, ziel * stueck);
+  const kaufGebuehr = berechneOrderGebuehr(kaufwert, broker);
+  const verkaufsGebuehr = berechneOrderGebuehr(verkaufswert, broker);
+  return kaufGebuehr + verkaufsGebuehr;
+}
+
+function berechneBreakEvenKurs(einstieg, stueck, broker) {
+  if (einstieg <= 0 || stueck <= 0) return einstieg || 0;
+
+  const kaufwert = einstieg * stueck;
+  const kaufGebuehr = berechneOrderGebuehr(kaufwert, broker);
+  const nettoBeiKurs = (kurs) => {
+    const brutto = (kurs - einstieg) * stueck;
+    const verkaufsGebuehr = berechneOrderGebuehr(kurs * stueck, broker);
+    return brutto - kaufGebuehr - verkaufsGebuehr;
+  };
+
+  if (nettoBeiKurs(einstieg) >= 0) return einstieg;
+
+  let low = einstieg;
+  let high = Math.max(einstieg * 1.05, einstieg + 0.01);
+  let guard = 0;
+  while (nettoBeiKurs(high) < 0 && guard < 60) {
+    high *= 1.35;
+    guard += 1;
+  }
+
+  for (let i = 0; i < 40; i++) {
+    const mid = (low + high) / 2;
+    if (nettoBeiKurs(mid) >= 0) {
+      high = mid;
+    } else {
+      low = mid;
+    }
+  }
+
+  return high;
+}
+
 function aendereBroker() {
   const broker = document.getElementById('brokerAuswahl').value;
   const fixkostenInput = document.getElementById('fixkosten');
   const variableInput = document.getElementById('variableGebuehr');
+  const feesDescription = document.getElementById('feesDescription');
   
   switch(broker) {
-    case 'traderepublic':
-      fixkostenInput.value = '1.00';
+    case 'finanzenzero':
+      fixkostenInput.value = '0.00';
       variableInput.value = '0';
       fixkostenInput.disabled = true;
       variableInput.disabled = true;
       break;
-    case 'scalable':
-      fixkostenInput.value = '0.99';
+    case 'smartbrokerplus':
+      fixkostenInput.value = '0.00';
       variableInput.value = '0';
+      fixkostenInput.disabled = true;
+      variableInput.disabled = true;
+      break;
+    case 'justtrade':
+      fixkostenInput.value = '0.00';
+      variableInput.value = '0';
+      fixkostenInput.disabled = true;
+      variableInput.disabled = true;
+      break;
+    case 'flatex':
+      fixkostenInput.value = '5.90';
+      variableInput.value = '0';
+      fixkostenInput.disabled = true;
+      variableInput.disabled = true;
+      break;
+    case 'comdirect':
+      fixkostenInput.value = '4.90';
+      variableInput.value = '0.25';
+      fixkostenInput.disabled = true;
+      variableInput.disabled = true;
+      break;
+    case 'ing':
+      fixkostenInput.value = '4.90';
+      variableInput.value = '0.25';
+      fixkostenInput.disabled = true;
+      variableInput.disabled = true;
+      break;
+    case 'consorsbank':
+      fixkostenInput.value = '4.95';
+      variableInput.value = '0.25';
+      fixkostenInput.disabled = true;
+      variableInput.disabled = true;
+      break;
+    case 'commerzbank':
+      fixkostenInput.value = '4.90';
+      variableInput.value = '0.25';
+      fixkostenInput.disabled = true;
+      variableInput.disabled = true;
+      break;
+    case 'dkb':
+      fixkostenInput.value = '10.00';
+      variableInput.value = '0.25';
+      fixkostenInput.disabled = true;
+      variableInput.disabled = true;
+      break;
+    case 'interactivebrokers':
+      fixkostenInput.value = '1.25';
+      variableInput.value = '0.05';
       fixkostenInput.disabled = true;
       variableInput.disabled = true;
       break;
@@ -4983,6 +5310,14 @@ function aendereBroker() {
       fixkostenInput.disabled = false;
       variableInput.disabled = false;
       break;
+  }
+
+  if (feesDescription) {
+    if (broker === 'custom') {
+      feesDescription.textContent = 'Ordergebühren deines Brokers. Diese werden sowohl beim Kauf als auch beim Verkauf berücksichtigt.';
+    } else {
+      feesDescription.textContent = 'Für diesen Broker wird ein Ordermodell mit Direkthandel/Xetra, Mindestorderwerten und ggf. Staffel-/Min-/Max-Preis automatisch berücksichtigt.';
+    }
   }
   
   // Speichere Broker-Auswahl und Gebühren
@@ -5340,8 +5675,16 @@ const uebersetzungen = {
     inflationRateLabel: 'Inflationsrate',
     yearlyIncreaseLabel: 'Jährliche Dynamik',
     forecastDescription: 'Die Inflationsrate wird für die Realwertberechnung im Sparrechner verwendet. Die jährliche Dynamik erhöht deine Sparrate automatisch um den angegebenen Prozentsatz pro Jahr.',
-    brokerTradeRepublic: 'Trade Republic',
-    brokerScalable: 'Scalable Capital',
+    brokerFinanzenZero: 'Finanzen.net Zero',
+    brokerSmartbrokerPlus: 'Smartbroker+',
+    brokerJustTrade: 'justTRADE',
+    brokerFlatex: 'Flatex',
+    brokerComdirect: 'Comdirect',
+    brokerIng: 'ING',
+    brokerConsorsbank: 'Consorsbank',
+    brokerCommerzbank: 'Commerzbank',
+    brokerDkb: 'DKB',
+    brokerInteractiveBrokers: 'Interactive Brokers',
     
     // Login/Register
     loginBtn: 'Anmelden',
@@ -5403,7 +5746,7 @@ const uebersetzungen = {
 
       <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">5. Registrierung und lokale Speicherung</h3>
       <p style="margin-bottom:16px;color:var(--muted)">
-        Sofern eine Registrierung angeboten wird, erfolgt diese lokal in deinem Browser. Eingaben, Einstellungen und Berechnungen werden ausschliesslich lokal gespeichert (localStorage). Es findet keine Uebertragung an externe Server oder Dritte statt.
+        Sofern eine Registrierung angeboten wird, erfolgt diese ueber Firebase Auth. Dabei werden E-Mail und Passwort (verschluesselt) sowie Profilangaben wie das Land gespeichert. Weitere App-Daten koennen lokal im Browser gespeichert werden.
       </p>
 
       <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">6. Nutzerpflichten</h3>
@@ -5446,27 +5789,27 @@ const uebersetzungen = {
 
       <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">3. Verarbeitete Daten</h3>
       <p style="margin-bottom:16px;color:var(--muted)">
-        Verarbeitet werden ausschliesslich die Daten, die du selbst eingibst (z. B. Trading- und Sparwerte, Einstellungen sowie optional E-Mail und Passwort zur lokalen Anmeldung).
+        Verarbeitet werden die von dir eingegebenen Daten, die fuer Anmeldung und Profil noetig sind (z. B. E-Mail, Passwort-Hash, Land) sowie optional lokal gespeicherte Einstellungen.
       </p>
 
       <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">4. Lokale Speicherung</h3>
       <p style="margin-bottom:16px;color:var(--muted)">
-        Alle Daten werden ausschliesslich lokal in deinem Browser gespeichert (localStorage). Es erfolgt keine Uebertragung an externe Server oder Dritte.
+        Account-Daten werden in der Cloud (Firebase/Firestore) gespeichert. Lokale App-Daten koennen im Browser gespeichert werden.
       </p>
 
       <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">5. Keine Drittanbieter, kein Tracking</h3>
       <p style="margin-bottom:16px;color:var(--muted)">
-        Es werden keine Cookies von Drittanbietern, keine Analyse-Tools und kein Tracking eingesetzt. Dein Nutzungsverhalten wird nicht aufgezeichnet.
+        Es werden keine Tracking- oder Analyse-Tools eingesetzt. Fuer Anmeldung und Profildaten nutzen wir Firebase (Google) als Dienstleister.
       </p>
 
       <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">6. Datensicherheit</h3>
       <p style="margin-bottom:16px;color:var(--muted)">
-        Da die Daten nur lokal auf deinem Geraet gespeichert werden, liegt die Sicherheit der Daten in deiner Verantwortung. Bitte schuetze dein Geraet vor unbefugtem Zugriff.
+        Wir setzen technische und organisatorische Massnahmen ein, um Account-Daten zu schuetzen. Bitte schuetze zusaetzlich dein Geraet und deine Zugangsdaten.
       </p>
 
       <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">7. Deine Rechte</h3>
       <p style="margin-bottom:16px;color:var(--muted)">
-        Du kannst deine lokal gespeicherten Daten jederzeit in den Browser-Einstellungen loeschen. Wenn du Fragen hast, kannst du uns ueber die genannten Kontaktdaten erreichen.
+        Du kannst deine Account-Daten loeschen oder berichtigen lassen. Lokal gespeicherte Daten kannst du in den Browser-Einstellungen entfernen. Bei Fragen erreichst du uns ueber die genannten Kontaktdaten.
       </p>
 
       <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">8. Aenderungen</h3>
@@ -5575,11 +5918,11 @@ const uebersetzungen = {
     preciseCalculations: 'Präzise Berechnungen',
     preciseCalculationsDesc: 'Exakte Gewinnberechnungen mit Berücksichtigung aller Gebühren und Steuern.',
     dataPrivacy: '100% Datenschutz',
-    dataPrivacyDesc: 'Alle Daten bleiben lokal in deinem Browser gespeichert. Keine Cloud, keine Server, vollständige Kontrolle.',
+    dataPrivacyDesc: 'Account-Daten werden sicher in der Cloud gespeichert (Firebase). Ohne Anmeldung bleiben Daten lokal im Browser.',
     fastSpeed: 'Blitzschnell',
     fastSpeedDesc: 'Keine Ladezeiten, sofortige Berechnungen. Arbeitet komplett offline nach dem ersten Laden.',
     multiBroker: 'Multi-Broker Support',
-    multiBrokerDesc: 'Vorkonfigurierte Gebührenmodelle für Trade Republic, Scalable Capital und benutzerdefinierte Broker.',
+    multiBrokerDesc: 'Vorkonfigurierte Gebührenmodelle für Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers und benutzerdefinierte Broker.',
     tradingHistory: 'Trading Historie',
     tradingHistoryDesc: 'Speichere und verfolge all deine Trades mit detaillierten Informationen zu Gewinn, Rendite und Zeitpunkt.',
     noPositionsSaved: 'Noch keine Positionen gespeichert',
@@ -5618,9 +5961,9 @@ const uebersetzungen = {
     freeStartDesc: 'Komplett kostenlos nutzbar mit allen Basis-Features. Optional: Pro-Account für 1,99€/Monat mit erweiterten Funktionen.',
     faq: 'Häufig gestellte Fragen',
     faqQ1: 'Wie werden meine Daten gespeichert?',
-    faqA1: 'Alle Daten werden ausschließlich lokal in deinem Browser gespeichert (localStorage). Es werden keine Daten an externe Server übertragen. Du hast volle Kontrolle über deine Informationen.',
+    faqA1: 'Bei Anmeldung speichern wir Account-Daten sicher in der Cloud (Firebase/Firestore). Ohne Anmeldung bleiben Daten lokal im Browser.',
     faqQ2: 'Welche Broker werden unterstützt?',
-    faqA2: 'Wir bieten vorkonfigurierte Gebührenmodelle für Trade Republic (1€ pro Order) und Scalable Capital (0,99€ pro Order). Du kannst auch eigene Gebühren für jeden beliebigen Broker eingeben.',
+    faqA2: 'Wir bieten vorkonfigurierte Gebührenmodelle für Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB und Interactive Brokers. Du kannst auch eigene Gebühren für jeden beliebigen Broker eingeben.',
     faqQ3: 'Wie wird die Steuer berechnet?',
     faqA3: 'Die Abgeltungssteuer in Deutschland beträgt 26,375% (25% Abgeltungssteuer + 5,5% Solidaritätszuschlag). Der Freibetrag von 1.000€ pro Jahr wird automatisch berücksichtigt.',
     faqQ4: 'Kann ich zwischen Brutto und Netto wechseln?',
@@ -5644,6 +5987,7 @@ const uebersetzungen = {
     // Buttons
     calculate: 'Berechnen',
     saveTrade: 'Position speichern',
+    loginToSave: 'Anmelden zum Speichern',
     addBuyBtn: 'Nachkauf +',
     partialSellBtn: 'Teilverkauf +',
     upgradeNow: 'Jetzt upgraden',
@@ -5948,8 +6292,16 @@ const uebersetzungen = {
     inflationRateLabel: 'Inflation Rate',
     yearlyIncreaseLabel: 'Yearly Increase',
     forecastDescription: 'The inflation rate is used for real value calculation in the savings calculator. The yearly increase automatically raises your savings rate by the specified percentage per year.',
-    brokerTradeRepublic: 'Trade Republic',
-    brokerScalable: 'Scalable Capital',
+    brokerFinanzenZero: 'Finanzen.net Zero',
+    brokerSmartbrokerPlus: 'Smartbroker+',
+    brokerJustTrade: 'justTRADE',
+    brokerFlatex: 'Flatex',
+    brokerComdirect: 'Comdirect',
+    brokerIng: 'ING',
+    brokerConsorsbank: 'Consorsbank',
+    brokerCommerzbank: 'Commerzbank',
+    brokerDkb: 'DKB',
+    brokerInteractiveBrokers: 'Interactive Brokers',
     
     // Login/Register
     loginBtn: 'Login',
@@ -6213,11 +6565,11 @@ const uebersetzungen = {
     preciseCalculations: 'Precise Calculations',
     preciseCalculationsDesc: 'Exact profit calculations considering all fees and taxes.',
     dataPrivacy: '100% Data Privacy',
-    dataPrivacyDesc: 'All data remains stored locally in your browser. No cloud, no servers, complete control.',
+    dataPrivacyDesc: 'Account data is stored securely in the cloud (Firebase). Without login, data stays local in your browser.',
     fastSpeed: 'Lightning Fast',
     fastSpeedDesc: 'No loading times, instant calculations. Works completely offline after first load.',
     multiBroker: 'Multi-Broker Support',
-    multiBrokerDesc: 'Pre-configured fee models for Trade Republic, Scalable Capital and custom brokers.',
+    multiBrokerDesc: 'Pre-configured fee models for Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers and custom brokers.',
     tradingHistory: 'Trading History',
     noPositionsSaved: 'No positions saved yet',
     saveFirstPosition: 'Save your first position to see it here',
@@ -6256,9 +6608,9 @@ const uebersetzungen = {
     freeStartDesc: 'Completely free to use with all basic features. Optional: Pro account for €1.99/month with advanced features.',
     faq: 'Frequently Asked Questions',
     faqQ1: 'How is my data stored?',
-    faqA1: 'All data is stored exclusively locally in your browser (localStorage). No data is transferred to external servers. You have full control over your information.',
+    faqA1: 'When you sign in, account data is stored securely in the cloud (Firebase/Firestore). Without login, data stays local in your browser.',
     faqQ2: 'Which brokers are supported?',
-    faqA2: 'We offer pre-configured fee models for Trade Republic (€1 per order) and Scalable Capital (€0.99 per order). You can also enter custom fees for any broker.',
+    faqA2: 'We offer pre-configured fee models for Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB and Interactive Brokers. You can also enter custom fees for any broker.',
     faqQ3: 'How is the tax calculated?',
     faqA3: 'The capital gains tax in Germany is 26.375% (25% capital gains tax + 5.5% solidarity surcharge). The allowance of €1,000 per year is automatically taken into account.',
     faqQ4: 'Can I switch between gross and net?',
@@ -6282,6 +6634,7 @@ const uebersetzungen = {
     // Buttons
     calculate: 'Calculate',
     saveTrade: 'Save Position',
+    loginToSave: 'Login to Save',
     addBuyBtn: 'Buy +',
     partialSellBtn: 'Sell +',
     upgradeNow: 'Upgrade Now',
@@ -6593,8 +6946,16 @@ const uebersetzungen = {
     inflationRateLabel: 'Tasa de Inflación',
     yearlyIncreaseLabel: 'Aumento Anual',
     forecastDescription: 'La tasa de inflación se utiliza para el cálculo del valor real en la calculadora de ahorros. El aumento anual incrementa automáticamente su tasa de ahorro en el porcentaje especificado por año.',
-    brokerTradeRepublic: 'Trade Republic',
-    brokerScalable: 'Scalable Capital',
+    brokerFinanzenZero: 'Finanzen.net Zero',
+    brokerSmartbrokerPlus: 'Smartbroker+',
+    brokerJustTrade: 'justTRADE',
+    brokerFlatex: 'Flatex',
+    brokerComdirect: 'Comdirect',
+    brokerIng: 'ING',
+    brokerConsorsbank: 'Consorsbank',
+    brokerCommerzbank: 'Commerzbank',
+    brokerDkb: 'DKB',
+    brokerInteractiveBrokers: 'Interactive Brokers',
     
     // Login/Register
     loginBtn: 'Iniciar sesión',
@@ -6858,11 +7219,11 @@ const uebersetzungen = {
     preciseCalculations: 'Cálculos Precisos',
     preciseCalculationsDesc: 'Cálculos exactos de beneficios considerando todas las comisiones e impuestos.',
     dataPrivacy: '100% Privacidad de Datos',
-    dataPrivacyDesc: 'Todos los datos permanecen almacenados localmente en tu navegador. Sin nube, sin servidores, control completo.',
+    dataPrivacyDesc: 'Los datos de cuenta se almacenan de forma segura en la nube (Firebase). Sin inicio de sesión, los datos quedan locales en tu navegador.',
     fastSpeed: 'Ultrarrápido',
     fastSpeedDesc: 'Sin tiempos de carga, cálculos instantáneos. Funciona completamente sin conexión después de la primera carga.',
     multiBroker: 'Soporte Multi-Broker',
-    multiBrokerDesc: 'Modelos de comisiones preconfigurados para Trade Republic, Scalable Capital y brokers personalizados.',
+    multiBrokerDesc: 'Modelos de comisiones preconfigurados para Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers y brokers personalizados.',
     tradingHistory: 'Historial de Trading',
     noPositionsSaved: 'Aún no hay posiciones guardadas',
     saveFirstPosition: 'Guarda tu primera posición para verla aquí',
@@ -6901,9 +7262,9 @@ const uebersetzungen = {
     freeStartDesc: 'Completamente gratuito con todas las funciones básicas. Opcional: Cuenta Pro por 1,99€/mes con funciones avanzadas.',
     faq: 'Preguntas Frecuentes',
     faqQ1: '¿Cómo se almacenan mis datos?',
-    faqA1: 'Todos los datos se almacenan exclusivamente de forma local en tu navegador (localStorage). No se transfieren datos a servidores externos. Tienes control total sobre tu información.',
+    faqA1: 'Al iniciar sesión, los datos de cuenta se almacenan de forma segura en la nube (Firebase/Firestore). Sin inicio de sesión, los datos quedan locales en tu navegador.',
     faqQ2: '¿Qué brokers son compatibles?',
-    faqA2: 'Ofrecemos modelos de comisiones preconfigurados para Trade Republic (1€ por orden) y Scalable Capital (0,99€ por orden). También puedes introducir comisiones personalizadas para cualquier broker.',
+    faqA2: 'Ofrecemos modelos de comisiones preconfigurados para Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB e Interactive Brokers. También puedes introducir comisiones personalizadas para cualquier broker.',
     faqQ3: '¿Cómo se calculan los impuestos?',
     faqA3: 'El impuesto sobre plusvalías en Alemania es del 26,375% (25% impuesto sobre plusvalías + 5,5% recargo de solidaridad). La desgravación de 1.000€ al año se tiene en cuenta automáticamente.',
     faqQ4: '¿Puedo cambiar entre bruto y neto?',
@@ -6927,6 +7288,7 @@ const uebersetzungen = {
     // Buttons
     calculate: 'Calcular',
     saveTrade: 'Guardar Posición',
+    loginToSave: 'Inicia sesion para guardar',
     addBuyBtn: 'Compra +',
     partialSellBtn: 'Venta +',
     upgradeNow: 'Actualizar Ahora',
@@ -6975,7 +7337,7 @@ const uebersetzungen = {
     tradingCalculator: 'Calculateur de Trading',
     tradingDesc: 'Calculez les profits, rendements, seuil de rentabilité, CRV et plus. Avec fonction de levier, stop-loss et calculs précis des taxes et frais.',
     savingsCalculator: 'Calculateur d\'épargne',
-    savingsDesc: 'Planifiez votre avenir financier avec des taux d\'épargne intelligents, des calculs d\'intérê¬ts composés et une analyse d\'inflation (Pro).',
+    savingsDesc: 'Planifiez votre avenir financier avec des taux d\'épargne intelligents, des calculs d\'intérêts composés et une analyse d\'inflation (Pro).',
     proAccount: 'Compte Pro',
     proDesc: 'Trades illimités, base de données ETF, calculateur d\'inflation et d\'impôts, export PDF/CSV et sans publicité – pour seulement 1,99€/mois.',
     
@@ -6983,9 +7345,9 @@ const uebersetzungen = {
     appearance: 'Apparence',
     language: 'Langue',
     currency: 'Devise',
-    dataManagement: 'Gestion des Donnï¿½es',
-    exportData: 'Exporter les Donnï¿½es',
-    legal: 'Mentions Lï¿½gales',
+    dataManagement: 'Gestion des Données',
+    exportData: 'Exporter les Données',
+    legal: 'Mentions Légales',
     feedback: 'Portail de Commentaires',
     feedbackDesc: 'Partagez vos idées et aidez-nous à améliorer Trade',
     feedbackSupportHeading: 'AVIS & SUPPORT',
@@ -7017,7 +7379,7 @@ const uebersetzungen = {
     // Trading
     tradeCalculation: 'Calcul de Trade',
     entryPrice: 'Prix d\'Entrée',
-    quantity: 'Quantitï¿½',
+    quantity: 'Quantité',
     targetPrice: 'Prix Cible',
     stopLoss: 'Stop Loss',
     leverage: 'Levier',
@@ -7070,10 +7432,10 @@ const uebersetzungen = {
     proFeature: 'FONCTION PRO',
     compareHistorical: 'Comparez les rendements moyens historiques des ETF populaires',
     unlockETF: 'Déverrouiller la base de données ETF',
-    accessHistorical: 'Accï¿½dez aux donnï¿½es historiques des 10 derniï¿½res annï¿½es. Comparez la performance, le TER et simulez votre plan dï¿½ï¿½pargne.',
-    upgradeNow: 'Passer ï¿½ la version Pro ï¿½ 1,99ï¿½/mois',
+    accessHistorical: 'Accédez aux données historiques des 10 dernières années. Comparez la performance, le TER et simulez votre plan d\'épargne.',
+    upgradeNow: 'Passer à la version Pro à 1,99€/mois',
     popularETFs: 'ETF populaires',
-    descending: 'Dï¿½croissant',
+    descending: 'Décroissant',
     ascending: 'Croissant',
     sortBy: 'Trier par',
     sortByName: 'Trier par : Nom',
@@ -7084,150 +7446,158 @@ const uebersetzungen = {
     sortByTER: 'Trier par : Ratio de Frais Totaux (TER)',
     whatIsTER: 'Qu\'est-ce que le TER (Ratio de Frais Totaux)?',
     returnComparison: 'Comparaison des rendements (10 ans)',
-    selectedETFs: 'ETF sï¿½lectionnï¿½s',
-    selectedETFsOfTwo: 'sur 2 ETF sï¿½lectionnï¿½s',
-    selectUpTo2: 'Sï¿½lectionnez jusquï¿½ï¿½ 2 ETF dans la liste ci-dessous pour les comparer',
-    noETFsFound: 'Aucun ETF trouvï¿½',
+    selectedETFs: 'ETF sélectionnés',
+    selectedETFsOfTwo: 'sur 2 ETF sélectionnés',
+    selectUpTo2: 'Sélectionnez jusqu\'à 2 ETF dans la liste ci-dessous pour les comparer',
+    noETFsFound: 'Aucun ETF trouvé',
     tryDifferent: 'Essayez un autre terme de recherche',
-    noteHistorical: 'Note : Les rendements affichï¿½s sont des moyennes historiques et ne garantissent pas les performances futures. TER = Ratio de Frais Totaux (Total Expense Ratio). Informations sans garantie.',
+    noteHistorical: 'Note : Les rendements affichés sont des moyennes historiques et ne garantissent pas les performances futures. TER = Ratio de Frais Totaux (Total Expense Ratio). Informations sans garantie.',
     category: 'Cat.',
-    etfDetailsTitle: 'Dï¿½tails de lï¿½ETF',
+    etfDetailsTitle: 'Détails de l\'ETF',
     toComparison: 'Comparer',
-    etfSelected: '? Sï¿½lectionnï¿½',
-    etfTrustedBy: 'Plï¿½biscitï¿½ par des milliers',
-    etfUnlockHeadline: 'Dï¿½verrouillez les fonctionnalitï¿½s Pro',
-    etfUnlockSubheading: 'Profitez de toute la puissance de 1?247 ETF professionnels avec 10 ans de donnï¿½es, des comparaisons illimitï¿½es et des analyses avancï¿½es ï¿½ pour moins quï¿½un cafï¿½ par mois.',
-    etfStatHistorical: 'Donnï¿½es historiques',
+    etfSelected: '? Sélectionné',
+    etfTrustedBy: 'Plébiscité par des milliers',
+    etfUnlockHeadline: 'Déverrouillez les fonctionnalités Pro',
+    etfUnlockSubheading: 'Profitez de toute la puissance de 1 247 ETF professionnels avec 10 ans de données, des comparaisons illimitées et des analyses avancées - pour moins qu\'un café par mois.',
+    etfStatHistorical: 'Données historiques',
     etfStatEtfs: 'ETF professionnels',
-    etfStatCompare: 'Comparaisons illimitï¿½es',
-    etfStatProfitability: 'Rentabilitï¿½ fiable',
-    etfUpgradeCta: 'Passer ï¿½ la version Pro ï¿½ 1,99ï¿½/mois',
-    etfTrustCancelable: 'Annulable ï¿½ tout moment',
+    etfStatCompare: 'Comparaisons illimitées',
+    etfStatProfitability: 'Rentabilité fiable',
+    etfUpgradeCta: 'Passer à la version Pro à 1,99€/mois',
+    etfTrustCancelable: 'Annulable à tout moment',
     etfTrustFreeDays: '3 jours gratuits',
-    etfTrustAllFeatures: 'Toutes les fonctionnalitï¿½s tout de suite',
-    etfTrustPrivacy: 'Confidentialitï¿½ sï¿½curisï¿½e',
+    etfTrustAllFeatures: 'Toutes les fonctionnalités tout de suite',
+    etfTrustPrivacy: 'Confidentialité sécurisée',
     etfExpectTitle: 'Ce que vous obtenez',
     etfFeature1Title: '📈 Analyse de performance',
-    etfFeature1Desc: 'Graphiques professionnels avec 10 ans dï¿½historique complet. Repï¿½rez tendances et motifs en un coup dï¿½ï¿½il.',
+    etfFeature1Desc: 'Graphiques professionnels avec 10 ans d\'historique complet. Repérez tendances et motifs en un coup d\'œil.',
     etfFeature2Title: '🧩 Outil de comparaison',
-    etfFeature2Desc: 'Comparez un nombre illimitï¿½ dï¿½ETF cï¿½te ï¿½ cï¿½te. Rendements, frais, risques en un coup dï¿½ï¿½il.',
-    etfFeature3Title: '💸 Simulateur de plan dï¿½ï¿½pargne',
-    etfFeature3Desc: 'Testez des stratï¿½gies dï¿½ï¿½pargne avec des donnï¿½es rï¿½elles. Voyez exactement oï¿½ va votre argent et comment vous en profitez.',
+    etfFeature2Desc: 'Comparez un nombre illimité d\'ETF côte à côte. Rendements, frais, risques en un coup d\'œil.',
+    etfFeature3Title: '💸 Simulateur de plan d\'épargne',
+    etfFeature3Desc: 'Testez des stratégies d\'épargne avec des données réelles. Voyez exactement où va votre argent et comment vous en profitez.',
     etfFeature4Title: '📊 Suivi de Portefeuille',
     etfFeature4Desc: 'Gardez vos investissements sous contrôle. Analyse automatique des performances et aperçus détaillés.',
-    etfPreviewTitle: 'Aperï¿½u : Voici ï¿½ quoi ressemble votre base de donnï¿½es (aperï¿½u floutï¿½)',
-    etfSample1Desc: 'Actions mondiales ï¿½ 3?500+ entreprises',
-    etfSample2Desc: 'Tech & croissance US ï¿½ 500 meilleures entreprises',
-    etfSample3Desc: 'Axï¿½ technologie ï¿½ 100 plus grandes entreprises',
+    etfPreviewTitle: 'Aperçu : Voici à quoi ressemble votre base de données (aperçu flouté)',
+    etfSample1Desc: 'Actions mondiales - 3 500+ entreprises',
+    etfSample2Desc: 'Tech & croissance US - 500 meilleures entreprises',
+    etfSample3Desc: 'Axé technologie - 100 plus grandes entreprises',
     etfInfoTitle: '✨ Analyses complètes',
     etfInfoDesc: 'Filtrer par coûts, régions, secteurs et plus – tous les 1.247 ETF avec des métriques détaillées',
-    etfPreviewMore: '+ 1?244 ETF supplï¿½mentaires avec donnï¿½es complï¿½tes',
-    etfPreviewAvailableAfter: 'Tous disponibles aprï¿½s lï¿½upgrade',
+    etfPreviewMore: '+ 1 244 ETF supplémentaires avec données complètes',
+    etfPreviewAvailableAfter: 'Tous disponibles après l\'upgrade',
     etfAvg10y: 'Moy. 10 ans',
-    etfStatHistoricalHtml: 'Donnï¿½es<br>historiques',
+    etfStatHistoricalHtml: 'Données<br>historiques',
     etfStatEtfsHtml: 'ETF<br>professionnels',
     etfStatCompareHtml: 'Analyses<br>Détaillées',
     etfStatProfitabilityHtml: 'Rentabilité<br>fiable',
-    etfTrustCancelableHtml: 'Annulable<br>ï¿½ tout moment',
+    etfTrustCancelableHtml: 'Annulable<br>à tout moment',
     etfTrustFreeDaysHtml: '3 jours<br>gratuits',
-    etfTrustAllFeaturesHtml: 'Toutes les fonctionnalitï¿½s<br>tout de suite',
-    etfTrustPrivacyHtml: 'Confidentialitï¿½<br>sï¿½curisï¿½e',
+    etfTrustAllFeaturesHtml: 'Toutes les fonctionnalités<br>tout de suite',
+    etfTrustPrivacyHtml: 'Confidentialité<br>sécurisée',
     
     // Settings
     appearance: 'Apparence',
     language: 'Langue',
     currency: 'Devise',
-    dataManagement: 'Gestion des Donnï¿½es',
-    exportData: 'Exporter les Donnï¿½es',
-    legal: 'Mentions Lï¿½gales',
+    dataManagement: 'Gestion des Données',
+    exportData: 'Exporter les Données',
+    legal: 'Mentions Légales',
     feedback: 'Portail de Commentaires',
-    feedbackDesc: 'Partagez vos idï¿½es et aidez-nous ï¿½ amï¿½liorer Trade',
-    theme: 'Thï¿½me',
-    system: 'Systï¿½me',
+    feedbackDesc: 'Partagez vos idées et aidez-nous à améliorer Trade',
+    theme: 'Thème',
+    system: 'Système',
     light: 'Clair',
     dark: 'Sombre',
     currencyTools: 'Devise et Outils',
     leverageFunction: 'Fonction Levier',
     analysisValues: 'Valeurs d\'Analyse',
-    taxesDE: 'Impï¿½ts (DE)',
-    taxFreeAmount: 'Montant Exempt d\'Impï¿½t',
+    taxesDE: 'Impôts (DE)',
+    taxFreeAmount: 'Montant Exempt d\'Impôt',
     taxRate: 'Taux d\'Imposition',
-    alreadyUsed: 'Dï¿½jï¿½ Utilisï¿½',
+    alreadyUsed: 'Déjà Utilisé',
     broker: 'Courtier',
     currentBroker: 'Courtier Actuel',
-    custom: 'Personnalisï¿½',
-    forecastParameters: 'Paramï¿½tres de Prï¿½vision',
-    fixedCosts: 'Coï¿½ts Fixes',
+    custom: 'Personnalisé',
+    forecastParameters: 'Paramètres de Prévision',
+    fixedCosts: 'Coûts Fixes',
     variableFee: 'Frais Variables',
     proAccountTitle: 'COMPTE PRO',
     tradePro: 'Trade Pro',
-    advancedFeatures: 'Fonctionnalitï¿½s avancï¿½es pour les traders sï¿½rieux',
-    unlimitedTrades: 'Transactions Illimitï¿½es',
+    advancedFeatures: 'Fonctionnalités avancées pour les traders sérieux',
+    unlimitedTrades: 'Transactions Illimitées',
     saveAsMany: 'Enregistrez autant de transactions que vous le souhaitez',
-    etfDatabaseAccess: 'Base de Donnï¿½es ETF',
-    accessHistoricalReturns: 'Accï¿½s aux rendements historiques moyens',
-    inflationTaxCalc: 'Calculateur d\'Inflation et d\'Impï¿½ts',
-    preciseCalculation: 'Calcul prï¿½cis avec impï¿½ts et inflation',
+    etfDatabaseAccess: 'Base de Données ETF',
+    accessHistoricalReturns: 'Accès aux rendements historiques moyens',
+    inflationTaxCalc: 'Calculateur d\'Inflation et d\'Impôts',
+    preciseCalculation: 'Calcul précis avec impôts et inflation',
     pdfCsvExport: 'Export PDF/CSV',
     exportCalculations: 'Exportez vos calculs',
-    adFree: 'Sans Publicitï¿½',
-    noAds: 'Pas de banniï¿½res publicitaires gï¿½nantes',
+    adFree: 'Sans Publicité',
+    noAds: 'Pas de bannières publicitaires gênantes',
     perMonth: 'par mois',
     perYear: 'par an',
     trialDays: 'Essai gratuit 3 jours',
-    trialInfo: '3 jours gratuits ï¿½ Annuler ï¿½ tout moment',
-    afterTrial: 'Aprï¿½s l\'essai 1,99ï¿½/mois ou 18,99ï¿½/an',
+    trialInfo: '3 jours gratuits - Annuler à tout moment',
+    afterTrial: 'Après l\'essai 1,99€/mois ou 18,99€/an',
     monthsFree: '2 mois gratuits',
-    noPaymentDuringTrial: 'Aucun paiement pendant l\'essai. Annuler ï¿½ tout moment.',
-    upgradeNowBtn: 'Mettre ï¿½ niveau maintenant',
-    cancelAnytime: 'Annuler ï¿½ tout moment',
+    noPaymentDuringTrial: 'Aucun paiement pendant l\'essai. Annuler à tout moment.',
+    upgradeNowBtn: 'Mettre à niveau maintenant',
+    cancelAnytime: 'Annuler à tout moment',
     active: 'ACTIF',
-    allPremium: 'Toutes les fonctionnalitï¿½s premium dï¿½bloquï¿½es',
+    allPremium: 'Toutes les fonctionnalités premium débloquées',
     cancelPro: 'Annuler Pro',
-    chooseTheme: 'Choisissez entre le mode clair, sombre ou systï¿½me.',
-    leverageDesc: 'La fonction de levier permet le calcul de produits dï¿½rivï¿½s (Long/Short).',
-    breakEvenPrice: 'Prix de Seuil de Rentabilitï¿½',
-    crvRatio: 'CRV (Risque-Rï¿½compense)',
-    breakEvenDesc: 'Le break-even montre le prix auquel vous ï¿½tes en gain, frais inclus. Le CRV ï¿½value le rapport entre l\'objectif de gain et le stop loss.',
-    breakEvenModalTitle: 'Prix de Seuil de Rentabilitï¿½',
-    breakEvenModalDesc: 'Le prix auquel votre transaction, en tenant compte de tous les frais d\'achat et de vente, est exactement ï¿½ ï¿½0 de profit/perte. ï¿½ partir de ce point, vous ï¿½tes dans la zone de profit.',
-    crvModalTitle: 'CRV ï¿½ Ratio Risque-Rï¿½compense',
-    crvModalDesc: 'Le rapport entre votre profit potentiel et votre risque (distance au stop-loss). Un CRV de 2.0 signifie que votre objectif de profit est deux fois plus ï¿½levï¿½ que votre risque de perte possible.',
+    chooseTheme: 'Choisissez entre le mode clair, sombre ou système.',
+    leverageDesc: 'La fonction de levier permet le calcul de produits dérivés (Long/Short).',
+    breakEvenPrice: 'Prix de Seuil de Rentabilité',
+    crvRatio: 'CRV (Risque-Récompense)',
+    breakEvenDesc: 'Le break-even montre le prix auquel vous êtes en gain, frais inclus. Le CRV évalue le rapport entre l\'objectif de gain et le stop loss.',
+    breakEvenModalTitle: 'Prix de Seuil de Rentabilité',
+    breakEvenModalDesc: 'Le prix auquel votre transaction, en tenant compte de tous les frais d\'achat et de vente, est exactement à 0 de profit/perte. À partir de ce point, vous êtes dans la zone de profit.',
+    crvModalTitle: 'CRV - Ratio Risque-Récompense',
+    crvModalDesc: 'Le rapport entre votre profit potentiel et votre risque (distance au stop-loss). Un CRV de 2.0 signifie que votre objectif de profit est deux fois plus élevé que votre risque de perte possible.',
     understood: 'Compris',
     remaining2026: 'Restant 2026',
-    used: 'utilisï¿½',
+    used: 'utilisé',
     yearlyAllowance: 'Abattement Annuel',
-    taxInfo: 'En Allemagne, l\'impï¿½t sur les plus-values y compris la contribution de solidaritï¿½ est de 26,375%. L\'abattement de 1.000ï¿½ est automatiquement renouvelï¿½ le 1er janvier de chaque annï¿½e. Les transactions sauvegardï¿½es sont automatiquement attribuï¿½es ï¿½ l\'annï¿½e correspondante.',
-    sparAssetDevelopment: 'Dï¿½VELOPPEMENT DES ACTIFS',
+    taxInfo: 'En Allemagne, l\'impôt sur les plus-values y compris la contribution de solidarité est de 26,375%. L\'abattement de 1.000€ est automatiquement renouvelé le 1er janvier de chaque année. Les transactions sauvegardées sont automatiquement attribuées à l\'année correspondante.',
+    sparAssetDevelopment: 'DÉVELOPPEMENT DES ACTIFS',
     sparCalculationMode: 'MODE DE CALCUL',
-    sparDeposits: 'Dï¿½pï¿½ts',
-    sparPureInterest: 'INTï¿½Rï¿½T PUR',
-    crvRatioLabel: 'CRV (RISQUE/Rï¿½COMPENSE)',
+    sparDeposits: 'Dépôts',
+    sparPureInterest: 'INTÉRÊT PUR',
+    crvRatioLabel: 'CRV (RISQUE/RÉCOMPENSE)',
     totalCapital: 'Capital Total',
-    depositsDesc: 'Somme du capital initial et des taux d\'ï¿½pargne incluant la dynamique.',
-    pureInterestDesc: 'Le profit total des intï¿½rï¿½ts et des intï¿½rï¿½ts composï¿½s.',
+    depositsDesc: 'Somme du capital initial et des taux d\'épargne incluant la dynamique.',
+    pureInterestDesc: 'Le profit total des intérêts et des intérêts composés.',
     requiredRate: 'TAUX REQUIS',
     
     // ETF
     zeroETFs: '(0 ETFs)',
     terModalDesc: 'TER (Ratio de Frais Totaux) indique les frais annuels continus d\'un ETF',
     terExampleLabel: 'EXEMPLE',
-    terExample: 'Avec un TER de 0,20% et un investissement de ï¿½10 000 vous payez ï¿½20 par an en frais.',
+    terExample: 'Avec un TER de 0,20% et un investissement de €10 000 vous payez €20 par an en frais.',
     lowerTERBetter: 'TER plus bas = Meilleur pour toi!',
-    terIncludes: 'Le TER comprend les frais de gestion, les frais d\'exploitation et autres dï¿½penses permanentes. Il est automatiquement dï¿½duit des actifs du fonds et est dï¿½jï¿½ reflï¿½tï¿½ dans l\'ï¿½volution de la valeur.',
+    terIncludes: 'Le TER comprend les frais de gestion, les frais d\'exploitation et autres dépenses permanentes. Il est automatiquement déduit des actifs du fonds et est déjà reflété dans l\'évolution de la valeur.',
     
     // Settings - Broker
     brokerHeading: 'BROKER',
     currentBrokerLabel: 'Courtier Actuel',
-    customBroker: 'Personnalisï¿½',
+    customBroker: 'Personnalisé',
     
     // Settings - Forecast Parameters
-    forecastParametersHeading: 'PARAMï¿½TRES DE PRï¿½VISION',
+    forecastParametersHeading: 'PARAMÈTRES DE PRÉVISION',
     inflationRateLabel: 'Taux d\'Inflation',
     yearlyIncreaseLabel: 'Augmentation Annuelle',
-    forecastDescription: 'Le taux d\'inflation est utilisï¿½ pour le calcul de la valeur rï¿½elle dans la calculatrice d\'ï¿½pargne. L\'augmentation annuelle augmente automatiquement votre taux d\'ï¿½pargne du pourcentage spï¿½cifiï¿½ par an.',
-    brokerTradeRepublic: 'Trade Republic',
-    brokerScalable: 'Scalable Capital',
+    forecastDescription: 'Le taux d\'inflation est utilisé pour le calcul de la valeur réelle dans la calculatrice d\'épargne. L\'augmentation annuelle augmente automatiquement votre taux d\'épargne du pourcentage spécifié par an.',
+    brokerFinanzenZero: 'Finanzen.net Zero',
+    brokerSmartbrokerPlus: 'Smartbroker+',
+    brokerJustTrade: 'justTRADE',
+    brokerFlatex: 'Flatex',
+    brokerComdirect: 'Comdirect',
+    brokerIng: 'ING',
+    brokerConsorsbank: 'Consorsbank',
+    brokerCommerzbank: 'Commerzbank',
+    brokerDkb: 'DKB',
+    brokerInteractiveBrokers: 'Interactive Brokers',
     
     // Login/Register
     loginBtn: 'Se connecter',
@@ -7237,35 +7607,35 @@ const uebersetzungen = {
     emailLabel: 'Adresse e-mail',
     emailPlaceholder: 'votre@email.fr',
     passwordLabel: 'Mot de passe',
-    passwordPlaceholder: 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+    passwordPlaceholder: '********',
     acceptTerms: 'J\'accepte les',
     termsLink: 'Conditions d\'utilisation',
     andThe: 'et la',
-    privacyLink: 'Politique de confidentialitï¿½',
+    privacyLink: 'Politique de confidentialité',
     loginSubmit: 'Se connecter',
     registerSubmit: 'S\'inscrire',
     
     // Settings - Fees
     feesHeading: 'FRAIS',
-    fixedCostsLabel: 'Coï¿½ts Fixes',
+    fixedCostsLabel: 'Coûts Fixes',
     variableFeeLabel: 'Frais Variables',
-    feesDescription: 'Frais de commande de votre courtier. Ceux-ci sont pris en compte ï¿½ la fois pour l\'achat et la vente.',
+    feesDescription: 'Frais de commande de votre courtier. Ceux-ci sont pris en compte à la fois pour l\'achat et la vente.',
     
     // Settings - Legal
-    legalHeading: 'Lï¿½GAL',
-    aboutTradeTitle: 'ï¿½ Propos de Trade',
-    aboutTradeDescription: 'Trade est une calculatrice de trading gratuite pour les traders et investisseurs privï¿½s. L\'application offre des calculs prï¿½cis pour le trading, l\'ï¿½pargne et les investissements avec calcul automatique des impï¿½ts.',
+    legalHeading: 'LÉGAL',
+    aboutTradeTitle: 'À Propos de Trade',
+    aboutTradeDescription: 'Trade est une calculatrice de trading gratuite pour les traders et investisseurs privés. L\'application offre des calculs précis pour le trading, l\'épargne et les investissements avec calcul automatique des impôts.',
     supportEmail: 'Support:',
     version: 'Version:',
-    privacyPolicy: 'Politique de Confidentialitï¿½',
-    privacyPolicyDesc: 'Dï¿½couvrez comment nous protï¿½geons vos donnï¿½es',
+    privacyPolicy: 'Politique de Confidentialité',
+    privacyPolicyDesc: 'Découvrez comment nous protégeons vos données',
     termsOfService: 'Conditions d\'Utilisation',
-    termsOfServiceDesc: 'Lisez nos conditions gï¿½nï¿½rales',
-    imprint: 'Mentions Lï¿½gales',
-    imprintDesc: 'Informations lï¿½gales sur le fournisseur',
+    termsOfServiceDesc: 'Lisez nos conditions générales',
+    imprint: 'Mentions Légales',
+    imprintDesc: 'Informations légales sur le fournisseur',
     termsTitle: 'Conditions d\'Utilisation',
-    privacyTitle: 'Politique de Confidentialitï¿½',
-    imprintTitle: 'Mentions Lï¿½gales',
+    privacyTitle: 'Politique de Confidentialité',
+    imprintTitle: 'Mentions Légales',
     termsHtml: `
       <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">1. Fournisseur et contact</h3>
       <p style="margin-bottom:16px;color:var(--muted)">
@@ -7363,7 +7733,7 @@ const uebersetzungen = {
       <p style="color:var(--muted);font-size:12px;margin-top:24px">Derniere mise a jour: <span data-last-updated="true"></span></p>
     `,
     imprintHtml: `
-      <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">1. Informations conformes au ï¿½ 5 TMG</h3>
+      <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">1. Informations conformes au § 5 TMG</h3>
       <p style="margin-bottom:16px;color:var(--muted)">
         LTP-TMC UG (haftungsbeschraenkt) &amp; CO. KG<br>
         Bizetstrasse 111<br>
@@ -7390,12 +7760,12 @@ const uebersetzungen = {
 
       <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">5. TVA intracommunautaire</h3>
       <p style="margin-bottom:16px;color:var(--muted)">
-        Numero d'identification TVA conforme au ï¿½ 27 a UStG: [Marqueur]
+        Numero d'identification TVA conforme au § 27a UStG: [Marqueur]
       </p>
 
       <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">6. Responsable du contenu</h3>
       <p style="margin-bottom:16px;color:var(--muted)">
-        [Marqueur conforme au ï¿½ 18 Abs. 2 MStV]
+        [Marqueur conforme au § 18 Abs. 2 MStV]
       </p>
 
       <h3 style="margin-top:20px;margin-bottom:12px;color:var(--accent)">7. Responsabilite concernant le contenu</h3>
@@ -7420,19 +7790,19 @@ const uebersetzungen = {
 
       <p style="color:var(--muted);font-size:12px;margin-top:24px">Derniere mise a jour: <span data-last-updated="true"></span></p>
     `,
-    allRightsReserved: 'Tous droits rï¿½servï¿½s.',
+    allRightsReserved: 'Tous droits réservés.',
     contributions: 'Contributions',
-    pureInterest: 'Intï¿½rï¿½t Pur',
-    realValueInflation: 'Valeur Rï¿½elle (Ajustï¿½ pour l\'Inflation)',
-    moreDetails: 'Plus de Dï¿½tails avec Trade Pro',
-    seeRealValue: 'Voir la valeur rï¿½elle et les impï¿½ts de vos plans d\'ï¿½pargne',
-    upgradeFor: 'Mettre ï¿½ niveau pour 1,99ï¿½/mois',
-    anytime: 'Annuler ï¿½ tout moment',
+    pureInterest: 'Intérêt Pur',
+    realValueInflation: 'Valeur Réelle (Ajustée pour l\'Inflation)',
+    moreDetails: 'Plus de Détails avec Trade Pro',
+    seeRealValue: 'Voir la valeur réelle et les impôts de vos plans d\'épargne',
+    upgradeFor: 'Mettre à niveau pour 1,99€/mois',
+    anytime: 'Annuler à tout moment',
     proFeature: 'FONCTION PRO',
     compareHistorical: 'Comparez les rendements historiques moyens des ETF populaires',
-    unlockETF: 'Dï¿½bloquer la Base de Donnï¿½es ETF',
-    accessHistorical: 'Accï¿½s aux donnï¿½es historiques des 10 derniï¿½res annï¿½es. Comparez les performances, le TER et simulez votre plan d\'ï¿½pargne.',
-    upgradeNow: 'Mettre ï¿½ niveau maintenant pour 1,99ï¿½/mois',
+    unlockETF: 'Débloquer la Base de Données ETF',
+    accessHistorical: 'Accès aux données historiques des 10 dernières années. Comparez les performances, le TER et simulez votre plan d\'épargne.',
+    upgradeNow: 'Mettre à niveau maintenant pour 1,99€/mois',
     popularETFs: 'ETF Populaires',
     descending: 'Descendant',
     ascending: 'Ascendant',
@@ -7445,11 +7815,11 @@ const uebersetzungen = {
     sortByTER: 'Trier par: Ratio de Frais Totaux (TER)',
     whatIsTER: 'Qu\'est-ce que le TER (Ratio de Frais Totaux)?',
     returnComparison: 'Comparaison des Rendements (10 Ans)',
-    selectedETFs: 'ETF sï¿½lectionnï¿½s',
-    selectUpTo2: 'Sï¿½lectionnez jusqu\'ï¿½ 2 ETF dans la liste ci-dessous pour les comparer',
-    noETFsFound: 'Aucun ETF trouvï¿½',
+    selectedETFs: 'ETF sélectionnés',
+    selectUpTo2: 'Sélectionnez jusqu\'à 2 ETF dans la liste ci-dessous pour les comparer',
+    noETFsFound: 'Aucun ETF trouvé',
     tryDifferent: 'Essayez un autre terme de recherche',
-    noteHistorical: 'Note : Les rendements indiquï¿½s sont des moyennes historiques et ne garantissent pas les dï¿½veloppements futurs. TER = Ratio de Frais Totaux (Total Expense Ratio). Toutes les informations sans garantie.',
+    noteHistorical: 'Note : Les rendements indiqués sont des moyennes historiques et ne garantissent pas les développements futurs. TER = Ratio de Frais Totaux (Total Expense Ratio). Toutes les informations sans garantie.',
     category: 'Cat.',
     
     // Allgemein
@@ -7463,11 +7833,11 @@ const uebersetzungen = {
     optional: 'optionnel',
     loading: 'Chargement...',
     
-    // Home - ï¿½tendu
-    financialPlanningReimagined: 'Planification Financiï¿½re Rï¿½inventï¿½e',
-    financialPlanningDesc: 'Optimisï¿½ pour le trading, l\'ï¿½pargne et les investissements. Avec calcul automatique des impï¿½ts, trading avec effet de levier, gestion stop-loss et interface intuitive.',
-    capitalGainsTax: 'Impï¿½t sur les Plus-Values',
-    capitalGainsTaxLabel: 'Impï¿½t sur les Plus-Values (26,375%)',
+    // Home - Étendu
+    financialPlanningReimagined: 'Planification Financière Réinventée',
+    financialPlanningDesc: 'Optimisé pour le trading, l\'épargne et les investissements. Avec calcul automatique des impôts, trading avec effet de levier, gestion stop-loss et interface intuitive.',
+    capitalGainsTax: 'Impôt sur les Plus-Values',
+    capitalGainsTaxLabel: 'Impôt sur les Plus-Values (26,375%)',
     taxFreeAllowance: 'Abattement Fiscal',
     per: 'Pro',
     perMonth: 'Mois',
@@ -7477,102 +7847,103 @@ const uebersetzungen = {
     countryForTax: 'Pays (pour calcul fiscal)',
     taxRateInfo: 'Taux d\'imposition',
     taxAllowanceInfo: 'Abattement fiscal',
-    noTax: 'Pas d\'impï¿½t sur les plus-values',
-    howItWorks: 'Comment ï¿½a Marche',
+    noTax: 'Pas d\'impôt sur les plus-values',
+    howItWorks: 'Comment ça Marche',
     step1Title: 'Saisir les Valeurs',
-    step1Desc: 'Entrez vos donnï¿½es de trading : prix d\'entrï¿½e, quantitï¿½ et prix cible. En option, vous pouvez ï¿½galement simuler des achats supplï¿½mentaires et des ventes partielles.',
+    step1Desc: 'Entrez vos données de trading : prix d\'entrée, quantité et prix cible. En option, vous pouvez également simuler des achats supplémentaires et des ventes partielles.',
     step2Title: 'Calcul Automatique',
-    step2Desc: 'L\'outil calcule automatiquement votre profit net en tenant compte des frais de courtage et de l\'impï¿½t allemand sur les plus-values.',
+    step2Desc: 'L\'outil calcule automatiquement votre profit net en tenant compte des frais de courtage et de l\'impôt allemand sur les plus-values.',
     step3Title: 'Enregistrer la Position',
-    step3Desc: 'Enregistrez vos transactions dans l\'historique et gardez un aperï¿½u de votre performance et de l\'abattement fiscal restant.',
+    step3Desc: 'Enregistrez vos transactions dans l\'historique et gardez un aperçu de votre performance et de l\'abattement fiscal restant.',
     step4Title: 'Suivre la Performance',
-    step4Desc: 'Analysez votre succï¿½s en trading avec des graphiques dï¿½taillï¿½s et gardez tous les indicateurs importants en vue.',
+    step4Desc: 'Analysez votre succès en trading avec des graphiques détaillés et gardez tous les indicateurs importants en vue.',
     yourAdvantages: 'Vos Avantages',
-    preciseCalculations: 'Calculs Prï¿½cis',
-    preciseCalculationsDesc: 'Calculs exacts des bï¿½nï¿½fices en tenant compte de tous les frais et impï¿½ts.',
-    dataPrivacy: '100% Confidentialitï¿½',
-    dataPrivacyDesc: 'Toutes les donnï¿½es restent stockï¿½es localement dans votre navigateur. Pas de cloud, pas de serveurs, contrï¿½le total.',
+    preciseCalculations: 'Calculs Précis',
+    preciseCalculationsDesc: 'Calculs exacts des bénéfices en tenant compte de tous les frais et impôts.',
+    dataPrivacy: '100% Confidentialité',
+    dataPrivacyDesc: 'Les données de compte sont stockées de façon sécurisée dans le cloud (Firebase). Sans connexion, les données restent locales dans votre navigateur.',
     fastSpeed: 'Ultra Rapide',
-    fastSpeedDesc: 'Aucun temps de chargement, calculs instantanï¿½s. Fonctionne complï¿½tement hors ligne aprï¿½s le premier chargement.',
+    fastSpeedDesc: 'Aucun temps de chargement, calculs instantanés. Fonctionne complètement hors ligne après le premier chargement.',
     multiBroker: 'Support Multi-Courtiers',
-    multiBrokerDesc: 'Modï¿½les de frais prï¿½configurï¿½s pour Trade Republic, Scalable Capital et courtiers personnalisï¿½s.',
+    multiBrokerDesc: 'Modèles de frais préconfigurés pour Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB, Interactive Brokers et courtiers personnalisés.',
     tradingHistory: 'Historique de Trading',
-    noPositionsSaved: 'Aucune position enregistrï¿½e',
-    saveFirstPosition: 'Enregistrez votre premiï¿½re position pour la voir ici',
+    noPositionsSaved: 'Aucune position enregistrée',
+    saveFirstPosition: 'Enregistrez votre première position pour la voir ici',
     
     // Trading Modals
-    addBuy: 'Achat Supplï¿½mentaire -',
+    addBuy: 'Achat Supplémentaire -',
     buyPrice: 'Prix d\'Achat',
-    quantity: 'Quantitï¿½',
+    quantity: 'Quantité',
     pieces: 'Pcs.',
     newAverage: 'Nouvelle Moyenne',
     invested: 'Investi',
     confirmBuy: 'Confirmer l\'Achat',
     partialSell: 'Vente Partielle +',
     sellPrice: 'Prix de Vente',
-    sellQuantity: 'Quantitï¿½ de Vente',
+    sellQuantity: 'Quantité de Vente',
     remaining: 'Restant',
     profitFromSale: 'Profit de Vente',
     confirmSell: 'Confirmer la Vente',
-    addBuyBtn: 'Achat Supplï¿½mentaire +',
+    addBuyBtn: 'Achat Supplémentaire +',
     partialSellBtn: 'Vente Partielle +',
     netProfit: 'PROFIT NET',
     grossProfit: 'PROFIT BRUT',
     
     // Position Cards
     unnamedPosition: 'Position Sans Nom',
-    entry: 'Entrï¿½e',
+    entry: 'Entrée',
     target: 'Objectif',
-    quantity: 'Quantitï¿½',
+    quantity: 'Quantité',
     yield: 'Rendement',
     profit: 'Profit',
     net: 'Net',
     gross: 'Brut',
     toggle: 'Changer',
-    tradingHistoryDesc: 'Enregistrez et suivez toutes vos transactions avec des informations dï¿½taillï¿½es sur le profit, le rendement et le moment.',
+    tradingHistoryDesc: 'Enregistrez et suivez toutes vos transactions avec des informations détaillées sur le profit, le rendement et le moment.',
     freeStart: 'Commencer Gratuitement',
-    freeStartDesc: 'Entiï¿½rement gratuit avec toutes les fonctionnalitï¿½s de base. Option : Compte Pro pour 1,99ï¿½/mois avec fonctionnalitï¿½s avancï¿½es.',
-    faq: 'Questions Frï¿½quentes',
-    faqQ1: 'Comment mes donnï¿½es sont-elles stockï¿½es?',
-    faqA1: 'Toutes les donnï¿½es sont stockï¿½es exclusivement localement dans votre navigateur (localStorage). Aucune donnï¿½e n\'est transfï¿½rï¿½e vers des serveurs externes. Vous avez un contrï¿½le total sur vos informations.',
+    freeStartDesc: 'Entièrement gratuit avec toutes les fonctionnalités de base. Option : Compte Pro pour 1,99€/mois avec fonctionnalités avancées.',
+    faq: 'Questions Fréquentes',
+    faqQ1: 'Comment mes données sont-elles stockées?',
+    faqA1: 'Lorsque vous vous connectez, les donnees de compte sont stockees de facon securisee dans le cloud (Firebase/Firestore). Sans connexion, les donnees restent locales dans votre navigateur.',
     faqQ2: 'Quels courtiers sont pris en charge?',
-    faqA2: 'Nous proposons des modï¿½les de frais prï¿½configurï¿½s pour Trade Republic (1ï¿½ par ordre) et Scalable Capital (0,99ï¿½ par ordre). Vous pouvez ï¿½galement saisir des frais personnalisï¿½s pour n\'importe quel courtier.',
-    faqQ3: 'Comment les impï¿½ts sont-ils calculï¿½s?',
-    faqA3: 'L\'impï¿½t sur les plus-values en Allemagne est de 26,375% (25% impï¿½t sur les plus-values + 5,5% contribution de solidaritï¿½). L\'abattement de 1.000ï¿½ par an est automatiquement pris en compte.',
+    faqA2: 'Nous proposons des modèles de frais préconfigurés pour Finanzen.net Zero, Smartbroker+, justTRADE, Flatex, Comdirect, ING, Consorsbank, Commerzbank, DKB et Interactive Brokers. Vous pouvez également saisir des frais personnalisés pour n\'importe quel courtier.',
+    faqQ3: 'Comment les impôts sont-ils calculés?',
+    faqA3: 'L\'impôt sur les plus-values en Allemagne est de 26,375% (25% impôt sur les plus-values + 5,5% contribution de solidarité). L\'abattement de 1.000€ par an est automatiquement pris en compte.',
     faqQ4: 'Puis-je basculer entre brut et net?',
-    faqA4: 'Oui! Pour tous les calculs, vous pouvez basculer entre brut (avant impï¿½ts/frais) et net (aprï¿½s dï¿½duction) en cliquant sur l\'affichage du profit.',
+    faqA4: 'Oui! Pour tous les calculs, vous pouvez basculer entre brut (avant impôts/frais) et net (après déduction) en cliquant sur l\'affichage du profit.',
     faqQ5: 'Ai-je besoin d\'un compte?',
-    faqA5: 'Un compte est optionnel. Sans inscription, vous pouvez utiliser toutes les calculatrices. Avec un compte, vos positions sauvegardï¿½es sont liï¿½es ï¿½ votre profil.',
+    faqA5: 'Un compte est optionnel. Sans inscription, vous pouvez utiliser toutes les calculatrices. Avec un compte, vos positions sauvegardées sont liées à votre profil.',
     yourOpinionMatters: 'Votre Opinion Compte!',
-    feedbackCTA: 'Aidez-nous ï¿½ amï¿½liorer Trade encore plus. Partagez vos idï¿½es, souhaits ou signalez des problï¿½mes ï¿½ chaque retour est apprï¿½ciï¿½ et pris en compte.',
+    feedbackCTA: 'Aidez-nous à améliorer Trade encore plus. Partagez vos idées, souhaits ou signalez des problèmes - chaque retour est apprécié et pris en compte.',
     giveFeedback: 'Donner un Feedback',
     
     // Delete Dialogs
     deletePosition: 'Supprimer la Position',
-    confirmDeletePosition: 'ï¿½tes-vous certain de vouloir supprimer dï¿½finitivement cette position?',
-    deletePositionWarning: 'ï¿½tes-vous certain de vouloir supprimer dï¿½finitivement cette position?',
+    confirmDeletePosition: 'Êtes-vous certain de vouloir supprimer définitivement cette position?',
+    deletePositionWarning: 'Êtes-vous certain de vouloir supprimer définitivement cette position?',
     deleteAllPositions: 'Supprimer Toutes les Positions',
-    deleteAllWarning: 'ATTENTION: Vous ï¿½tes sur le point de supprimer dï¿½finitivement {count} position(s)!',
-    irreversibleAction: 'Cette action ne peut pas ï¿½tre annulï¿½e.',
+    deleteAllWarning: 'ATTENTION: Vous êtes sur le point de supprimer définitivement {count} position(s)!',
+    irreversibleAction: 'Cette action ne peut pas être annulée.',
     deleteButtonText: 'Supprimer',
     deleteAllButtonText: 'Supprimer Tout',
     
     // Buttons
     calculate: 'Calculer',
     saveTrade: 'Enregistrer la Position',
+    loginToSave: 'Connexion pour enregistrer',
     addBuyBtn: 'Achat +',
     partialSellBtn: 'Vente +',
-    upgradeNow: 'Passer ï¿½ la Version Pro',
-    exportData: 'Exporter les Donnï¿½es',
+    upgradeNow: 'Passer à la Version Pro',
+    exportData: 'Exporter les Données',
     cancelPro: 'Annuler Pro',
     login: 'Connexion',
     register: 'Inscription',
-    logoutBtn: 'Dï¿½connexion',
-    privacyPolicy: 'Politique de Confidentialitï¿½',
+    logoutBtn: 'Déconnexion',
+    privacyPolicy: 'Politique de Confidentialité',
     terms: 'Conditions de Service',
-    imprint: 'Mentions Lï¿½gales',
+    imprint: 'Mentions Légales',
     feedbackBtn: 'Envoyer des Commentaires',
-    themeSystem: 'Systï¿½me',
+    themeSystem: 'Système',
     themeLight: 'Clair',
     themeDark: 'Sombre',
     understood: 'Compris',
@@ -7581,14 +7952,14 @@ const uebersetzungen = {
     // Form Validation
     fillAllFields: 'Veuillez remplir tous les champs.',
     validEmail: 'Veuillez entrer une adresse e-mail valide.',
-    noAccountFound: 'Aucun compte trouvï¿½ avec cet e-mail.',
+    noAccountFound: 'Aucun compte trouvé avec cet e-mail.',
     wrongPassword: 'Mot de passe incorrect.',
-    loginSuccess: 'Connectï¿½ avec succï¿½s!',
-    acceptTermsRequired: 'Vous devez accepter les conditions de service et la politique de confidentialitï¿½ pour crï¿½er un compte.',
-    passwordMinLength: 'Le mot de passe doit contenir au moins 6 caractï¿½res.',
-    accountExists: 'Un compte avec cet e-mail existe dï¿½jï¿½.',
-    registerSuccess: 'Compte crï¿½ï¿½ avec succï¿½s! Vous serez connectï¿½...',
-    logoutConfirm: 'Voulez-vous vraiment vous dï¿½connecter?'
+    loginSuccess: 'Connecté avec succès!',
+    acceptTermsRequired: 'Vous devez accepter les conditions de service et la politique de confidentialité pour créer un compte.',
+    passwordMinLength: 'Le mot de passe doit contenir au moins 6 caractères.',
+    accountExists: 'Un compte avec cet e-mail existe déjà.',
+    registerSuccess: 'Compte créé avec succès! Vous serez connecté...',
+    logoutConfirm: 'Voulez-vous vraiment vous déconnecter?'
   }
 };
 
@@ -7828,10 +8199,10 @@ function aktualisiereSprachAnzeige() {
   const countrySelectLabelText = document.getElementById('countrySelectLabelText');
   if (countrySelectLabelText) countrySelectLabelText.textContent = t('countryForTax');
 
-  // Lï¿½nder-Optionen in Dropdowns aktualisieren
+  // Länder-Optionen in Dropdowns aktualisieren
   aktualisiereLandOptionen();
   
-  // Pricing Cards - Neue ï¿½bersetzungen
+  // Pricing Cards - Neue Übersetzungen
   const pricingPers = document.querySelectorAll('.pricing-per');
   pricingPers.forEach(el => { el.textContent = t('per'); });
   
@@ -7845,7 +8216,7 @@ function aktualisiereSprachAnzeige() {
   if (pricingBonus) pricingBonus.textContent = t('monthsFree');
   
   const trialTitle = document.querySelector('.trial-title');
-  if (trialTitle) trialTitle.innerHTML = '? ' + t('trialDays');
+  if (trialTitle) trialTitle.innerHTML = '🎁 ' + t('trialDays');
   
   const trialDesc = document.querySelector('.trial-desc');
   if (trialDesc) trialDesc.textContent = t('noPaymentDuringTrial');
@@ -7853,7 +8224,7 @@ function aktualisiereSprachAnzeige() {
   const upgradeButtonText = document.querySelector('.upgrade-button-text');
   if (upgradeButtonText) upgradeButtonText.textContent = t('trialDays');
   
-  // Update dynamische lï¿½nderspezifische Texte
+  // Update dynamische länderspezifische Texte
   aktualisiereDynamischeTexte();
   
   // "Wie es funktioniert" Section
@@ -8039,7 +8410,7 @@ function aktualisiereSprachAnzeige() {
     if (svg) calcBtn.prepend(svg);
   }
   
-  const saveBtn = document.querySelector('#trading button[onclick="speicherePosition()"]');
+  const saveBtn = document.getElementById('savePositionBtn');
   if (saveBtn) {
     const svg = saveBtn.querySelector('svg');
     saveBtn.textContent = t('saveTrade');
@@ -8050,7 +8421,7 @@ function aktualisiereSprachAnzeige() {
   const sparenLabels = document.querySelectorAll('#sparen .label-text');
   const labelTexts = {
     'Anfangskapital': t('initialCapital'),
-    'Gewï¿½nschtes Endkapital': t('finalCapital'),
+    'Gewünschtes Endkapital': t('finalCapital'),
     'Sparrate (Monatlich)': t('monthlySavings'),
     'Laufzeit': t('duration'),
     'Zinssatz p.a.': t('interestRate') + ' p.a.'
@@ -8059,7 +8430,7 @@ function aktualisiereSprachAnzeige() {
   sparenLabels.forEach(label => {
     const text = label.textContent.trim();
     if (text === 'Anfangskapital') label.textContent = t('initialCapital');
-    else if (text === 'Gewï¿½nschtes Endkapital') label.textContent = t('finalCapital');
+    else if (text === 'Gewünschtes Endkapital') label.textContent = t('finalCapital');
     else if (text === 'Sparrate (Monatlich)') label.textContent = t('monthlySavings');
     else if (text.includes('Laufzeit:')) {
       // Special case for Laufzeit with value
@@ -8073,7 +8444,7 @@ function aktualisiereSprachAnzeige() {
   });
   
   // ===== FEEDBACK SEITE LABELS =====
-  // (wird spï¿½ter noch einmal vollstï¿½ndig gesetzt)
+  // (wird später noch einmal vollständig gesetzt)
   
   // ===== MODAL LABELS =====
   
@@ -8087,7 +8458,7 @@ function aktualisiereSprachAnzeige() {
     btnZielRate.textContent = t('savingsGoal');
   }
   
-  // Einzahlungen & Reiner Zins Labels - Nur die korrekten divs ï¿½ndern
+  // Einzahlungen & Reiner Zins Labels - Nur die korrekten divs ändern
   const sparInfoDivs = document.querySelectorAll('#sparen div[style*="font-size:11px"][style*="letter-spacing:1px"]');
   sparInfoDivs.forEach(div => {
     const text = div.textContent.trim();
@@ -8176,7 +8547,7 @@ function aktualisiereSprachAnzeige() {
     if (div.textContent === 'Beliebte ETFs') div.textContent = t('popularETFs');
     if (div.textContent.includes('ETF Datenbank freischalten')) div.textContent = t('unlockETF');
     if (div.textContent.includes('Zugriff auf historische')) div.textContent = t('accessHistorical');
-    if (div.textContent.includes('Jederzeit kï¿½ndbar')) div.textContent = t('anytime');
+    if (div.textContent.includes('Jederzeit kündbar')) div.textContent = t('anytime');
   });
   
   const etfUnlockBtn = document.querySelector('#etfFreeView .btn');
@@ -8193,7 +8564,7 @@ function aktualisiereSprachAnzeige() {
   // ETF Label Text - SORTIEREN NACH / REIHENFOLGE
   document.querySelectorAll('#etf .label-text').forEach(label => {
     const text = label.textContent.trim();
-    // Nutze existing Translations wenn mï¿½glich, sonst nutze Fallback
+    // Nutze existing Translations wenn möglich, sonst nutze Fallback
     if (text === 'SORTIEREN NACH') {
       label.textContent = aktuelleSprache === 'de' ? 'SORTIEREN NACH' :
                           aktuelleSprache === 'en' ? 'SORT BY' :
@@ -8215,7 +8586,7 @@ function aktualisiereSprachAnzeige() {
     etfSortRichtung.options[1].text = t('ascending');
   }
   
-  // Zusï¿½tzlich alle select#etfSortRichtung Elemente behandeln
+  // Zusätzlich alle select#etfSortRichtung Elemente behandeln
   document.querySelectorAll('select#etfSortRichtung').forEach(select => {
     select.querySelectorAll('option').forEach(opt => {
       if (opt.value === 'desc') opt.textContent = t('descending');
@@ -8235,7 +8606,7 @@ function aktualisiereSprachAnzeige() {
     }
   }
   
-  // Zusï¿½tzlich alle select#etfSortKriterium Elemente behandeln
+  // Zusätzlich alle select#etfSortKriterium Elemente behandeln
   document.querySelectorAll('select#etfSortKriterium').forEach(select => {
     const options = select.querySelectorAll('option');
     options.forEach((opt, idx) => {
@@ -8256,11 +8627,11 @@ function aktualisiereSprachAnzeige() {
   // ETF Chart Labels
   document.querySelectorAll('#etfChartContainer div').forEach(div => {
     if (div.textContent.includes('RENDITEN-VERGLEICH')) div.textContent = t('returnComparison').toUpperCase();
-    if (div.textContent.includes('ETFs ausgewï¿½hlt')) {
+    if (div.textContent.includes('ETFs ausgewählt')) {
       const anzahl = div.querySelector('span#ausgewaehlteAnzahl')?.textContent || '0';
       div.innerHTML = `<span id="ausgewaehlteAnzahl">${anzahl}</span> ${t('selectedETFsOfTwo')}`;
     }
-    if (div.textContent.includes('Wï¿½hle bis zu 2')) div.textContent = t('selectUpTo2');
+    if (div.textContent.includes('Wähle bis zu 2')) div.textContent = t('selectUpTo2');
   });
   
   // ETF Detail Vergleich Labels
@@ -8348,33 +8719,33 @@ function aktualisiereSprachAnzeige() {
   const settingsH2 = document.querySelector('#settings h2');
   if (settingsH2) settingsH2.textContent = t('settings');
   
-  // Settings ï¿½berschriften
+  // Settings Überschriften
   const settingsH3 = document.querySelectorAll('#settings h3');
   settingsH3.forEach(h3 => {
     const text = h3.textContent.trim();
     if (text === 'PRO ACCOUNT') h3.textContent = t('proAccountTitle');
     if (text === 'DATEN VERWALTEN') h3.textContent = t('dataManagement').toUpperCase();
     if (text === 'ERSCHEINUNGSBILD') h3.textContent = t('appearance').toUpperCase();
-    if (text.includes('Wï¿½HRUNG & TOOLS')) h3.textContent = t('currencyTools').toUpperCase();
+    if (text.includes('WÄHRUNG & TOOLS')) h3.textContent = t('currencyTools').toUpperCase();
     if (text === 'ANALYSE-WERTE') h3.textContent = t('analysisValues').toUpperCase();
     if (text === 'STEUERN (DE)') h3.textContent = t('taxesDE').toUpperCase();
     if (text === 'BROKER') h3.textContent = t('brokerHeading');
     if (text === 'PROGNOSE PARAMETER') h3.textContent = t('forecastParametersHeading');
-    if (text === 'GEBï¿½HREN') h3.textContent = t('feesHeading');
+    if (text === 'GEBÜHREN') h3.textContent = t('feesHeading');
     if (text === 'RECHTLICHES') h3.textContent = t('legalHeading');
   });
   
-  // Settings - Broker Section - ALLE info-row Labels ï¿½bersetzen
+  // Settings - Broker Section - ALLE info-row Labels übersetzen
   let infoRowLabels = document.querySelectorAll('#settings .info-row span[style*="color:var(--muted)"]');
   infoRowLabels.forEach(span => {
     const text = span.textContent.trim();
     if (text === 'Aktueller Broker') span.textContent = t('currentBrokerLabel');
     if (text === 'Inflationsrate') span.textContent = t('inflationRateLabel');
-    if (text === 'Jï¿½hrliche Dynamik') span.textContent = t('yearlyIncreaseLabel');
+    if (text === 'Jährliche Dynamik') span.textContent = t('yearlyIncreaseLabel');
     if (text === 'Fixkosten') span.textContent = t('fixedCostsLabel');
-    if (text === 'Variable Gebï¿½hr') span.textContent = t('variableFeeLabel');
+    if (text === 'Variable Gebühr') span.textContent = t('variableFeeLabel');
     if (text === 'Sprache') span.textContent = t('language');
-    if (text === 'Wï¿½hrung') span.textContent = t('currency');
+    if (text === 'Währung') span.textContent = t('currency');
     if (text === 'Break-Even Kurs') span.textContent = t('breakEvenPrice');
     if (text === 'CRV (Chance-Risiko)') span.textContent = t('crvRatio');
     if (text === 'Jahres-Freibetrag') span.textContent = t('yearlyAllowance');
@@ -8382,36 +8753,38 @@ function aktualisiereSprachAnzeige() {
     if (text === 'Aktueller Broker') span.textContent = t('currentBroker');
   });
   
-  // ï¿½bersetze ALLE span Texte auf der Einstellungsseite die Settings-Beschreibungen sind
+  // Übersetze ALLE span Texte auf der Einstellungsseite die Settings-Beschreibungen sind
   document.querySelectorAll('#settings span').forEach(span => {
     const text = span.textContent.trim();
-    // Nur ï¿½bersetzen wenn es kurze Labels sind (nicht lange Beschreibungen)
+    // Nur übersetzen wenn es kurze Labels sind (nicht lange Beschreibungen)
     if (text.length < 50) {
       if (text === 'Aktueller Broker') span.textContent = t('currentBrokerLabel');
       if (text === 'Inflationsrate') span.textContent = t('inflationRateLabel');
-      if (text === 'Jï¿½hrliche Dynamik') span.textContent = t('yearlyIncreaseLabel');
+      if (text === 'Jährliche Dynamik') span.textContent = t('yearlyIncreaseLabel');
       if (text === 'Fixkosten') span.textContent = t('fixedCostsLabel');
-      if (text === 'Variable Gebï¿½hr') span.textContent = t('variableFeeLabel');
+      if (text === 'Variable Gebühr') span.textContent = t('variableFeeLabel');
     }
   });
   
-  // Broker Select Options - Alle Optionen ï¿½bersetzen
+  // Broker Select Options - Alle Optionen übersetzen
   const brokerSelect = document.getElementById('brokerAuswahl');
   if (brokerSelect) {
     brokerSelect.querySelectorAll('option').forEach(opt => {
-      if (opt.value === 'custom' && opt.textContent.trim() === 'Benutzerdefiniert') {
-        opt.textContent = t('customBroker');
-      }
-      if (opt.value === 'traderepublic' && opt.textContent.trim() === 'Trade Republic') {
-        opt.textContent = t('brokerTradeRepublic');
-      }
-      if (opt.value === 'scalable' && opt.textContent.trim() === 'Scalable Capital') {
-        opt.textContent = t('brokerScalable');
-      }
+      if (opt.value === 'custom') opt.textContent = t('customBroker');
+      if (opt.value === 'finanzenzero') opt.textContent = t('brokerFinanzenZero');
+      if (opt.value === 'smartbrokerplus') opt.textContent = t('brokerSmartbrokerPlus');
+      if (opt.value === 'justtrade') opt.textContent = t('brokerJustTrade');
+      if (opt.value === 'flatex') opt.textContent = t('brokerFlatex');
+      if (opt.value === 'comdirect') opt.textContent = t('brokerComdirect');
+      if (opt.value === 'ing') opt.textContent = t('brokerIng');
+      if (opt.value === 'consorsbank') opt.textContent = t('brokerConsorsbank');
+      if (opt.value === 'commerzbank') opt.textContent = t('brokerCommerzbank');
+      if (opt.value === 'dkb') opt.textContent = t('brokerDkb');
+      if (opt.value === 'interactivebrokers') opt.textContent = t('brokerInteractiveBrokers');
     });
   }
   
-  // Wï¿½hrungs Select Options - Alle Optionen ï¿½bersetzen
+  // Währungs Select Options - Alle Optionen übersetzen
   const waehrungSelect = document.getElementById('waehrungSelect');
   if (waehrungSelect) {
     waehrungSelect.querySelectorAll('option').forEach(opt => {
@@ -8437,25 +8810,25 @@ function aktualisiereSprachAnzeige() {
   const feesDescription = document.getElementById('feesDescription');
   if (feesDescription) feesDescription.textContent = t('feesDescription');
   
-  // ï¿½bersetze ALLE H3 ï¿½berschriften auf der Seite Settings
+  // Übersetze ALLE H3 Überschriften auf der Seite Settings
   document.querySelectorAll('#settings h3').forEach(h3 => {
     const text = h3.textContent.trim();
     if (text === 'PRO ACCOUNT') h3.textContent = t('proAccountTitle').toUpperCase();
     if (text === 'DATEN VERWALTEN') h3.textContent = t('dataManagement').toUpperCase();
     if (text === 'ERSCHEINUNGSBILD') h3.textContent = t('appearance').toUpperCase();
-    if (text.includes('Wï¿½HRUNG')) h3.textContent = t('currencyTools').toUpperCase();
+    if (text.includes('WÄHRUNG')) h3.textContent = t('currencyTools').toUpperCase();
     if (text === 'ANALYSE-WERTE') h3.textContent = t('analysisValues').toUpperCase();
     if (text === 'STEUERN (DE)') h3.textContent = t('taxesDE').toUpperCase();
     if (text === 'BROKER') h3.textContent = t('brokerHeading').toUpperCase();
     if (text === 'PROGNOSE PARAMETER') h3.textContent = t('forecastParametersHeading').toUpperCase();
-    if (text === 'GEBï¿½HREN') h3.textContent = t('feesHeading').toUpperCase();
+    if (text === 'GEBÜHREN') h3.textContent = t('feesHeading').toUpperCase();
     if (text === 'RECHTLICHES') h3.textContent = t('legalHeading').toUpperCase();
   });
   
-  // ï¿½bersetze alle Button-Texte in Settings
+  // übersetze alle Button-Texte in Settings
   document.querySelectorAll('#settings button').forEach(btn => {
     const text = btn.textContent.trim();
-    if (text === 'Pro kï¿½ndigen' || text === 'Pro kï¿½ndigen') {
+    if (text === 'Pro kündigen' || text === 'Pro kündigen') {
       const svg = btn.querySelector('svg');
       btn.textContent = t('cancelPro');
       if (svg) btn.prepend(svg);
@@ -8472,7 +8845,7 @@ function aktualisiereSprachAnzeige() {
     }
   });
   
-  // Settings - Legal Section "ï¿½ber Trade"
+  // Settings - Legal Section "über Trade"
   const aboutTradeTitle = document.getElementById('aboutTradeTitle');
   if (aboutTradeTitle) aboutTradeTitle.textContent = t('aboutTradeTitle');
   
@@ -8492,7 +8865,7 @@ function aktualisiereSprachAnzeige() {
     const titleDiv = btn.querySelector('div[style*="font-weight:600"]');
     const descDiv = btn.querySelector('div[style*="font-size:12px"]');
     
-    if (titleDiv && titleDiv.textContent.trim() === 'Datenschutzerklï¿½rung') {
+    if (titleDiv && titleDiv.textContent.trim() === 'Datenschutzerklärung') {
       titleDiv.textContent = t('privacyPolicy');
       if (descDiv) descDiv.textContent = t('privacyPolicyDesc');
     }
@@ -8523,11 +8896,11 @@ function aktualisiereSprachAnzeige() {
   const proFeatures = document.querySelectorAll('#proAccountFree > div[style*="margin-bottom:20px"] > div[style*="font-size:13px"]');
   proFeatures.forEach(div => {
     const text = div.textContent.trim();
-    if (text === '? Unbegrenzte Trades') div.textContent = '? ' + t('unlimitedTrades');
-    else if (text === '? ETF Datenbank') div.textContent = '? ' + t('etfDatabaseAccess');
-    else if (text === '? Inflations- & Steuerrechner') div.textContent = '? ' + t('inflationTaxCalc');
-    else if (text === '? PDF/CSV Export') div.textContent = '? ' + t('pdfCsvExport');
-    else if (text === '? Werbefrei') div.textContent = '? ' + t('adFree');
+    if (text.startsWith('∞ ') || text.includes('Unbegrenzte Trades')) div.textContent = '∞ ' + t('unlimitedTrades');
+    else if (text.startsWith('📚 ') || text.includes('ETF Datenbank')) div.textContent = '📚 ' + t('etfDatabaseAccess');
+    else if (text.startsWith('🧮 ') || text.includes('Inflations- & Steuerrechner')) div.textContent = '🧮 ' + t('inflationTaxCalc');
+    else if (text.startsWith('📄 ') || text.includes('PDF/CSV Export')) div.textContent = '📄 ' + t('pdfCsvExport');
+    else if (text.startsWith('🚫 ') || text.includes('Werbefrei')) div.textContent = '🚫 ' + t('adFree');
   });
   
   // Pro Account Free - Feature-Beschreibungen
@@ -8536,9 +8909,9 @@ function aktualisiereSprachAnzeige() {
     const text = div.textContent.trim();
     if (text.includes('Speichere so viele')) div.textContent = t('saveAsMany');
     else if (text.includes('Zugriff auf historische')) div.textContent = t('accessHistoricalReturns');
-    else if (text.includes('Prï¿½zise Berechnung')) div.textContent = t('preciseCalculation');
+    else if (text.includes('Präzise Berechnung')) div.textContent = t('preciseCalculation');
     else if (text.includes('Exportiere deine')) div.textContent = t('exportCalculations');
-    else if (text.includes('Keine stï¿½renden')) div.textContent = t('noAds');
+    else if (text.includes('Keine störenden')) div.textContent = t('noAds');
   });
   
   // Pro Account Free - "pro Monat"
@@ -8558,9 +8931,9 @@ function aktualisiereSprachAnzeige() {
     }
   }
   
-  // Pro Account Free - "Jederzeit kï¿½ndbar"
+  // Pro Account Free - "Jederzeit kündbar"
   const cancelAnytimeDiv = document.querySelector('#proAccountFree > div[style*="text-align:center"]');
-  if (cancelAnytimeDiv && cancelAnytimeDiv.textContent.includes('Jederzeit kï¿½ndbar')) {
+  if (cancelAnytimeDiv && cancelAnytimeDiv.textContent.includes('Jederzeit kündbar')) {
     cancelAnytimeDiv.textContent = t('cancelAnytime');
   }
   
@@ -8582,9 +8955,9 @@ function aktualisiereSprachAnzeige() {
     proSubtitleActive.textContent = t('allPremium');
   }
   
-  // Pro Account Active - Kï¿½ndigen Button
+  // Pro Account Active - Kündigen Button
   const cancelProBtn = document.querySelector('#proAccountActive .btn');
-  if (cancelProBtn && cancelProBtn.textContent.includes('Pro kï¿½ndigen')) {
+  if (cancelProBtn && cancelProBtn.textContent.includes('Pro kündigen')) {
     cancelProBtn.textContent = t('cancelPro');
   }
   
@@ -8596,7 +8969,7 @@ function aktualisiereSprachAnzeige() {
   
   // Theme Beschreibung
   document.querySelectorAll('#settings > div > div.chart > p').forEach(p => {
-    if (p.textContent.includes('Wï¿½hle zwischen hellem')) p.textContent = t('chooseTheme');
+    if (p.textContent.includes('Wähle zwischen hellem')) p.textContent = t('chooseTheme');
     if (p.textContent.includes('Break-Even zeigt den Kurs')) p.textContent = t('breakEvenDesc');
   });
   
@@ -8740,7 +9113,7 @@ function aktualisiereSprachAnzeige() {
   infoRowLabels.forEach(span => {
     const text = span.textContent.trim();
     if (text === 'Sprache') span.textContent = t('language');
-    if (text === 'Wï¿½hrung') span.textContent = t('currency');
+    if (text === 'Währung') span.textContent = t('currency');
     if (text === 'Break-Even Kurs') span.textContent = t('breakEvenPrice');
     if (text === 'CRV (Chance-Risiko)') span.textContent = t('crvRatio');
     if (text === 'Jahres-Freibetrag') span.textContent = t('yearlyAllowance');
@@ -8751,14 +9124,14 @@ function aktualisiereSprachAnzeige() {
   // Hebel-Funktion Texte
   document.querySelectorAll('#settings .info-row div div').forEach(div => {
     if (div.textContent === 'Hebel-Funktion' && div.style.fontWeight === '600') div.textContent = t('leverageFunction');
-    if (div.textContent.includes('Die Hebel-Funktion ermï¿½glicht')) div.textContent = t('leverageDesc');
+    if (div.textContent.includes('Die Hebel-Funktion ermöglicht')) div.textContent = t('leverageDesc');
   });
   
   // Labels in Settings
   document.querySelectorAll('#settings .label-text').forEach(label => {
     if (label.textContent === 'Bereits verwendet') label.textContent = t('alreadyUsed');
     if (label.textContent === 'Fixkosten') label.textContent = t('fixedCosts');
-    if (label.textContent === 'Variable Gebï¿½hr') label.textContent = t('variableFee');
+    if (label.textContent === 'Variable Gebühr') label.textContent = t('variableFee');
   });
   
   // Steuern Texte
@@ -8799,7 +9172,7 @@ function aktualisiereSprachAnzeige() {
   // Copyright
   const copyright = document.getElementById('copyright');
   if (copyright) {
-    copyright.textContent = `ï¿½ 2026 Trade. ${t('allRightsReserved')}`;
+    copyright.textContent = `© 2026 Trade. ${t('allRightsReserved')}`;
   }
   
   // Sprache-Select aktualisieren
@@ -8816,7 +9189,7 @@ function aktualisiereSprachAnzeige() {
   const terExampleLabel = document.getElementById('terExampleLabel');
   if (terExampleLabel) terExampleLabel.textContent = t('terExampleLabel');
   const terExampleText = document.getElementById('terExampleText');
-  if (terExampleText) terExampleText.innerHTML = 'Bei einem TER von <strong style="color:var(--purple)">0,20%</strong> und einem Investment von <strong style="color:var(--purple)">10.000ï¿½</strong> zahlst du <strong style="color:var(--purple)">20ï¿½ pro Jahr</strong> an Gebï¿½hren.';
+  if (terExampleText) terExampleText.innerHTML = 'Bei einem TER von <strong style="color:var(--purple)">0,20%</strong> und einem Investment von <strong style="color:var(--purple)">10.000€</strong> zahlst du <strong style="color:var(--purple)">20€ pro Jahr</strong> an Gebühren.';
   const lowerTERBetterText = document.getElementById('lowerTERBetterText');
   if (lowerTERBetterText) lowerTERBetterText.innerHTML = '<svg width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg><strong>' + t('lowerTERBetter') + '</strong>';
   const terIncludesText = document.getElementById('terIncludesText');
@@ -8838,7 +9211,7 @@ function aktualisiereSprachAnzeige() {
   const reinerZinsBtn = document.getElementById('reinerZinsBtn');
   if (reinerZinsBtn) reinerZinsBtn.textContent = t('understood');
   
-  // Delete Dialogs (Lï¿½sch-Modals)
+  // Delete Dialogs (Lösch-Modals)
   const deletePositionTitle = document.getElementById('deletePositionTitle');
   if (deletePositionTitle) deletePositionTitle.textContent = t('deletePosition');
   
@@ -8862,13 +9235,13 @@ function aktualisiereSprachAnzeige() {
                          aktuelleSprache === 'es' ? 'ADVERTENCIA:' :
                          aktuelleSprache === 'fr' ? 'ATTENTION:' : 'ACHTUNG:';
     const deleteText = aktuelleSprache === 'de' ? 'Du bist dabei,' : 
-                       aktuelleSprache === 'en' ? 'You are about to' :
-                       aktuelleSprache === 'es' ? 'Estï¿½s a punto de' :
-                       aktuelleSprache === 'fr' ? 'Vous ï¿½tes sur le point de' : 'Du bist dabei,';
-    const deleteText2 = aktuelleSprache === 'de' ? 'Position(en) unwiderruflich zu lï¿½schen!' : 
-                        aktuelleSprache === 'en' ? 'position(s) permanently!' :
-                        aktuelleSprache === 'es' ? 'posiciï¿½n(es) permanentemente!' :
-                        aktuelleSprache === 'fr' ? 'position(s) dï¿½finitivement!' : 'Position(en) unwiderruflich zu lï¿½schen!';
+               aktuelleSprache === 'en' ? 'You are about to' :
+               aktuelleSprache === 'es' ? 'Estás a punto de' :
+               aktuelleSprache === 'fr' ? 'Vous êtes sur le point de' : 'Du bist dabei,';
+    const deleteText2 = aktuelleSprache === 'de' ? 'Position(en) unwiderruflich zu löschen!' : 
+              aktuelleSprache === 'en' ? 'position(s) permanently!' :
+              aktuelleSprache === 'es' ? 'posición(es) permanentemente!' :
+              aktuelleSprache === 'fr' ? 'position(s) définitivement!' : 'Position(en) unwiderruflich zu löschen!';
     deleteAllWarningMessage.innerHTML = `<strong style="color:var(--danger)">${warningLabel}</strong> ${deleteText} <strong id="anzahlPositionen">${count}</strong> ${deleteText2}`;
   }
   
@@ -8904,17 +9277,17 @@ function aktualisiereSprachAnzeige() {
     // Nur die Label-divs, nicht die Werte
     const parent = div.parentElement;
     if (parent && parent.querySelector('div[style*="font-size:11px"]')) {
-      // Das ist ein Wert-div, ï¿½berspringe es
+      // Das ist ein Wert-div, überspringe es
       return;
     }
   });
   
   // ===== COMPLETE TEXT TRANSLATION WALKER =====
-  // ï¿½bersetze WIRKLICH ALLE verbleibenden Texte durch aggressives DOM-Traversal
+  // Übersetze WIRKLICH ALLE verbleibenden Texte durch aggressives DOM-Traversal
   const translationPairs = [
-    // Kombiniere alle Paare fï¿½r die aktuelle Sprache
+    // Kombiniere alle Paare für die aktuelle Sprache
     ...(aktuelleSprache === 'de' ? [] : [
-      ['Wï¿½hle zwischen hellem, dunklem oder dem System-Modus.', t('chooseTheme')],
+      ['Wähle zwischen hellem, dunklem oder dem System-Modus.', t('chooseTheme')],
       ['Starten', t('startNow')],
       ['STARTEN', t('startNow').toUpperCase()],
       ['Mehr erfahren', t('learnMore')],
@@ -8923,14 +9296,14 @@ function aktualisiereSprachAnzeige() {
       ['Nachkauf +', t('addBuyBtn')],
       ['Teilverkauf +', t('partialSellBtn')],
       ['Berechnen', t('calculate')],
-      ['Position lï¿½schen', t('deletePosition')],
-      ['Alle Positionen lï¿½schen', t('deleteAllPositions')],
+      ['Position löschen', t('deletePosition')],
+      ['Alle Positionen löschen', t('deleteAllPositions')],
       ['Jetzt upgraden', t('upgradeNowBtn')],
       ['JETZT UPGRADEN', t('upgradeNowBtn').toUpperCase()],
-      ['Upgrade fï¿½r 1,99ï¿½/Monat', t('upgradeNowBtn')],
+      ['Upgrade für 1,99€/Monat', t('upgradeNowBtn')],
       ['Daten exportieren', t('exportData')],
-      ['Pro kï¿½ndigen', t('cancelPro')],
-      ['PRO Kï¿½NDIGEN', t('cancelPro').toUpperCase()],
+      ['Pro kündigen', t('cancelPro')],
+      ['PRO KÜNDIGEN', t('cancelPro').toUpperCase()],
       ['Datenschutz', t('privacyPolicy')],
       ['Nutzungsbedingungen', t('terms')],
       ['Impressum', t('imprint')],
@@ -8942,7 +9315,7 @@ function aktualisiereSprachAnzeige() {
       ['Registrieren', t('register')],
       ['Abmelden', t('logoutBtn')],
       ['Sprache', t('language')],
-      ['Wï¿½hrung', t('currency')],
+      ['Währung', t('currency')],
       ['Broker', t('brokerHeading')],
       ['BROKER', t('brokerHeading')],
       ['Einstellungen', t('settings')],
@@ -8955,12 +9328,12 @@ function aktualisiereSprachAnzeige() {
       ['WIE ES FUNKTIONIERT', t('howItWorks').toUpperCase()],
       ['Deine Vorteile', t('yourAdvantages')],
       ['DEINE VORTEILE', t('yourAdvantages').toUpperCase()],
-      ['Hï¿½ufig gestellte Fragen', t('faq')],
+      ['Häufig gestellte Fragen', t('faq')],
       ['FAQ', t('faq')],
     ])
   ];
   
-  // Wende alle Text-ï¿½bersetzungen an
+  // Wende alle Text-Übersetzungen an
   function applyTranslations() {
     const walker = document.createTreeWalker(
       document.body,
@@ -8975,7 +9348,7 @@ function aktualisiereSprachAnzeige() {
       nodesToProcess.push(node);
     }
     
-    // Helper: ï¿½berspringe alles innerhalb der Settings-Section
+    // Helper: überspringe alles innerhalb der Settings-Section
     function isInSettings(el) {
       try { return el && el.closest && el.closest('#settings'); } catch(e) { return false; }
     }
@@ -8985,30 +9358,30 @@ function aktualisiereSprachAnzeige() {
       let text = textNode.textContent;
       let originalText = text;
       
-      // ï¿½berspringe leere oder nur Leerzeichen Knoten
-      if (!text.trim() || text.match(/^[\s\dï¿½$ï¿½%\-+.,;():<>'"\/\\]+$/)) {
+      // überspringe leere oder nur Leerzeichen Knoten
+      if (!text.trim() || text.match(/^[\s\d€$£%\-+.,;():<>'"\/\\]+$/)) {
         continue;
       }
-      // ï¿½berspringe sehr lange Textknoten (ganze Absï¿½tze) - diese werden nicht aggressiv ersetzt
+      // überspringe sehr lange Textknoten (ganze Absätze) - diese werden nicht aggressiv ersetzt
       if (text.length > 200) continue;
       
-      // ï¿½berspringe Knoten in Script/Style/etc
+      // überspringe Knoten in Script/Style/etc
       const parent = textNode.parentElement;
       if (!parent || ['SCRIPT', 'STYLE', 'NOSCRIPT', 'CANVAS', 'SVG'].includes(parent.tagName)) {
         continue;
       }
 
-      // ï¿½berspringe ganze Settings-Section
+      // überspringe ganze Settings-Section
       if (isInSettings(parent)) continue;
       
-      // Wende alle ï¿½bersetzungspaare an
+      // Wende alle Übersetzungspaare an
       for (const [german, translated] of translationPairs) {
         if (text.includes(german)) {
           text = text.replace(new RegExp(escapeRegex(german), 'g'), translated);
         }
       }
       
-      // Aktualisiere Textknoten wenn etwas geï¿½ndert wurde
+      // Aktualisiere Textknoten wenn etwas geändert wurde
       if (text !== originalText) {
         textNode.textContent = text;
       }
@@ -9019,9 +9392,9 @@ function aktualisiereSprachAnzeige() {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
   
-  // Fï¿½hre schwere ï¿½bersetzungsarbeiten asynchron aus, damit die Seite zuerst rendert
+  // Führe schwere Übersetzungsarbeiten asynchron aus, damit die Seite zuerst rendert
   function scheduleAggressiveTranslations() {
-    // DEAKTIVIERT Fï¿½R NAVIGATION FIX
+    // DEAKTIVIERT FÜR NAVIGATION FIX
     return;
   }
 
@@ -9030,26 +9403,26 @@ function aktualisiereSprachAnzeige() {
 
 // Stelle sicher, dass wichtige Handler nach dem Laden wieder gebunden werden
 document.addEventListener('DOMContentLoaded', function() {
-  // kleine Verzï¿½gerung, damit eventuelle DOM-Manipulationen vorbei sind
+  // kleine Verzögerung, damit eventuelle DOM-Manipulationen vorbei sind
   setTimeout(() => {
     try { rebindInlineHandlers(); } catch (e) { console.error('rebindInlineHandlers failed', e); }
   }, 200);
 });
 
-// Falls Inline-onclicks wegen DOM-Manipulationen nicht mehr auslï¿½sen,
+// Falls Inline-onclicks wegen DOM-Manipulationen nicht mehr auslösen,
 // binden wir wichtige Handler programmgesteuert nach.
 function rebindInlineHandlers() {
-  // Stelle sicher dass alle wichtigen Funktionen verfï¿½gbar sind
-  // Der Inline-Onclick wird direkt ausgefï¿½hrt, wir prï¿½fen nur dass die Funktionen existieren
+  // Stelle sicher dass alle wichtigen Funktionen verfügbar sind
+  // Der Inline-Onclick wird direkt ausgeführt, wir prüfen nur dass die Funktionen existieren
   
-  // ï¿½berprï¿½fe showSection
+  // überprüfe showSection
   if (typeof showSection === 'function') {
     document.querySelectorAll('button[onclick*="showSection"]').forEach(btn => {
       // Onclick wird automatisch aufgerufen, wir brauchen nicht zu rebinden
     });
   }
   
-  // ï¿½berprï¿½fe andere wichtige Handler
+  // überprüfe andere wichtige Handler
   if (typeof oeffneLoginModal !== 'function') {
     window.oeffneLoginModal = function() { console.warn('oeffneLoginModal nicht definiert'); };
   }
@@ -9065,14 +9438,14 @@ function rebindInlineHandlers() {
 }
 
 function translatePageText() {
-  // UMFASSENDE Text-ï¿½bersetzung fï¿½r die aktuelle Sprache
+  // UMFASSENDE Text-Übersetzung für die aktuelle Sprache
   window.translationMap = {
     // Trading Page
     'Position speichern': t('saveTrade'),
     'Einstiegskurs': t('entryPrice'),
     'EINSTIEGSKURS': t('entryPrice').toUpperCase(),
-    'Stï¿½ckzahl': t('quantity'),
-    'STï¿½CKZAHL': t('quantity').toUpperCase(),
+    'Stückzahl': t('quantity'),
+    'STÜCKZAHL': t('quantity').toUpperCase(),
     'Zielkurs': t('targetPrice'),
     'ZIELKURS': t('targetPrice').toUpperCase(),
     'Stop-Loss (Optional)': t('stopLoss') + ' (' + t('optional') + ')',
@@ -9125,12 +9498,12 @@ function translatePageText() {
     'p.a.': ' p.a.',
     'Anfangskapital': t('initialCapital'),
     'ANFANGSKAPITAL': t('initialCapital').toUpperCase(),
-    'Gewï¿½nschtes Endkapital': t('finalCapital'),
+    'Gewünschtes Endkapital': t('finalCapital'),
     'Endkapital': t('finalCapital'),
     'ENDKAPITAL': t('finalCapital').toUpperCase(),
     
     // Savings Page - Buttons
-    'Gewï¿½nschtes Endkapital': t('finalCapital'),
+    'Gewünschtes Endkapital': t('finalCapital'),
     'Sparziel': t('savingsGoal'),
     'Sparplan': t('savingsPlan'),
     'Sparrechner': t('savingsCalculator'),
@@ -9141,22 +9514,22 @@ function translatePageText() {
     'Vergleiche historische Durchschnittsrenditen beliebter ETFs': t('compareHistorical'),
     'Vertraut von Tausenden': t('etfTrustedBy'),
     'Pro-Features freischalten': t('etfUnlockHeadline'),
-    'Nutze die volle Kraft von 1.247 professionellen ETFs mit 10 Jahren Daten, unbegrenzte Vergleiche und erweiterte Analysen ï¿½ fï¿½r weniger als ein Kaffee pro Monat.': t('etfUnlockSubheading'),
-    'Jetzt upgraden ï¿½ 1,99ï¿½/Monat': t('etfUpgradeCta'),
+    'Nutze die volle Kraft von 1.247 professionellen ETFs mit 10 Jahren Daten, unbegrenzte Vergleiche und erweiterte Analysen - für weniger als ein Kaffee pro Monat.': t('etfUnlockSubheading'),
+    'Jetzt upgraden - 1,99€/Monat': t('etfUpgradeCta'),
     'Das erwartet dich': t('etfExpectTitle'),
     'Rendite-Analysen': t('etfFeature1Title'),
-    'Professionelle Charts mit 10 Jahren vollstï¿½ndiger Kurshistorie. Erkenne Trends und Muster auf den ersten Blick.': t('etfFeature1Desc'),
+    'Professionelle Charts mit 10 Jahren vollständiger Kurshistorie. Erkenne Trends und Muster auf den ersten Blick.': t('etfFeature1Desc'),
     'Vergleich-Tool': t('etfFeature2Title'),
-    'Vergleiche unbegrenzt viele ETFs nebeneinander. Renditen, Gebï¿½hren, Risiken auf einen Blick.': t('etfFeature2Desc'),
+    'Vergleiche unbegrenzt viele ETFs nebeneinander. Renditen, Gebühren, Risiken auf einen Blick.': t('etfFeature2Desc'),
     'Sparplan-Simulator': t('etfFeature3Title'),
-    'Teste Sparstrategien mit echten Daten. Sehe exakt, wohin dein Geld flieï¿½t und wie du profitierst.': t('etfFeature3Desc'),
+    'Teste Sparstrategien mit echten Daten. Sehe exakt, wohin dein Geld fließt und wie du profitierst.': t('etfFeature3Desc'),
     'Vorschau: So sieht deine Datenbank aus (unscharfes Vorschaubild)': t('etfPreviewTitle'),
-    'Weltweite Aktien ï¿½ 3.500+ Unternehmen': t('etfSample1Desc'),
-    'US Tech & Growth ï¿½ 500 Top-Unternehmen': t('etfSample2Desc'),
-    'Tech-fokussiert ï¿½ 100 grï¿½ï¿½te Konzerne': t('etfSample3Desc'),
-    '+ 1.244 weitere ETFs mit vollstï¿½ndigen Daten': t('etfPreviewMore'),
-    'Alle verfï¿½gbar nach dem Upgrade': t('etfPreviewAvailableAfter'),
-    '10 Jahre ï¿½': t('etfAvg10y'),
+    'Weltweite Aktien - 3.500+ Unternehmen': t('etfSample1Desc'),
+    'US Tech & Growth - 500 Top-Unternehmen': t('etfSample2Desc'),
+    'Tech-fokussiert - 100 größte Konzerne': t('etfSample3Desc'),
+    '+ 1.244 weitere ETFs mit vollständigen Daten': t('etfPreviewMore'),
+    'Alle verfügbar nach dem Upgrade': t('etfPreviewAvailableAfter'),
+    '10 Jahre Ø': t('etfAvg10y'),
     'ETF Datenbank': t('etfDatabase'),
     'Suche nach ETFs...': t('searchETF'),
     'Absteigend': t('descending'),
@@ -9169,8 +9542,8 @@ function translatePageText() {
     'Sortieren nach: Kosten (TER)': t('sortByTER'),
     'Was ist TER?': t('whatIsTER'),
     'RENDITEN-VERGLEICH (10 JAHRE)': t('returnComparison').toUpperCase(),
-    'von 2 ETFs ausgewï¿½hlt': t('selectedETFsOfTwo'),
-    'Wï¿½hle bis zu 2 ETFs aus der Liste unten aus, um sie zu vergleichen': t('selectUpTo2'),
+    'von 2 ETFs ausgewählt': t('selectedETFsOfTwo'),
+    'Wähle bis zu 2 ETFs aus der Liste unten aus, um sie zu vergleichen': t('selectUpTo2'),
     'Keine ETFs gefunden': t('noETFsFound'),
     'Versuche einen anderen Suchbegriff': t('tryDifferent'),
     '1 JAHR': t('year1').toUpperCase(),
@@ -9178,12 +9551,12 @@ function translatePageText() {
     'KAT.': t('category').toUpperCase(),
     'ETF Details': t('etfDetailsTitle'),
     'Zum Vergleich': t('toComparison'),
-    'SchlieÄŸen': t('close'),
+    'Schließen': t('close'),
     
     // Generic/Common
     'Berechnen': t('calculate'),
     'Speichern': t('save'),
-    'Lï¿½schen': t('deleteButtonText'),
+    'Löschen': t('deleteButtonText'),
     'Abbrechen': t('cancel'),
     'OK': t('ok'),
     'Verstanden': t('understood'),
@@ -9205,21 +9578,21 @@ function translatePageText() {
     'WIE ES FUNKTIONIERT': t('howItWorks').toUpperCase(),
     'Deine Vorteile': t('yourAdvantages'),
     'DEINE VORTEILE': t('yourAdvantages').toUpperCase(),
-    'Hï¿½ufig gestellte Fragen': t('faq'),
+    'Häufig gestellte Fragen': t('faq'),
     'FAQ': t('faq'),
     'Starten': t('startNow'),
     'STARTEN': t('startNow').toUpperCase(),
     
     // ETF Comparison
     'Zum Vergleich': t('toComparison'),
-    '? Ausgewï¿½hlt': t('etfSelected'),
+    '? Ausgewählt': t('etfSelected'),
     'Was ist TER?': t('whatIsTER'),
     
     // Settings/Common Labels
     'Sprache': t('language'),
     'SPRACHE': t('language').toUpperCase(),
-    'Wï¿½hrung': t('currency'),
-    'Wï¿½HRUNG': t('currency').toUpperCase(),
+    'Währung': t('currency'),
+    'WÄHRUNG': t('currency').toUpperCase(),
     'Broker': t('brokerHeading'),
     'BROKER': t('brokerHeading').toUpperCase(),
     'Einstellungen': t('settings'),
@@ -9240,13 +9613,13 @@ function translatePageText() {
     'Ausgeglichen': t('balanced'),
     'Pro Account': t('proAccountTitle'),
     'PRO ACCOUNT': t('proAccountTitle').toUpperCase(),
-    'Pro kï¿½ndigen': t('cancelPro'),
+    'Pro kündigen': t('cancelPro'),
     'Jetzt upgraden': t('upgradeNowBtn'),
     'AKTIV': t('active'),
     'Inflationsrate': t('inflationRateLabel'),
-    'Jï¿½hrliche Dynamik': t('yearlyIncreaseLabel'),
+    'Jährliche Dynamik': t('yearlyIncreaseLabel'),
     'Fixkosten': t('fixedCostsLabel'),
-    'Variable Gebï¿½hr': t('variableFeeLabel'),
+    'Variable Gebühr': t('variableFeeLabel'),
     'Aktueller Broker': t('currentBrokerLabel'),
     'Break-Even Kurs': t('breakEvenPrice'),
     'CRV (Chance-Risiko)': t('crvRatio'),
@@ -9258,19 +9631,27 @@ function translatePageText() {
     'STEUERN (DE)': t('taxesDE').toUpperCase(),
     'Prognose Parameter': t('forecastParametersHeading'),
     'PROGNOSE PARAMETER': t('forecastParametersHeading').toUpperCase(),
-    'Gebï¿½hren': t('feesHeading'),
-    'GEBï¿½HREN': t('feesHeading').toUpperCase(),
+    'Gebühren': t('feesHeading'),
+    'GEBÜHREN': t('feesHeading').toUpperCase(),
     'Rechtliches': t('legalHeading'),
     'RECHTLICHES': t('legalHeading').toUpperCase(),
     'Benutzerdefiniert': t('customBroker'),
-    'Trade Republic': t('brokerTradeRepublic'),
-    'Scalable Capital': t('brokerScalable'),
+    'Finanzen.net Zero': t('brokerFinanzenZero'),
+    'Smartbroker+': t('brokerSmartbrokerPlus'),
+    'justTRADE': t('brokerJustTrade'),
+    'Flatex': t('brokerFlatex'),
+    'Comdirect': t('brokerComdirect'),
+    'ING': t('brokerIng'),
+    'Consorsbank': t('brokerConsorsbank'),
+    'Commerzbank': t('brokerCommerzbank'),
+    'DKB': t('brokerDkb'),
+    'Interactive Brokers': t('brokerInteractiveBrokers'),
     
     // Modal Common Text
-    'Schlieï¿½en': t('close'),
+    'Schließen': t('close'),
     'SCHLIESSEN': t('close').toUpperCase(),
-    'Bestï¿½tigen': t('confirm'),
-    'BESTï¿½TIGEN': t('confirm').toUpperCase(),
+    'Bestätigen': t('confirm'),
+    'BESTÄTIGEN': t('confirm').toUpperCase(),
     'Laden': t('load'),
     'LADEN': t('load').toUpperCase(),
     'Exportieren': t('export'),
@@ -9291,8 +9672,8 @@ function translatePageText() {
     'BESCHREIBUNG': t('description').toUpperCase(),
     'Passwort': t('password'),
     'PASSWORT': t('password').toUpperCase(),
-    'Bestï¿½tigung': t('confirmation'),
-    'BESTï¿½TIGUNG': t('confirmation').toUpperCase(),
+    'Bestätigung': t('confirmation'),
+    'BESTÄTIGUNG': t('confirmation').toUpperCase(),
     
     // Numbers/Count
     'Position': t('position'),
@@ -9309,8 +9690,8 @@ function translatePageText() {
     'WOCHE': t('week').toUpperCase(),
     
     // Measurements/Units
-    'Stï¿½ck': t('piece'),
-    'STï¿½CK': t('piece').toUpperCase(),
+    'Stück': t('piece'),
+    'STÜCK': t('piece').toUpperCase(),
     'Pcs.': t('pieces'),
     'PCS.': t('pieces').toUpperCase(),
     'Pcs': t('pieces'),
@@ -9319,16 +9700,16 @@ function translatePageText() {
     'EUR': 'EUR',
     'GBP': 'GBP',
     'USD': 'USD',
-    'ï¿½': getWaehrungsSymbol(),
-    'ï¿½': getWaehrungsSymbol(),
+    '€': getWaehrungsSymbol(),
+    '£': getWaehrungsSymbol(),
     '$': getWaehrungsSymbol(),
     
     // Button texts
-    'Upgrade fï¿½r 1,99ï¿½/Monat': t('upgradeNowBtn'),
+    'Upgrade für 1,99€/Monat': t('upgradeNowBtn'),
     'Jetzt upgraden': t('upgradeNowBtn'),
     'Upgrade now': t('upgradeNowBtn'),
     'Actualizar Ahora': t('upgradeNowBtn'),
-    'Mettre ï¿½ niveau': t('upgradeNowBtn'),
+    'Mettre à niveau': t('upgradeNowBtn'),
     'Datenschutz': t('privacyPolicy'),
     'Nutzungsbedingungen': t('terms'),
     'Impressum': t('imprint'),
@@ -9337,7 +9718,7 @@ function translatePageText() {
     'Registrieren': t('register'),
     'Abmelden': t('logoutBtn'),
     'Daten exportieren': t('exportData'),
-    'Pro kï¿½ndigen': t('cancelPro'),
+    'Pro kündigen': t('cancelPro'),
     'Berechnen': t('calculate'),
     'Position speichern': t('saveTrade'),
     'Nachkauf +': t('addBuyBtn'),
@@ -9355,11 +9736,11 @@ function translatePageText() {
     
     // TER Modal
     'Was ist TER?': t('whatIsTER'),
-    'Die Total Expense Ratio (Gesamtkostenquote) gibt die jï¿½hrlichen laufenden Kosten eines ETFs an.': t('terModalDesc'),
+    'Die Total Expense Ratio (Gesamtkostenquote) gibt die jährlichen laufenden Kosten eines ETFs an.': t('terModalDesc'),
     'BEISPIEL': t('terExampleLabel'),
-    'Bei einem TER von 0,20% und einem Investment von 10.000ï¿½ zahlst du 20ï¿½ pro Jahr an Gebï¿½hren.': t('terExample'),
-    'Niedriger TER = Besser fï¿½r dich!': t('lowerTERBetter'),
-    'Die TER umfasst Verwaltungsgebï¿½hren, Betriebskosten und andere laufende Ausgaben. Sie wird automatisch vom Fondsvermï¿½gen abgezogen und ist bereits in der Wertentwicklung berï¿½cksichtigt.': t('terIncludes'),
+    'Bei einem TER von 0,20% und einem Investment von 10.000€ zahlst du 20€ pro Jahr an Gebühren.': t('terExample'),
+    'Niedriger TER = Besser für dich!': t('lowerTERBetter'),
+    'Die TER umfasst Verwaltungsgebühren, Betriebskosten und andere laufende Ausgaben. Sie wird automatisch vom Fondsvermögen abgezogen und ist bereits in der Wertentwicklung berücksichtigt.': t('terIncludes'),
     
     // Additional common words
     'PRO FEATURE': t('proFeature'),
@@ -9416,8 +9797,16 @@ function translatePageText() {
     'Hebel-Funktion': t('leverageFunction'),
     'Die Hebel-Funktion ermöglicht die Berechnung von Derivaten (Long/Short).': t('leverageDesc'),
     'Benutzerdefiniert': t('custom'),
-    'Trade Republic': 'Trade Republic',
-    'Scalable Capital': 'Scalable Capital',
+    'Finanzen.net Zero': 'Finanzen.net Zero',
+    'Smartbroker+': 'Smartbroker+',
+    'justTRADE': 'justTRADE',
+    'Flatex': 'Flatex',
+    'Comdirect': 'Comdirect',
+    'ING': 'ING',
+    'Consorsbank': 'Consorsbank',
+    'Commerzbank': 'Commerzbank',
+    'DKB': 'DKB',
+    'Interactive Brokers': 'Interactive Brokers',
     
     // Settings - Analysis Values
     'Break-Even Kurs': t('breakEvenPrice'),
@@ -9489,7 +9878,7 @@ function translatePageText() {
       allTranslations[german] = translated;
     }
     
-    // Verwende TreeWalker fï¿½r effiziente DOM-Navigation
+    // Verwende TreeWalker für effiziente DOM-Navigation
     const walker = document.createTreeWalker(
       document.body,
       NodeFilter.SHOW_TEXT,
@@ -9502,11 +9891,11 @@ function translatePageText() {
       let originalText = textNode.textContent;
       let newText = originalText;
       
-      // ï¿½berspringe sehr kleine oder Leerzeichen-only Knoten
+      // überspringe sehr kleine oder Leerzeichen-only Knoten
       if (!originalText.trim() || originalText.trim().length === 0) {
         continue;
       }
-      // ï¿½berspringe sehr lange Textknoten
+      // überspringe sehr lange Textknoten
       if (originalText.length > 200) continue;
       
       // überspringe parent-Elemente die Special sind
@@ -9518,7 +9907,7 @@ function translatePageText() {
         continue;
       }
       
-      // ï¿½berspringe Elemente mit bestimmten IDs/Classes die nicht ï¿½bersetzt werden sollen
+      // überspringe Elemente mit bestimmten IDs/Classes die nicht übersetzt werden sollen
       if (parent.id && parent.id.match(/(modal|chart|graph|canvas|image|icon|logo)/i)) {
         continue;
       }
@@ -9538,15 +9927,15 @@ function translatePageText() {
           // Nur ersetze wenn der German String lang genug ist (Mindestens 3 Zeichen)
           // Und nicht in Zahlen/Symbolen eingebettet ist
           if (german.length >= 3 && newText.includes(german)) {
-            // ï¿½berspringe wenn der Text hauptsï¿½chlich aus Zahlen besteht
-            if (!german.match(/^[\d\-+ï¿½$ï¿½%.,]*$/) && !newText.match(/^[\d\-+ï¿½$ï¿½%.,\s]*$/)) {
+            // überspringe wenn der Text hauptsächlich aus Zahlen besteht
+            if (!german.match(/^[\d\-+€$£%.,]*$/) && !newText.match(/^[\d\-+€$£%.,\s]*$/)) {
               newText = newText.replace(new RegExp(escapeRegExp(german), 'g'), translated);
             }
           }
         }
       }
       
-      // Aktualisiere den TextNode wenn etwas geï¿½ndert wurde
+      // Aktualisiere den TextNode wenn etwas geändert wurde
       if (newText !== originalText) {
         textNode.textContent = newText;
       }
@@ -9606,7 +9995,7 @@ function translatePageText() {
   
   // Alternative Methode: Alle Textinhalte direkt durchsuchen und ersetzen - WIRD JETZT NICHT MEHR INLINE AUSGEFÜHRT
 
-// Installiere einen MutationObserver, der dynamisch hinzugefï¿½gte Inhalte ï¿½bersetzt
+// Installiere einen MutationObserver, der dynamisch hinzugefügte Inhalte übersetzt
 if (!window.__translationObserverInstalled) {
   window.__translationObserverInstalled = true;
   function __translateNode(node) {
@@ -9625,12 +10014,12 @@ if (!window.__translationObserverInstalled) {
       const tag = node.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || node.isContentEditable) return;
 
-      // ï¿½bersetze direkte Textknoten des Elements (shallow)
+      // übersetze direkte Textknoten des Elements (shallow)
       for (const child of Array.from(node.childNodes)) {
         if (child.nodeType === Node.TEXT_NODE) __translateNode(child);
       }
 
-      // ï¿½bersetze hï¿½ufige Attribute
+      // übersetze häufige Attribute
       ['placeholder','title','aria-label','data-text','data-label','data-title'].forEach(attr => {
         if (node.hasAttribute && node.hasAttribute(attr)) {
           let v = node.getAttribute(attr);
@@ -9682,7 +10071,7 @@ if (!window.__translationObserverInstalled) {
     }
   });
 
-  // Beobachtung nicht sofort starten - wir aktivieren den Observer spï¿½ter
+  // Beobachtung nicht sofort starten - wir aktivieren den Observer später
   window.__translationObserver = __translationObserver;
   window.__startTranslationObserver = function() {
     try {
@@ -9723,7 +10112,7 @@ if (!window.__translationObserverInstalled) {
 }
 
 function getWaehrungsSymbol() {
-  return waehrungsSymbole[aktuelleWaehrung] || 'ï¿½';
+  return waehrungsSymbole[aktuelleWaehrung] || '€';
 }
 
 function aendereWaehrung() {
@@ -9733,11 +10122,16 @@ function aendereWaehrung() {
   aktualisiereAlleWaehrungen();
 }
 
-// ï¿½ndert das ausgewï¿½hlte Land und passt Steuern an
+// Ändert das ausgewählte Land und passt Steuern an
 function aendereLand() {
   const select = document.getElementById('landSelect');
   const land = select.value;
   localStorage.setItem('selectedCountry', land);
+  if (window.firebaseSaveProfile && window.firebaseCurrentUser && window.firebaseCurrentUser.uid) {
+    window.firebaseSaveProfile(window.firebaseCurrentUser.uid, { land: land }).catch((err) => {
+      console.error('Firebase Profil-Update fehlgeschlagen', err);
+    });
+  }
   
   const daten = getLandSteuerdaten();
   
@@ -9751,11 +10145,11 @@ function aendereLand() {
     taxInfoRow.style.display = 'none';
   }
   
-  // Update Wï¿½hrung automatisch basierend auf Land
+  // Update Währung automatisch basierend auf Land
   if (daten.waehrung) {
     const waehrungSelect = document.getElementById('waehrungSelect');
     if (waehrungSelect && waehrungSelect.value !== daten.waehrung) {
-      // Prï¿½fe ob Wï¿½hrung verfï¿½gbar ist
+      // Prüfe ob Währung verfügbar ist
       const optionExists = Array.from(waehrungSelect.options).some(opt => opt.value === daten.waehrung);
       if (optionExists) {
         waehrungSelect.value = daten.waehrung;
@@ -9774,9 +10168,9 @@ function aktualisiereAlleWaehrungen() {
   const numberLocale = getNumberLocale();
   const freibetragText = landDaten.freibetrag.toLocaleString(numberLocale);
   
-  // Aktualisiere alle Wï¿½hrungsanzeigen
+  // Aktualisiere alle Währungsanzeigen
   document.querySelectorAll('.input-unit').forEach(el => {
-    if (el.textContent === 'ï¿½' || el.textContent === '$' || el.textContent === 'ï¿½') {
+    if (el.textContent === '€' || el.textContent === '$' || el.textContent === '£') {
       el.textContent = symbol;
     }
   });
@@ -9820,7 +10214,7 @@ function ladeLand() {
     registerLandSelect.value = gespeichertesLand;
   }
   
-  // Zeige Hinweis fï¿½r ausgewï¿½hltes Land
+  // Zeige Hinweis für ausgewähltes Land
   const daten = getLandSteuerdaten();
   const taxInfoRow = document.getElementById('taxInfoRow');
   const taxInfoText = document.getElementById('taxInfoText');
@@ -9883,7 +10277,7 @@ function wechsleLoginTab(modus) {
   document.getElementById('loginErfolg').style.display = 'none';
 }
 
-function login() {
+async function login() {
   const email = document.getElementById('loginEmail').value.trim();
   const passwort = document.getElementById('loginPassword').value;
   const fehlerEl = document.getElementById('loginFehler');
@@ -9904,39 +10298,44 @@ function login() {
     fehlerEl.style.display = 'block';
     return;
   }
+
+  if (!window.firebaseLogin || !window.firebaseRegister) {
+    fehlerEl.textContent = 'Firebase ist noch nicht bereit. Bitte Seite neu laden.';
+    fehlerEl.style.display = 'block';
+    return;
+  }
   
   if (istLoginModus) {
     // Login
-    const gespeicherteUser = JSON.parse(localStorage.getItem('users') || '{}');
-    
-    if (!gespeicherteUser[email]) {
-      fehlerEl.textContent = t('noAccountFound');
+    try {
+      await window.firebaseLogin(email, passwort);
+      erfolgEl.textContent = t('loginSuccess');
+      erfolgEl.style.display = 'block';
+      
+      setTimeout(() => {
+        closeModal('loginModal');
+        aktualisiereLoginStatus();
+        document.getElementById('loginEmail').value = '';
+        document.getElementById('loginPassword').value = '';
+      }, 800);
+    } catch (err) {
+      const code = err && err.code ? err.code : '';
+      if (code === 'auth/user-not-found' || code === 'auth/invalid-credential') {
+        fehlerEl.textContent = t('noAccountFound');
+      } else if (code === 'auth/wrong-password') {
+        fehlerEl.textContent = t('wrongPassword');
+      } else if (code === 'auth/invalid-email') {
+        fehlerEl.textContent = t('validEmail');
+      } else {
+        fehlerEl.textContent = 'Anmeldung fehlgeschlagen.';
+      }
       fehlerEl.style.display = 'block';
-      return;
     }
-    
-    if (gespeicherteUser[email].passwort !== passwort) {
-      fehlerEl.textContent = t('wrongPassword');
-      fehlerEl.style.display = 'block';
-      return;
-    }
-    
-    // Erfolgreich angemeldet
-    localStorage.setItem('aktuellerUser', email);
-    erfolgEl.textContent = t('loginSuccess');
-    erfolgEl.style.display = 'block';
-    
-    setTimeout(() => {
-      closeModal('loginModal');
-      aktualisiereLoginStatus();
-      document.getElementById('loginEmail').value = '';
-      document.getElementById('loginPassword').value = '';
-    }, 1000);
     
   } else {
     // Registrierung
     
-    // Prï¿½fe ob Nutzungsbedingungen akzeptiert wurden
+    // Prüfe ob Nutzungsbedingungen akzeptiert wurden
     const acceptTermsCheckbox = document.getElementById('acceptTerms');
     if (!acceptTermsCheckbox || !acceptTermsCheckbox.checked) {
       fehlerEl.textContent = t('acceptTermsRequired');
@@ -9950,69 +10349,85 @@ function login() {
       return;
     }
     
-    const gespeicherteUser = JSON.parse(localStorage.getItem('users') || '{}');
-    
-    if (gespeicherteUser[email]) {
-      fehlerEl.textContent = t('accountExists');
-      fehlerEl.style.display = 'block';
-      return;
-    }
-    
     // Neuen User erstellen
     const selectedCountry = document.getElementById('registerCountrySelect').value || 'DE';
-    gespeicherteUser[email] = {
-      passwort: passwort,
-      land: selectedCountry,
-      erstelltAm: new Date().toISOString()
-    };
-    
-    localStorage.setItem('users', JSON.stringify(gespeicherteUser));
-    localStorage.setItem('aktuellerUser', email);
-    localStorage.setItem('selectedCountry', selectedCountry);
-    
-    // Wï¿½hrung basierend auf Land setzen
-    const landDaten = laenderSteuerdaten[selectedCountry];
-    if (landDaten && landDaten.waehrung) {
-      localStorage.setItem('waehrung', landDaten.waehrung);
+    try {
+      await window.firebaseRegister(email, passwort, { land: selectedCountry });
+      localStorage.setItem('selectedCountry', selectedCountry);
+      
+      // Waehrung basierend auf Land setzen
+      const landDaten = laenderSteuerdaten[selectedCountry];
+      if (landDaten && landDaten.waehrung) {
+        localStorage.setItem('waehrung', landDaten.waehrung);
+      }
+      
+      erfolgEl.textContent = t('registerSuccess');
+      erfolgEl.style.display = 'block';
+      
+      setTimeout(() => {
+        closeModal('loginModal');
+        aktualisiereLoginStatus();
+        document.getElementById('loginEmail').value = '';
+        document.getElementById('loginPassword').value = '';
+      }, 1200);
+    } catch (err) {
+      const code = err && err.code ? err.code : '';
+      if (code === 'auth/email-already-in-use') {
+        fehlerEl.textContent = t('accountExists');
+      } else if (code === 'auth/invalid-email') {
+        fehlerEl.textContent = t('validEmail');
+      } else if (code === 'auth/weak-password') {
+        fehlerEl.textContent = t('passwordMinLength');
+      } else {
+        fehlerEl.textContent = 'Registrierung fehlgeschlagen.';
+      }
+      fehlerEl.style.display = 'block';
     }
-    
-    localStorage.setItem('users', JSON.stringify(gespeicherteUser));
-    localStorage.setItem('aktuellerUser', email);
-    
-    erfolgEl.textContent = t('registerSuccess');
-    erfolgEl.style.display = 'block';
-    
-    setTimeout(() => {
-      closeModal('loginModal');
-      aktualisiereLoginStatus();
-      document.getElementById('loginEmail').value = '';
-      document.getElementById('loginPassword').value = '';
-    }, 1500);
   }
 }
 
-function abmelden() {
-  if (confirm(t('logoutConfirm'))) {
-    localStorage.removeItem('aktuellerUser');
-    aktualisiereLoginStatus();
+async function abmelden() {
+  if (!confirm(t('logoutConfirm'))) {
+    return;
   }
+  if (window.firebaseLogout) {
+    try {
+      await window.firebaseLogout();
+    } catch (err) {
+      console.error('Logout fehlgeschlagen', err);
+    }
+  }
+  aktualisiereLoginStatus();
 }
 
 function aktualisiereLoginStatus() {
-  const aktuellerUser = localStorage.getItem('aktuellerUser');
+  const aktuellerUser = window.firebaseCurrentUser;
   const loginBtn = document.getElementById('loginBtn');
   const userBtn = document.getElementById('userBtn');
   const userEmail = document.getElementById('userEmail');
+  const saveBtn = document.getElementById('savePositionBtn');
   
   if (aktuellerUser) {
     // Angemeldet
     loginBtn.style.display = 'none';
     userBtn.style.display = 'flex';
-    userEmail.textContent = aktuellerUser.split('@')[0];
+    userEmail.textContent = (aktuellerUser.email || '').split('@')[0];
+    if (saveBtn) {
+      const svg = saveBtn.querySelector('svg');
+      saveBtn.textContent = t('saveTrade');
+      if (svg) saveBtn.prepend(svg);
+      saveBtn.style.opacity = '1';
+    }
   } else {
     // Nicht angemeldet
     loginBtn.style.display = 'block';
     userBtn.style.display = 'none';
+    if (saveBtn) {
+      const svg = saveBtn.querySelector('svg');
+      saveBtn.textContent = t('loginToSave');
+      if (svg) saveBtn.prepend(svg);
+      saveBtn.style.opacity = '0.85';
+    }
   }
 }
 
@@ -10043,6 +10458,104 @@ document.addEventListener('DOMContentLoaded', function() {
     zeigeGespeichertePositionen();
   }, 100);
 });
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, collection, getDocs, deleteDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAd4B0gt6D1cgErq-up419M8ARDejI57zQ",
+      authDomain: "calculo-79290.firebaseapp.com",
+      projectId: "calculo-79290",
+      storageBucket: "calculo-79290.firebasestorage.app",
+      messagingSenderId: "989206420527",
+      appId: "1:989206420527:web:b653befd74ccf19bf0fada"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    window.firebaseAuth = auth;
+    window.firebaseDb = db;
+    window.firebaseCurrentUser = null;
+
+    window.firebaseLogin = async (email, password) => signInWithEmailAndPassword(auth, email, password);
+
+    window.firebaseRegister = async (email, password, profile) => {
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+      const uid = cred.user.uid;
+      await setDoc(doc(db, 'users', uid), {
+        email: cred.user.email || email,
+        land: (profile && profile.land) ? profile.land : 'DE',
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+      return cred;
+    };
+
+    window.firebaseLogout = async () => signOut(auth);
+
+    window.firebaseLoadProfile = async (uid) => {
+      const snap = await getDoc(doc(db, 'users', uid));
+      return snap.exists() ? snap.data() : null;
+    };
+
+    window.firebaseSaveProfile = async (uid, data) => {
+      const payload = Object.assign({}, data, { updatedAt: serverTimestamp() });
+      await setDoc(doc(db, 'users', uid), payload, { merge: true });
+    };
+
+    window.firebaseSavePosition = async (uid, position) => {
+      const id = String(position.id);
+      const payload = Object.assign({}, position, { id: position.id, updatedAt: serverTimestamp() });
+      if (!position.createdAt) {
+        payload.createdAt = serverTimestamp();
+      }
+      await setDoc(doc(db, 'users', uid, 'positions', id), payload, { merge: true });
+    };
+
+    window.firebaseLoadPositions = async (uid) => {
+      const q = query(collection(db, 'users', uid, 'positions'), orderBy('createdAt', 'desc'));
+      const snap = await getDocs(q);
+      return snap.docs.map((docSnap) => Object.assign({ docId: docSnap.id }, docSnap.data()));
+    };
+
+    window.firebaseDeletePosition = async (uid, posId) => {
+      await deleteDoc(doc(db, 'users', uid, 'positions', String(posId)));
+    };
+
+    window.firebaseDeleteAllPositions = async (uid) => {
+      const col = collection(db, 'users', uid, 'positions');
+      const snap = await getDocs(col);
+      const deletes = snap.docs.map((docSnap) => deleteDoc(docSnap.ref));
+      await Promise.all(deletes);
+    };
+
+    onAuthStateChanged(auth, async (user) => {
+      window.firebaseCurrentUser = user || null;
+      if (user) {
+        try {
+          const profile = await window.firebaseLoadProfile(user.uid);
+          if (profile && profile.land) {
+            localStorage.setItem('selectedCountry', profile.land);
+          }
+          if (typeof window.ladeLand === 'function') {
+            window.ladeLand();
+          }
+        } catch (err) {
+          console.error('Firebase profile load failed', err);
+        }
+      }
+      if (typeof window.aktualisiereLoginStatus === 'function') {
+        window.aktualisiereLoginStatus();
+      }
+      if (typeof window.zeigeGespeichertePositionen === 'function') {
+        window.zeigeGespeichertePositionen();
+      }
+    });
   </script>
 </body>
 </html>
