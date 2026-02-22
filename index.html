@@ -730,6 +730,11 @@ strong{color:var(--text)}
             <div id="sparSteuern" style="font-size:18px;font-weight:700;color:var(--purple)">0 €</div>
           </div>
         </div>
+
+        <div id="sparProLaunchBanner" style="display:none;margin-top:12px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.3);border-radius:12px;padding:14px 16px;text-align:center">
+          <div id="sparProLaunchTitle" style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px"></div>
+          <div id="sparProLaunchTimer" style="font-size:12px;color:var(--muted)"></div>
+        </div>
         
         <div id="sparProTeaser" style="margin-top:12px;background:rgba(168,85,247,0.05);border:1px solid rgba(168,85,247,0.2);border-radius:12px;padding:20px;text-align:center;display:block">
           <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Mehr Details mit Calculo Pro</div>
@@ -756,6 +761,11 @@ strong{color:var(--text)}
           </div>
           <h2 id="etfCompareTitle" style="margin-bottom:8px">ETF Vergleich</h2>
           <p id="etfCompareSubtitle" style="color:var(--muted);font-size:14px">Vergleiche historische Durchschnittsrenditen beliebter ETFs</p>
+        </div>
+
+        <div id="etfProLaunchBanner" style="display:none;margin:0 0 24px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.3);border-radius:12px;padding:14px 16px;text-align:center">
+          <div id="etfProLaunchTitle" style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px"></div>
+          <div id="etfProLaunchTimer" style="font-size:12px;color:var(--muted)"></div>
         </div>
 
         <!-- Free User View -->
@@ -1164,6 +1174,10 @@ strong{color:var(--text)}
         <h2>Einstellungen</h2>
         
         <h3 style="font-size:11px;color:var(--muted);letter-spacing:1px;margin:24px 0 12px">PRO ACCOUNT</h3>
+        <div id="settingsProLaunchBanner" style="display:none;margin-bottom:16px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.3);border-radius:12px;padding:14px 16px;text-align:center">
+          <div id="settingsProLaunchTitle" style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px"></div>
+          <div id="settingsProLaunchTimer" style="font-size:12px;color:var(--muted)"></div>
+        </div>
         <div id="proAccountFree" style="background:linear-gradient(135deg, rgba(168,85,247,0.1), rgba(168,85,247,0.05));border:1px solid rgba(168,85,247,0.3);border-radius:12px;padding:24px;margin-bottom:16px">
           <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
             <div style="width:56px;height:56px;background:linear-gradient(135deg, var(--purple), #c084fc);border-radius:12px;display:flex;align-items:center;justify-content:center">
@@ -1230,6 +1244,55 @@ strong{color:var(--text)}
           <button class="btn" onclick="cancelPro()" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--muted)">
             Pro kündigen
           </button>
+        </div>
+
+        <div id="premiumAccountSection" style="display:none">
+          <h3 style="font-size:11px;color:var(--muted);letter-spacing:1px;margin:24px 0 12px">PREMIUM ACCOUNT</h3>
+          <div id="premiumAccountFree" style="background:linear-gradient(135deg, rgba(251,191,36,0.12), rgba(251,191,36,0.06));border:1px solid rgba(251,191,36,0.35);border-radius:12px;padding:24px;margin-bottom:16px">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+              <div style="width:56px;height:56px;background:linear-gradient(135deg,#f59e0b,#fbbf24);border-radius:12px;display:flex;align-items:center;justify-content:center">
+                <svg width="26" height="26" fill="none" stroke="white" stroke-width="2"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9 12 2"/></svg>
+              </div>
+              <div style="flex:1">
+                <div style="color:var(--text);font-weight:700;font-size:18px;margin-bottom:4px">Calculo Premium</div>
+                <div style="font-size:13px;color:var(--muted)">Beinhaltet Free + Pro. Premium-Features folgen.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;margin-bottom:16px">
+              <div style="flex:1;background:rgba(251,191,36,0.1);border:2px solid rgba(251,191,36,0.55);border-radius:12px;padding:16px;text-align:center">
+                <div style="font-size:28px;font-weight:800;color:#f59e0b">9,99€</div>
+                <div style="font-size:12px;color:var(--muted);margin-top:4px">pro Monat</div>
+              </div>
+              <div style="flex:1;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.35);border-radius:12px;padding:16px;text-align:center">
+                <div style="font-size:28px;font-weight:800;color:#f59e0b">104,99€</div>
+                <div style="font-size:12px;color:var(--muted);margin-top:4px">pro Jahr</div>
+                <div style="background:var(--accent);color:white;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;margin-top:6px;display:inline-block">1,5 Monate geschenkt</div>
+              </div>
+            </div>
+            <button class="btn upgrade-premium" onclick="upgradeToPremium()" style="width:100%;background:linear-gradient(90deg,#f59e0b,#fbbf24);color:#111827;margin-bottom:12px">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9 12 2"/></svg>
+              Premium aktivieren
+            </button>
+            <div style="text-align:center;font-size:11px;color:var(--muted)">Premium ist ab 01.06.2026 sichtbar und buchbar.</div>
+          </div>
+
+          <div id="premiumAccountActive" style="background:linear-gradient(135deg, rgba(251,191,36,0.12), rgba(251,191,36,0.06));border:1px solid rgba(251,191,36,0.35);border-radius:12px;padding:24px;margin-bottom:16px;display:none">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+              <div style="width:56px;height:56px;background:linear-gradient(135deg,#f59e0b,#fbbf24);border-radius:12px;display:flex;align-items:center;justify-content:center">
+                <svg width="26" height="26" fill="none" stroke="white" stroke-width="2"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9 12 2"/></svg>
+              </div>
+              <div style="flex:1">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="color:var(--text);font-weight:700;font-size:18px">Calculo Premium</div>
+                  <div style="background:#f59e0b;color:white;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700">AKTIV</div>
+                </div>
+                <div style="font-size:13px;color:var(--muted);margin-top:4px">Free + Pro sind enthalten. Premium-Bonus folgt.</div>
+              </div>
+            </div>
+            <button class="btn" onclick="cancelPremium()" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--muted)">
+              Premium kündigen
+            </button>
+          </div>
         </div>
         
         <h3 style="font-size:11px;color:var(--muted);letter-spacing:1px;margin:24px 0 12px">DATEN VERWALTEN</h3>
@@ -2432,7 +2495,8 @@ strong{color:var(--text)}
   <script>
   const LAUNCH_SCHEDULE = {
     public: new Date('2026-03-15T00:00:00+01:00'),
-    pro: new Date('2026-04-01T00:00:00+02:00')
+    pro: new Date('2026-04-01T00:00:00+02:00'),
+    premium: new Date('2026-06-01T00:00:00+02:00')
   };
 
   let launchCountdownIntervalId = null;
@@ -2443,6 +2507,10 @@ strong{color:var(--text)}
 
   function isProLaunchLive() {
     return Date.now() >= LAUNCH_SCHEDULE.pro.getTime();
+  }
+
+  function isPremiumLaunchLive() {
+    return Date.now() >= LAUNCH_SCHEDULE.premium.getTime();
   }
 
   function getActiveLanguage() {
@@ -2467,28 +2535,32 @@ strong{color:var(--text)}
         siteTimer: 'Website-Launch in',
         proTitle: 'Calculo Pro ist ab 01.04.2026 verfügbar',
         proTimer: 'Pro-Start in',
-        proLocked: 'Calculo Pro ist aktuell noch nicht verfügbar. Pro startet am 01.04.2026.'
+        proLocked: 'Calculo Pro ist aktuell noch nicht verfügbar. Pro startet am 01.04.2026.',
+        premiumLocked: 'Calculo Premium ist aktuell noch nicht verfügbar. Premium startet am 01.06.2026.'
       },
       en: {
         siteTitle: 'Calculo launches on 03/15/2026',
         siteTimer: 'Website launch in',
         proTitle: 'Calculo Pro is available from 04/01/2026',
         proTimer: 'Pro launch in',
-        proLocked: 'Calculo Pro is not available yet. Pro launches on 04/01/2026.'
+        proLocked: 'Calculo Pro is not available yet. Pro launches on 04/01/2026.',
+        premiumLocked: 'Calculo Premium is not available yet. Premium launches on 06/01/2026.'
       },
       es: {
         siteTitle: 'Calculo se lanza el 15/03/2026',
         siteTimer: 'Lanzamiento del sitio en',
         proTitle: 'Calculo Pro estará disponible el 01/04/2026',
         proTimer: 'Lanzamiento Pro en',
-        proLocked: 'Calculo Pro aún no está disponible. Pro se lanza el 01/04/2026.'
+        proLocked: 'Calculo Pro aún no está disponible. Pro se lanza el 01/04/2026.',
+        premiumLocked: 'Calculo Premium aún no está disponible. Premium se lanza el 01/06/2026.'
       },
       fr: {
         siteTitle: 'Calculo sera lancé le 15/03/2026',
         siteTimer: 'Lancement du site dans',
         proTitle: 'Calculo Pro sera disponible le 01/04/2026',
         proTimer: 'Lancement Pro dans',
-        proLocked: 'Calculo Pro n’est pas encore disponible. Pro sera lancé le 01/04/2026.'
+        proLocked: 'Calculo Pro n’est pas encore disponible. Pro sera lancé le 01/04/2026.',
+        premiumLocked: 'Calculo Premium n’est pas encore disponible. Premium sera lancé le 01/06/2026.'
       }
     };
     return texts[lang] || texts.de;
@@ -2503,11 +2575,23 @@ strong{color:var(--text)}
     const now = Date.now();
     const lang = getActiveLanguage();
     const texts = getLaunchTexts(lang);
+    const localTitles = [
+      document.getElementById('sparProLaunchTitle'),
+      document.getElementById('etfProLaunchTitle'),
+      document.getElementById('settingsProLaunchTitle')
+    ];
+    const localTimers = [
+      document.getElementById('sparProLaunchTimer'),
+      document.getElementById('etfProLaunchTimer'),
+      document.getElementById('settingsProLaunchTimer')
+    ];
 
     if (now < LAUNCH_SCHEDULE.public.getTime()) {
       title.textContent = texts.siteTitle;
       timer.textContent = `${texts.siteTimer}: ${formatCountdown(LAUNCH_SCHEDULE.public.getTime() - now)}`;
       banner.style.display = 'block';
+      localTitles.forEach(el => { if (el) el.textContent = texts.proTitle; });
+      localTimers.forEach(el => { if (el) el.textContent = `${texts.proTimer}: ${formatCountdown(LAUNCH_SCHEDULE.pro.getTime() - now)}`; });
       return;
     }
 
@@ -2515,10 +2599,14 @@ strong{color:var(--text)}
       title.textContent = texts.proTitle;
       timer.textContent = `${texts.proTimer}: ${formatCountdown(LAUNCH_SCHEDULE.pro.getTime() - now)}`;
       banner.style.display = 'block';
+      localTitles.forEach(el => { if (el) el.textContent = texts.proTitle; });
+      localTimers.forEach(el => { if (el) el.textContent = `${texts.proTimer}: ${formatCountdown(LAUNCH_SCHEDULE.pro.getTime() - now)}`; });
       return;
     }
 
     banner.style.display = 'none';
+    localTitles.forEach(el => { if (el) el.textContent = ''; });
+    localTimers.forEach(el => { if (el) el.textContent = ''; });
   }
 
   function startLaunchCountdownBanner() {
@@ -2534,6 +2622,21 @@ strong{color:var(--text)}
 
   function applyPrelaunchProUI() {
     const prelaunch = !isProLaunchLive();
+
+    const sparProLaunchBanner = document.getElementById('sparProLaunchBanner');
+    if (sparProLaunchBanner) {
+      sparProLaunchBanner.style.display = prelaunch ? 'block' : 'none';
+    }
+
+    const etfProLaunchBanner = document.getElementById('etfProLaunchBanner');
+    if (etfProLaunchBanner) {
+      etfProLaunchBanner.style.display = prelaunch ? 'block' : 'none';
+    }
+
+    const settingsProLaunchBanner = document.getElementById('settingsProLaunchBanner');
+    if (settingsProLaunchBanner) {
+      settingsProLaunchBanner.style.display = prelaunch ? 'block' : 'none';
+    }
 
     const proFeatureTitle = document.getElementById('featureProTitle');
     if (proFeatureTitle && proFeatureTitle.parentElement) {
@@ -2568,11 +2671,25 @@ strong{color:var(--text)}
     document.querySelectorAll('.upgrade-pro').forEach(button => {
       button.style.display = prelaunch ? 'none' : '';
     });
+
+    const premiumAccountSection = document.getElementById('premiumAccountSection');
+    if (premiumAccountSection) {
+      premiumAccountSection.style.display = isPremiumLaunchLive() ? 'block' : 'none';
+    }
+
+    document.querySelectorAll('.upgrade-premium').forEach(button => {
+      button.style.display = isPremiumLaunchLive() ? '' : 'none';
+    });
   }
 
   function getProLockedMessage() {
     const lang = getActiveLanguage();
     return getLaunchTexts(lang).proLocked;
+  }
+
+  function getPremiumLockedMessage() {
+    const lang = getActiveLanguage();
+    return getLaunchTexts(lang).premiumLocked;
   }
 
 // Navigation
@@ -3712,6 +3829,79 @@ async function upgradeToPro(targetId) {
   }
 }
 
+async function upgradeToPremium() {
+  if (!isPremiumLaunchLive()) {
+    alert(getPremiumLockedMessage());
+    return;
+  }
+
+  const messages = {
+    de: {
+      confirm: 'Calculo Premium aktivieren?\n\n• 9,99€/Monat oder 104,99€/Jahr\n• Free + Pro inklusive\n• Premium-Extras folgen später\n\n(Dies ist eine Demo - keine echte Zahlung)',
+      success: 'Calculo Premium ist jetzt aktiv. 🎉\n\nFree + Pro sind enthalten.'
+    },
+    en: {
+      confirm: 'Activate Calculo Premium?\n\n• €9.99/month or €104.99/year\n• Includes Free + Pro\n• Premium extras will be added later\n\n(This is a demo - no real payment)',
+      success: 'Calculo Premium is now active. 🎉\n\nFree + Pro are included.'
+    },
+    es: {
+      confirm: '¿Activar Calculo Premium?\n\n• 9,99€/mes o 104,99€/año\n• Incluye Free + Pro\n• Extras Premium más adelante\n\n(Esta es una demo - sin pago real)',
+      success: 'Calculo Premium ya está activo. 🎉\n\nFree + Pro están incluidos.'
+    },
+    fr: {
+      confirm: 'Activer Calculo Premium ?\n\n• 9,99€/mois ou 104,99€/an\n• Inclut Free + Pro\n• Les extras Premium arriveront plus tard\n\n(Ceci est une démo - pas de paiement réel)',
+      success: 'Calculo Premium est maintenant actif. 🎉\n\nFree + Pro sont inclus.'
+    }
+  };
+
+  const lang = aktuelleSprache || 'de';
+  const msg = messages[lang] || messages.de;
+  const confirmed = confirm(msg.confirm);
+  if (!confirmed) return;
+
+  try {
+    if (typeof window.firebaseRequestPremiumActivation !== 'function') {
+      throw new Error('SERVER_GUARD_NOT_READY');
+    }
+    await window.firebaseRequestPremiumActivation();
+  } catch (error) {
+    console.error('Serverseitige Premium-Prüfung fehlgeschlagen:', error);
+    const code = (error && error.code) ? String(error.code) : '';
+    if (code.includes('unauthenticated')) {
+      alert(lang === 'de' ? 'Bitte melde dich zuerst an, um Premium zu aktivieren.' : 'Please sign in first to activate Premium.');
+      if (typeof oeffneLoginModal === 'function') {
+        oeffneLoginModal();
+      }
+      return;
+    }
+    if (code.includes('failed-precondition')) {
+      alert(getPremiumLockedMessage());
+      return;
+    }
+    alert(lang === 'de' ? 'Premium konnte serverseitig nicht freigeschaltet werden. Bitte versuche es später erneut.' : 'Premium could not be activated server-side. Please try again later.');
+    return;
+  }
+
+  localStorage.setItem('isPremium', 'true');
+  localStorage.setItem('isPro', 'true');
+  updateProStatus();
+  alert(msg.success);
+}
+
+function cancelPremium() {
+  const lang = aktuelleSprache || 'de';
+  const confirmed = confirm(
+    lang === 'de'
+      ? 'Möchtest du Calculo Premium wirklich kündigen?\n\nPremium und Pro werden beendet.'
+      : 'Do you really want to cancel Calculo Premium?\n\nPremium and Pro will be ended.'
+  );
+  if (!confirmed) return;
+
+  localStorage.setItem('isPremium', 'false');
+  localStorage.setItem('isPro', 'false');
+  updateProStatus();
+}
+
 function cancelPro() {
   const messages = {
     de: { confirm: 'Möchtest du Calculo Pro wirklich kündigen?\n\nDu verlierst Zugriff auf:\n• Realwert-Berechnung mit Inflation\n• Steuer-Details\n• ETF-Vergleichsdatenbank\n• Erweiterte Features\n• Alle Pro-Inhalte werden sofort unzugänglich', success: 'Calculo Pro wurde gekündigt.\n\nAlle Pro-Features sind jetzt nicht mehr zugänglich.' },
@@ -3786,10 +3976,20 @@ function versteckeAlleProFeatures() {
 }
 
 function updateProStatus() {
+  const storedIsPremium = localStorage.getItem('isPremium') === 'true';
+  const isPremium = isPremiumLaunchLive() && storedIsPremium;
+  if (!isPremiumLaunchLive() && storedIsPremium) {
+    localStorage.setItem('isPremium', 'false');
+  }
+
   const storedIsPro = localStorage.getItem('isPro') === 'true';
-  const isPro = isProLaunchLive() && storedIsPro;
+  const isPro = isProLaunchLive() && (storedIsPro || isPremium);
   if (!isProLaunchLive() && storedIsPro) {
     localStorage.setItem('isPro', 'false');
+  }
+
+  if (isPremium) {
+    localStorage.setItem('isPro', 'true');
   }
   
   if (isPro) {
@@ -3807,6 +4007,21 @@ function updateProStatus() {
   }
 
   applyPrelaunchProUI();
+  updatePremiumStatus();
+}
+
+function updatePremiumStatus() {
+  const premiumSection = document.getElementById('premiumAccountSection');
+  const premiumFree = document.getElementById('premiumAccountFree');
+  const premiumActive = document.getElementById('premiumAccountActive');
+  if (!premiumSection || !premiumFree || !premiumActive) return;
+
+  const premiumLive = isPremiumLaunchLive();
+  const isPremium = premiumLive && localStorage.getItem('isPremium') === 'true';
+
+  premiumSection.style.display = premiumLive ? 'block' : 'none';
+  premiumFree.style.display = (premiumLive && !isPremium) ? 'block' : 'none';
+  premiumActive.style.display = isPremium ? 'block' : 'none';
 }
 
 function setTheme(theme) {
@@ -10778,6 +10993,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.firebaseRequestProActivation = async () => {
       const callable = httpsCallable(functions, 'requestProActivation');
+      const result = await callable({});
+      return result.data;
+    };
+
+    window.firebaseRequestPremiumActivation = async () => {
+      const callable = httpsCallable(functions, 'requestPremiumActivation');
       const result = await callable({});
       return result.data;
     };
