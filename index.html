@@ -1004,7 +1004,50 @@ strong{color:var(--text)}
           
           <!-- Überschrift -->
           <h2 id="etfDatabaseTitle" style="font-size:clamp(2rem, 5vw, 2.5rem);font-weight:800;margin-bottom:32px;text-align:left">ETF Datenbank</h2>
+
+          <div id="etfPremiumTeaser" style="display:none;background:linear-gradient(135deg,rgba(251,191,36,0.14),rgba(251,191,36,0.06));border:1px solid rgba(251,191,36,0.35);border-radius:18px;padding:20px;margin-bottom:24px;text-align:left">
+            <div style="display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap">
+              <div>
+                <div style="font-size:18px;font-weight:800;color:var(--text);margin-bottom:6px">Premium: Broker Vergleich</div>
+                <div style="font-size:13px;color:var(--muted)">Detaillierte Broker-Rankings mit Sortierung und Detailansicht.</div>
+              </div>
+              <button class="btn upgrade-premium" onclick="upgradeToPremium()" style="background:linear-gradient(90deg,#f59e0b,#fbbf24);color:#111827;padding:10px 18px;font-size:13px">
+                Premium aktivieren
+              </button>
+            </div>
+          </div>
+
+          <div id="etfPremiumContent" style="display:none;margin-bottom:24px">
+            <div style="display:flex;gap:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);padding:8px;border-radius:999px;margin-bottom:14px">
+              <button id="premiumModeEtfBtn" onclick="setPremiumEtfMode('etf')" style="flex:1;border:none;border-radius:999px;background:rgba(255,255,255,0.08);color:var(--text);padding:10px 14px;font-weight:700;cursor:pointer">ETFs & Aktien</button>
+              <button id="premiumModeBrokerBtn" onclick="setPremiumEtfMode('broker')" style="flex:1;border:none;border-radius:999px;background:rgba(255,255,255,0.08);color:var(--text);padding:10px 14px;font-weight:700;cursor:pointer">Broker Vergleich</button>
+            </div>
+
+            <div id="premiumBrokerCompareView">
+            <div style="display:flex;justify-content:space-between;gap:12px;align-items:end;flex-wrap:wrap;margin-bottom:14px">
+              <div>
+                <div style="font-size:12px;color:var(--muted);letter-spacing:1px">KONDITIONEN & VERGLEICH</div>
+                <div style="font-size:30px;font-weight:900;color:var(--text);line-height:1.1">Die besten Broker</div>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                <select id="premiumBrokerSort" onchange="renderPremiumBrokerList()" style="background:var(--input-bg);border:1px solid var(--input-border);padding:10px 12px;border-radius:12px;color:var(--text);font-weight:600;font-size:13px">
+                  <option value="rating">Testnote</option>
+                  <option value="depot">Depotkosten p.a.</option>
+                  <option value="order">Ordergebühr</option>
+                  <option value="interest">Guthabenzinsen</option>
+                </select>
+                <select id="premiumBrokerDirection" onchange="renderPremiumBrokerList()" style="background:var(--input-bg);border:1px solid var(--input-border);padding:10px 12px;border-radius:12px;color:var(--text);font-weight:600;font-size:13px">
+                  <option value="desc" selected>Absteigend</option>
+                  <option value="asc">Aufsteigend</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="premiumBrokerList" style="display:grid;gap:14px"></div>
+            </div>
+          </div>
           
+          <div id="premiumEtfStocksView">
           <!-- Suchleiste -->
           <div style="margin-bottom:20px">
             <div style="position:relative">
@@ -1158,9 +1201,10 @@ strong{color:var(--text)}
           </div>
 
           <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:24px">
-            <div style="font-size:12px;color:var(--muted);line-height:1.6">
+            <div id="etfHistoricalNote" style="font-size:12px;color:var(--muted);line-height:1.6">
               <strong style="color:var(--text)">Hinweis:</strong> Die angegebenen Renditen sind historische Durchschnittswerte und keine Garantie für zukünftige Entwicklungen. TER = Total Expense Ratio (Gesamtkostenquote). Alle Angaben ohne Gewähr.
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -2449,6 +2493,40 @@ strong{color:var(--text)}
     </div>
   </div>
 
+  <!-- Premium Broker Detail Modal -->
+  <div id="premiumBrokerDetailModal" class="modal">
+    <div class="modal-content" style="max-width:700px">
+      <div class="modal-header">
+        <button class="btn" onclick="closeModal('premiumBrokerDetailModal')" style="background:var(--input-bg);border:1px solid var(--border);padding:8px 18px">Schließen</button>
+      </div>
+
+      <div style="padding:8px 0 0">
+        <div style="text-align:center;margin-bottom:22px">
+          <div style="width:88px;height:88px;margin:0 auto 12px;background:rgba(24,144,255,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center">
+            <span style="font-size:38px">🏦</span>
+          </div>
+          <div id="premiumBrokerDetailName" style="font-size:46px;font-weight:900;color:var(--text);line-height:1.1"></div>
+          <div style="margin-top:8px;color:#fbbf24;font-size:26px;letter-spacing:2px">★★★★☆ <span id="premiumBrokerDetailRating" style="font-size:30px;color:var(--muted)"></span></div>
+        </div>
+
+        <div style="display:flex;justify-content:center;margin-bottom:24px">
+          <a id="premiumBrokerDetailLink" href="#" target="_blank" rel="noopener noreferrer" class="btn" style="background:linear-gradient(90deg,#1890ff,#38bdf8);color:white;padding:12px 26px;font-size:24px;border:none">Zum Angebot</a>
+        </div>
+
+        <h3 style="font-size:44px;font-weight:800;color:var(--text);margin:0 0 12px">Produktdetails</h3>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:8px 16px;margin-bottom:24px">
+          <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span style="color:var(--muted)">Depotgebühr</span><strong id="premiumBrokerDetailDepot" style="color:var(--text)"></strong></div>
+          <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span style="color:var(--muted)">Kosten pro Order</span><strong id="premiumBrokerDetailOrder" style="color:var(--text)"></strong></div>
+          <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span style="color:var(--muted)">Kostenlose ETFs</span><strong id="premiumBrokerDetailEtf" style="color:var(--text)"></strong></div>
+          <div style="display:flex;justify-content:space-between;padding:14px 0"><span style="color:var(--muted)">Guthabenzinsen</span><strong id="premiumBrokerDetailInterest" style="color:var(--text)"></strong></div>
+        </div>
+
+        <h3 style="font-size:44px;font-weight:800;color:var(--text);margin:0 0 12px">Vor- und Nachteile</h3>
+        <div id="premiumBrokerDetailPros" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px;display:grid;gap:10px"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- TER Info Modal -->
   <div id="terInfoModal" class="modal">
     <div class="modal-content" style="max-width:500px">
@@ -2498,6 +2576,20 @@ strong{color:var(--text)}
     pro: new Date('2026-04-01T00:00:00+02:00'),
     premium: new Date('2026-06-01T00:00:00+02:00')
   };
+
+  function applyPreviewPremiumOverride() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('previewPremium') !== '1') return;
+
+    LAUNCH_SCHEDULE.public = new Date('2025-01-01T00:00:00+01:00');
+    LAUNCH_SCHEDULE.pro = new Date('2025-01-01T00:00:00+01:00');
+    LAUNCH_SCHEDULE.premium = new Date('2025-01-01T00:00:00+01:00');
+
+    localStorage.setItem('isPro', 'true');
+    localStorage.setItem('isPremium', 'true');
+  }
+
+  applyPreviewPremiumOverride();
 
   let launchCountdownIntervalId = null;
 
@@ -2734,10 +2826,14 @@ function showSection(id) {
     if (isPro) {
       document.getElementById('etfFreeView').style.display = 'none';
       document.getElementById('etfProView').style.display = 'block';
-      // ETF-Liste und Chart aktualisieren
+      // ETF-Liste, Premium-Ansicht und Chart sicher aktualisieren
       setTimeout(function() {
-        if (gefiltereETFs.length === 0) {
-          initETFDatenbank();
+        premiumEtfMode = 'etf';
+        initETFDatenbank();
+        updatePremiumStatus();
+        applyPremiumEtfModeUI();
+        if (typeof renderPremiumBrokerList === 'function') {
+          renderPremiumBrokerList();
         }
       }, 50);
     } else {
@@ -4014,6 +4110,8 @@ function updatePremiumStatus() {
   const premiumSection = document.getElementById('premiumAccountSection');
   const premiumFree = document.getElementById('premiumAccountFree');
   const premiumActive = document.getElementById('premiumAccountActive');
+  const premiumEtfContent = document.getElementById('etfPremiumContent');
+  const premiumEtfTeaser = document.getElementById('etfPremiumTeaser');
   if (!premiumSection || !premiumFree || !premiumActive) return;
 
   const premiumLive = isPremiumLaunchLive();
@@ -4022,6 +4120,70 @@ function updatePremiumStatus() {
   premiumSection.style.display = premiumLive ? 'block' : 'none';
   premiumFree.style.display = (premiumLive && !isPremium) ? 'block' : 'none';
   premiumActive.style.display = isPremium ? 'block' : 'none';
+
+  if (premiumEtfContent) {
+    premiumEtfContent.style.display = (premiumLive && isPremium) ? 'block' : 'none';
+  }
+  if (premiumEtfTeaser) {
+    premiumEtfTeaser.style.display = (premiumLive && !isPremium) ? 'block' : 'none';
+  }
+
+  if (premiumLive && isPremium) {
+    if (premiumEtfMode !== 'broker' && premiumEtfMode !== 'etf') {
+      premiumEtfMode = 'etf';
+    }
+    applyPremiumEtfModeUI();
+    renderPremiumBrokerList();
+  } else {
+    const brokerView = document.getElementById('premiumBrokerCompareView');
+    const etfStocksView = document.getElementById('premiumEtfStocksView');
+    if (brokerView) brokerView.style.display = 'none';
+    if (etfStocksView) etfStocksView.style.display = 'block';
+  }
+}
+
+let premiumEtfMode = 'etf';
+
+function setPremiumEtfMode(mode) {
+  premiumEtfMode = mode === 'broker' ? 'broker' : 'etf';
+  applyPremiumEtfModeUI();
+}
+
+function applyPremiumEtfModeUI() {
+  const mode = premiumEtfMode;
+  const brokerView = document.getElementById('premiumBrokerCompareView');
+  const etfStocksView = document.getElementById('premiumEtfStocksView');
+  const etfBtn = document.getElementById('premiumModeEtfBtn');
+  const brokerBtn = document.getElementById('premiumModeBrokerBtn');
+
+  if (!brokerView || !etfStocksView || !etfBtn || !brokerBtn) return;
+
+  const isPremiumActive = isPremiumLaunchLive() && localStorage.getItem('isPremium') === 'true';
+  if (!isPremiumActive) {
+    brokerView.style.display = 'none';
+    etfStocksView.style.display = 'block';
+    return;
+  }
+
+  const isBrokerMode = mode === 'broker';
+  brokerView.style.display = isBrokerMode ? 'block' : 'none';
+  etfStocksView.style.display = isBrokerMode ? 'none' : 'block';
+
+  if (!isBrokerMode) {
+    ensureEtfListRendered();
+  }
+
+  if (isBrokerMode) {
+    brokerBtn.style.background = 'rgba(255,255,255,0.22)';
+    brokerBtn.style.color = 'var(--text)';
+    etfBtn.style.background = 'rgba(255,255,255,0.08)';
+    etfBtn.style.color = 'var(--muted)';
+  } else {
+    etfBtn.style.background = 'rgba(255,255,255,0.22)';
+    etfBtn.style.color = 'var(--text)';
+    brokerBtn.style.background = 'rgba(255,255,255,0.08)';
+    brokerBtn.style.color = 'var(--muted)';
+  }
 }
 
 function setTheme(theme) {
@@ -4769,8 +4931,31 @@ function translateETFDescription(description) {
 }
 
 function initETFDatenbank() {
-  sortETFs();
+  try {
+    sortETFs();
+  } catch (error) {
+    console.warn('ETF Sortierung fehlgeschlagen, nutze Fallback:', error);
+    gefiltereETFs = [...etfDaten];
+    zeigeETFs();
+  }
   initETFChart();
+  ensureEtfListRendered();
+}
+
+function ensureEtfListRendered() {
+  const liste = document.getElementById('etfListe');
+  if (!liste) return;
+
+  const noResults = document.getElementById('keineErgebnisse');
+  const hasRows = liste.children.length > 0;
+
+  if (!hasRows && Array.isArray(etfDaten) && etfDaten.length > 0) {
+    gefiltereETFs = [...etfDaten];
+    const suche = document.getElementById('etfSuche');
+    if (suche) suche.value = '';
+    if (noResults) noResults.style.display = 'none';
+    zeigeETFs();
+  }
 }
 
 function toggleETFAuswahl(isin, evt) {
@@ -5132,6 +5317,177 @@ function zeigeETFs() {
     </div>
   `;
   }).join('');
+}
+
+const premiumBrokerDaten = [
+  {
+    id: 'scalable-free',
+    name: 'Scalable Capital (Free)',
+    rating: 4.9,
+    depotKosten: 0,
+    orderKosten: 0.99,
+    orderLabel: 'ab 0,99 €',
+    sparplaeneLabel: 'Kostenlos',
+    interest: 2.0,
+    kostenloseEtfs: 2860,
+    offerUrl: 'https://de.scalable.capital/',
+    pros: [
+      'Dauerhaft kostenlose ETF-Sparpläne',
+      '2% Zinsen (im Prime+ Modell)',
+      'Sehr große ETF-Auswahl (Prime Partner kostenlos)',
+      'Sehr gute App & Desktop-Version'
+    ]
+  },
+  {
+    id: 'traders-place',
+    name: 'Traders Place',
+    rating: 4.9,
+    depotKosten: 0,
+    orderKosten: 0,
+    orderLabel: '0,00 €',
+    sparplaeneLabel: 'Kostenlos',
+    interest: 1.75,
+    kostenloseEtfs: 2400,
+    offerUrl: 'https://tradersplace.de/',
+    pros: [
+      'Sehr niedrige Handelskosten',
+      'Kostenlose Sparpläne',
+      'Gute Auswahl für aktive Anleger'
+    ]
+  },
+  {
+    id: 'smartbroker-plus',
+    name: 'Smartbroker+',
+    rating: 4.8,
+    depotKosten: 0,
+    orderKosten: 0,
+    orderLabel: '0,00 €',
+    sparplaeneLabel: 'Kostenlos',
+    interest: 1.75,
+    kostenloseEtfs: 2200,
+    offerUrl: 'https://smartbrokerplus.de/',
+    pros: [
+      'Klassischer Broker mit moderner App',
+      'Viele Handelsplätze',
+      'Günstige Sparpläne'
+    ]
+  },
+  {
+    id: 'trade-republic',
+    name: 'Trade Republic',
+    rating: 4.8,
+    depotKosten: 0,
+    orderKosten: 1.0,
+    orderLabel: '1,00 €',
+    sparplaeneLabel: 'Kostenlos',
+    interest: 2.0,
+    kostenloseEtfs: 2500,
+    offerUrl: 'https://traderepublic.com/',
+    pros: [
+      'Sehr einfache App-Bedienung',
+      'Kostenlose Sparpläne',
+      '2% Zinsen auf Cash (modellabhängig)'
+    ]
+  }
+];
+
+function renderPremiumBrokerList() {
+  const listElement = document.getElementById('premiumBrokerList');
+  const sortElement = document.getElementById('premiumBrokerSort');
+  const directionElement = document.getElementById('premiumBrokerDirection');
+  if (!listElement || !sortElement || !directionElement) return;
+
+  const sortBy = sortElement.value;
+  const direction = directionElement.value;
+
+  const sorted = [...premiumBrokerDaten].sort((first, second) => {
+    let firstValue = 0;
+    let secondValue = 0;
+
+    if (sortBy === 'rating') {
+      firstValue = first.rating;
+      secondValue = second.rating;
+    } else if (sortBy === 'depot') {
+      firstValue = first.depotKosten;
+      secondValue = second.depotKosten;
+    } else if (sortBy === 'order') {
+      firstValue = first.orderKosten;
+      secondValue = second.orderKosten;
+    } else if (sortBy === 'interest') {
+      firstValue = first.interest;
+      secondValue = second.interest;
+    }
+
+    if (direction === 'asc') {
+      return firstValue - secondValue;
+    }
+    return secondValue - firstValue;
+  });
+
+  listElement.innerHTML = sorted.map((broker, index) => {
+    const medalColor = index === 0 ? '#fbbf24' : 'rgba(255,255,255,0.12)';
+    const ratingStars = '★'.repeat(Math.floor(broker.rating)) + (broker.rating % 1 >= 0.5 ? '★' : '☆');
+    return `
+      <div onclick="openPremiumBrokerDetail('${broker.id}')" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;cursor:pointer;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 18px 14px;border-bottom:1px solid rgba(255,255,255,0.08)">
+          <div style="display:flex;align-items:center;gap:14px">
+            <div style="width:42px;height:42px;background:${medalColor};border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:${index === 0 ? '#111827' : 'var(--text)'}">${index + 1}</div>
+            <div>
+              <div style="font-size:34px;font-weight:800;color:var(--text);line-height:1.1">${broker.name}</div>
+              <div style="font-size:28px;color:#fbbf24;line-height:1.1">★ <span style="color:var(--muted)">${broker.rating.toFixed(1)}</span></div>
+            </div>
+          </div>
+          <div style="font-size:34px;color:var(--muted)">›</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px 16px 16px">
+          <div style="text-align:left">
+            <div style="font-size:26px;color:var(--muted)">Ordergebühr</div>
+            <div style="font-size:40px;font-weight:700;color:var(--text)">${broker.orderLabel}</div>
+          </div>
+          <div style="text-align:left">
+            <div style="font-size:26px;color:var(--muted)">Sparpläne</div>
+            <div style="font-size:40px;font-weight:700;color:var(--text)">${broker.sparplaeneLabel}</div>
+          </div>
+          <div style="text-align:left">
+            <div style="font-size:26px;color:var(--muted)">Zinsen</div>
+            <div style="font-size:40px;font-weight:700;color:var(--text)">${broker.interest.toFixed(2)}%</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function openPremiumBrokerDetail(brokerId) {
+  const broker = premiumBrokerDaten.find(item => item.id === brokerId);
+  if (!broker) return;
+
+  const nameElement = document.getElementById('premiumBrokerDetailName');
+  const ratingElement = document.getElementById('premiumBrokerDetailRating');
+  const linkElement = document.getElementById('premiumBrokerDetailLink');
+  const depotElement = document.getElementById('premiumBrokerDetailDepot');
+  const orderElement = document.getElementById('premiumBrokerDetailOrder');
+  const etfElement = document.getElementById('premiumBrokerDetailEtf');
+  const interestElement = document.getElementById('premiumBrokerDetailInterest');
+  const prosElement = document.getElementById('premiumBrokerDetailPros');
+
+  if (!nameElement || !ratingElement || !linkElement || !depotElement || !orderElement || !etfElement || !interestElement || !prosElement) {
+    return;
+  }
+
+  nameElement.textContent = broker.name;
+  ratingElement.textContent = broker.rating.toFixed(1);
+  linkElement.href = broker.offerUrl;
+  depotElement.textContent = broker.depotKosten === 0 ? 'Kostenlos' : `${broker.depotKosten.toFixed(2)} €`;
+  orderElement.textContent = broker.orderLabel;
+  etfElement.textContent = String(broker.kostenloseEtfs);
+  interestElement.textContent = `${broker.interest.toFixed(2)} % p.a.`;
+
+  prosElement.innerHTML = broker.pros.map((entry) => {
+    return `<div style="display:flex;align-items:flex-start;gap:10px"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(34,197,94,0.16);color:#22c55e;font-weight:800">✓</span><span style="font-size:31px;color:var(--text);line-height:1.35">${entry}</span></div>`;
+  }).join('');
+
+  document.getElementById('premiumBrokerDetailModal').classList.add('active');
 }
 
 // Sparen
@@ -9095,9 +9451,18 @@ function aktualisiereSprachAnzeige() {
   });
   
   // ETF Hinweis
-  document.querySelectorAll('#etf .chart > div:last-child div').forEach(div => {
-    if (div.textContent.includes('Hinweis:')) div.innerHTML = `<strong style="color:var(--text)">${t('noteHistorical').split(':')[0]}:</strong> ${t('noteHistorical').split(':')[1]}`;
-  });
+  const etfHistoricalNote = document.getElementById('etfHistoricalNote');
+  if (etfHistoricalNote) {
+    const noteText = t('noteHistorical') || '';
+    if (noteText.includes(':')) {
+      const splitIndex = noteText.indexOf(':');
+      const title = noteText.slice(0, splitIndex).trim();
+      const body = noteText.slice(splitIndex + 1).trim();
+      etfHistoricalNote.innerHTML = `<strong style="color:var(--text)">${title}:</strong> ${body}`;
+    } else {
+      etfHistoricalNote.innerHTML = `<strong style="color:var(--text)">Hinweis:</strong> ${noteText}`;
+    }
+  }
   
   // ===== FEEDBACK SEITE =====
   const feedbackTitle = document.querySelector('#feedback h2');
