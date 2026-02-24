@@ -547,23 +547,40 @@ strong{color:var(--text)}
         </div>
 
         <label>
-          <div class="label-text">Einstiegskurs</div>
+          <div id="tradingEntryLabel" class="label-text">Einstiegskurs</div>
           <div class="input-wrapper">
             <input id="einstieg" type="number" step="0.01" value="2.9" oninput="berechneTrading()">
             <span class="input-unit">€</span>
           </div>
         </label>
 
-        <label>
-          <div class="label-text">Stückzahl</div>
+        <div style="margin-bottom:12px">
+          <div id="tradingInputModeLabel" class="label-text" style="margin-bottom:8px">Art</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <button id="tradingModeSharesBtn" type="button" class="btn" onclick="setTradingInputMode('shares')" style="padding:10px;background:linear-gradient(90deg,var(--accent),#34d399);color:#072017">Stückzahl</button>
+            <button id="tradingModeAmountBtn" type="button" class="btn" onclick="setTradingInputMode('amount')" style="padding:10px;background:var(--input-bg);border:1px solid var(--border);color:var(--muted)">Betrag</button>
+          </div>
+        </div>
+
+        <label id="tradingSharesField">
+          <div id="tradingQuantityLabel" class="label-text">Stückzahl</div>
           <div class="input-wrapper">
-            <input id="stueck" type="number" step="1" value="517" oninput="berechneTrading()">
+            <input id="stueck" type="number" step="0.0001" value="517" oninput="berechneTrading()">
             <span class="input-unit">Stk.</span>
           </div>
         </label>
 
+        <label id="tradingAmountField" style="display:none">
+          <div class="label-text">Investitionsbetrag</div>
+          <div class="input-wrapper">
+            <input id="tradingBetrag" type="number" step="0.01" value="1499.30" oninput="berechneTrading()">
+            <span class="input-unit">€</span>
+          </div>
+          <div id="tradingAmountHint" style="font-size:12px;color:var(--muted);margin-top:6px">≈ 0,00 Stk.</div>
+        </label>
+
         <label>
-          <div class="label-text">Zielkurs</div>
+          <div id="tradingTargetLabel" class="label-text">Zielkurs</div>
           <div class="input-wrapper">
             <input id="ziel" type="number" step="0.01" value="3.25" oninput="berechneTrading()">
             <span class="input-unit">€</span>
@@ -571,7 +588,7 @@ strong{color:var(--text)}
         </label>
 
         <label>
-          <div class="label-text">Stop-Loss (Optional)</div>
+          <div id="tradingStopLossLabel" class="label-text">Stop-Loss (Optional)</div>
           <div class="input-wrapper">
             <input id="stopLoss" type="number" step="0.01" value="" placeholder="Optional" oninput="berechneTrading()">
             <span class="input-unit">€</span>
@@ -579,7 +596,7 @@ strong{color:var(--text)}
         </label>
 
         <label id="hebelFeld">
-          <div class="label-text">Hebel (Leverage)</div>
+          <div id="tradingLeverageLabel" class="label-text">Hebel (Leverage)</div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;margin-bottom:8px">
             <input id="hebel" type="range" min="1" max="100" value="1" oninput="berechneTrading(); updateRangeSlider('hebel')" style="flex:1;margin-right:12px">
             <span style="color:var(--purple);font-weight:700;min-width:40px"><span id="hebelVal">1</span>x</span>
@@ -1000,7 +1017,7 @@ strong{color:var(--text)}
         </div>
 
         <!-- Pro User View -->
-        <div id="etfProView" style="display:none">
+        <div id="etfProView" style="display:none;text-align:left">
           
           <!-- Überschrift -->
           <h2 id="etfDatabaseTitle" style="font-size:clamp(2rem, 5vw, 2.5rem);font-weight:800;margin-bottom:32px;text-align:left">ETF Datenbank</h2>
@@ -1768,13 +1785,25 @@ strong{color:var(--text)}
             <span class="input-unit">€</span>
           </div>
         </label>
-        <label>
+        <label id="nachkaufMengeField">
           <div id="nachkaufMengeLabel" class="label-text">Menge</div>
           <div class="input-wrapper">
-            <input id="nachkaufMenge" type="number" step="1" value="20">
+            <input id="nachkaufMenge" type="number" step="0.0001" value="20">
             <span id="nachkaufMengeUnit" class="input-unit">Stk.</span>
           </div>
         </label>
+        <label id="nachkaufBetragField" style="display:none">
+          <div class="label-text">Nachkauf Betrag</div>
+          <div class="input-wrapper">
+            <input id="nachkaufBetrag" type="number" step="0.01" value="40.00">
+            <span class="input-unit">€</span>
+          </div>
+        </label>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px">
+        <button id="nachkaufModeSharesBtn" type="button" class="btn" onclick="setNachkaufInputMode('shares')" style="padding:10px;background:linear-gradient(90deg,var(--accent),#34d399);color:#072017">Stückzahl</button>
+        <button id="nachkaufModeAmountBtn" type="button" class="btn" onclick="setNachkaufInputMode('amount')" style="padding:10px;background:var(--input-bg);border:1px solid var(--border);color:var(--muted)">Betrag</button>
       </div>
 
       <div class="modal-result">
@@ -1785,6 +1814,8 @@ strong{color:var(--text)}
           <span id="neuerDurchschnitt" style="color:var(--blue)">1,50</span>
         </div>
         <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;margin-top:16px">
+          <div style="font-size:14px;color:var(--muted);margin-bottom:6px">Nachgekaufte Anteile</div>
+          <div id="nachkaufAnteile" style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:10px">+ 0 Stk.</div>
           <div id="investiertLabel" style="font-size:14px;color:var(--muted);margin-bottom:8px">Investiert</div>
           <div id="nachkaufInvestiert" style="font-size:28px;font-weight:700;color:var(--accent)">+ 20,00 €</div>
         </div>
@@ -1817,13 +1848,25 @@ strong{color:var(--text)}
             <span class="input-unit">€</span>
           </div>
         </label>
-        <label>
+        <label id="verkaufMengeField">
           <div id="verkaufsMengeLabel" class="label-text">Verkaufs-Menge</div>
           <div class="input-wrapper">
-            <input id="verkaufMenge" type="number" step="1" value="100">
+            <input id="verkaufMenge" type="number" step="0.0001" value="100">
             <span id="verkaufMengeUnit" class="input-unit">Stk.</span>
           </div>
         </label>
+        <label id="verkaufBetragField" style="display:none">
+          <div class="label-text">Verkaufsbetrag</div>
+          <div class="input-wrapper">
+            <input id="verkaufBetrag" type="number" step="0.01" value="325.00">
+            <span class="input-unit">€</span>
+          </div>
+        </label>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px">
+        <button id="teilverkaufModeSharesBtn" type="button" class="btn" onclick="setTeilverkaufInputMode('shares')" style="padding:10px;background:linear-gradient(90deg,var(--accent),#34d399);color:#072017">Stückzahl</button>
+        <button id="teilverkaufModeAmountBtn" type="button" class="btn" onclick="setTeilverkaufInputMode('amount')" style="padding:10px;background:var(--input-bg);border:1px solid var(--border);color:var(--muted)">Betrag</button>
       </div>
 
       <div class="modal-result">
@@ -2495,33 +2538,33 @@ strong{color:var(--text)}
 
   <!-- Premium Broker Detail Modal -->
   <div id="premiumBrokerDetailModal" class="modal">
-    <div class="modal-content" style="max-width:700px">
+    <div class="modal-content" style="max-width:620px">
       <div class="modal-header">
         <button class="btn" onclick="closeModal('premiumBrokerDetailModal')" style="background:var(--input-bg);border:1px solid var(--border);padding:8px 18px">Schließen</button>
       </div>
 
       <div style="padding:8px 0 0">
         <div style="text-align:center;margin-bottom:22px">
-          <div style="width:88px;height:88px;margin:0 auto 12px;background:rgba(24,144,255,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center">
-            <span style="font-size:38px">🏦</span>
+          <div style="width:58px;height:58px;margin:0 auto 10px;background:rgba(24,144,255,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center">
+            <span style="font-size:24px">🏦</span>
           </div>
-          <div id="premiumBrokerDetailName" style="font-size:46px;font-weight:900;color:var(--text);line-height:1.1"></div>
-          <div style="margin-top:8px;color:#fbbf24;font-size:26px;letter-spacing:2px">★★★★☆ <span id="premiumBrokerDetailRating" style="font-size:30px;color:var(--muted)"></span></div>
+          <div id="premiumBrokerDetailName" style="font-size:26px;font-weight:900;color:var(--text);line-height:1.2"></div>
+          <div style="margin-top:6px;color:#fbbf24;font-size:16px;letter-spacing:1px">★★★★☆ <span id="premiumBrokerDetailRating" style="font-size:18px;color:var(--muted)"></span></div>
         </div>
 
-        <div style="display:flex;justify-content:center;margin-bottom:24px">
-          <a id="premiumBrokerDetailLink" href="#" target="_blank" rel="noopener noreferrer" class="btn" style="background:linear-gradient(90deg,#1890ff,#38bdf8);color:white;padding:12px 26px;font-size:24px;border:none">Zum Angebot</a>
+        <div style="display:flex;justify-content:center;margin-bottom:18px">
+          <a id="premiumBrokerDetailLink" href="#" target="_blank" rel="noopener noreferrer" class="btn" style="background:linear-gradient(90deg,#1890ff,#38bdf8);color:white;padding:10px 18px;font-size:14px;border:none">Zum Angebot</a>
         </div>
 
-        <h3 style="font-size:44px;font-weight:800;color:var(--text);margin:0 0 12px">Produktdetails</h3>
-        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:8px 16px;margin-bottom:24px">
-          <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span style="color:var(--muted)">Depotgebühr</span><strong id="premiumBrokerDetailDepot" style="color:var(--text)"></strong></div>
-          <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span style="color:var(--muted)">Kosten pro Order</span><strong id="premiumBrokerDetailOrder" style="color:var(--text)"></strong></div>
-          <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span style="color:var(--muted)">Kostenlose ETFs</span><strong id="premiumBrokerDetailEtf" style="color:var(--text)"></strong></div>
-          <div style="display:flex;justify-content:space-between;padding:14px 0"><span style="color:var(--muted)">Guthabenzinsen</span><strong id="premiumBrokerDetailInterest" style="color:var(--text)"></strong></div>
+        <h3 style="font-size:20px;font-weight:800;color:var(--text);margin:0 0 10px">Produktdetails</h3>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:6px 14px;margin-bottom:16px">
+          <div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span style="color:var(--muted);font-size:13px">Depotgebühr</span><strong id="premiumBrokerDetailDepot" style="color:var(--text);font-size:14px"></strong></div>
+          <div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span style="color:var(--muted);font-size:13px">Kosten pro Order</span><strong id="premiumBrokerDetailOrder" style="color:var(--text);font-size:14px"></strong></div>
+          <div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span style="color:var(--muted);font-size:13px">Kostenlose ETFs</span><strong id="premiumBrokerDetailEtf" style="color:var(--text);font-size:14px"></strong></div>
+          <div style="display:flex;justify-content:space-between;padding:11px 0"><span style="color:var(--muted);font-size:13px">Guthabenzinsen</span><strong id="premiumBrokerDetailInterest" style="color:var(--text);font-size:14px"></strong></div>
         </div>
 
-        <h3 style="font-size:44px;font-weight:800;color:var(--text);margin:0 0 12px">Vor- und Nachteile</h3>
+        <h3 style="font-size:20px;font-weight:800;color:var(--text);margin:0 0 10px">Vor- und Nachteile</h3>
         <div id="premiumBrokerDetailPros" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px;display:grid;gap:10px"></div>
       </div>
     </div>
@@ -3150,10 +3193,149 @@ function aktualisiereNachLandWechsel() {
   aktualisiereFreibetrag();
 }
 
+let tradingInputMode = 'shares';
+let nachkaufInputMode = 'shares';
+let teilverkaufInputMode = 'shares';
+
+function formatSharesDisplay(value) {
+  const num = Number(value) || 0;
+  return num.toLocaleString(getNumberLocale(), { minimumFractionDigits: 0, maximumFractionDigits: 4 });
+}
+
+function styleModeButtons(activeBtn, inactiveBtn) {
+  if (activeBtn) {
+    activeBtn.style.background = 'linear-gradient(90deg,var(--accent),#34d399)';
+    activeBtn.style.color = '#072017';
+    activeBtn.style.border = 'none';
+  }
+  if (inactiveBtn) {
+    inactiveBtn.style.background = 'var(--input-bg)';
+    inactiveBtn.style.color = 'var(--muted)';
+    inactiveBtn.style.border = '1px solid var(--border)';
+  }
+}
+
+function syncTradingAmountAndShares() {
+  const einstieg = parseFloat(document.getElementById('einstieg').value) || 0;
+  const stueckInput = document.getElementById('stueck');
+  const betragInput = document.getElementById('tradingBetrag');
+  const hint = document.getElementById('tradingAmountHint');
+
+  let stueck = parseFloat(stueckInput.value) || 0;
+
+  if (tradingInputMode === 'amount') {
+    const betrag = parseFloat(betragInput.value) || 0;
+    stueck = einstieg > 0 ? (betrag / einstieg) : 0;
+    stueckInput.value = stueck.toFixed(4);
+    if (hint) hint.textContent = `≈ ${formatSharesDisplay(stueck)} Stk.`;
+  } else {
+    const betrag = einstieg * stueck;
+    betragInput.value = betrag.toFixed(2);
+    if (hint) hint.textContent = `≈ ${formatSharesDisplay(stueck)} Stk.`;
+  }
+
+  return stueck;
+}
+
+function setTradingInputMode(mode) {
+  tradingInputMode = mode === 'amount' ? 'amount' : 'shares';
+
+  const sharesField = document.getElementById('tradingSharesField');
+  const amountField = document.getElementById('tradingAmountField');
+  const sharesBtn = document.getElementById('tradingModeSharesBtn');
+  const amountBtn = document.getElementById('tradingModeAmountBtn');
+
+  if (sharesField) sharesField.style.display = tradingInputMode === 'shares' ? 'block' : 'none';
+  if (amountField) amountField.style.display = tradingInputMode === 'amount' ? 'block' : 'none';
+
+  if (tradingInputMode === 'shares') {
+    styleModeButtons(sharesBtn, amountBtn);
+  } else {
+    styleModeButtons(amountBtn, sharesBtn);
+  }
+
+  syncTradingAmountAndShares();
+  berechneTrading();
+}
+
+function getNachkaufMenge() {
+  const nk = parseFloat(document.getElementById('nachkaufKurs').value) || 0;
+  const mengeInput = document.getElementById('nachkaufMenge');
+  const betragInput = document.getElementById('nachkaufBetrag');
+  let nm = parseFloat(mengeInput.value) || 0;
+
+  if (nachkaufInputMode === 'amount') {
+    const betrag = parseFloat(betragInput.value) || 0;
+    nm = nk > 0 ? (betrag / nk) : 0;
+    mengeInput.value = nm.toFixed(4);
+  } else {
+    betragInput.value = (nk * nm).toFixed(2);
+  }
+
+  return nm;
+}
+
+function setNachkaufInputMode(mode) {
+  nachkaufInputMode = mode === 'amount' ? 'amount' : 'shares';
+
+  const mengeField = document.getElementById('nachkaufMengeField');
+  const betragField = document.getElementById('nachkaufBetragField');
+  const sharesBtn = document.getElementById('nachkaufModeSharesBtn');
+  const amountBtn = document.getElementById('nachkaufModeAmountBtn');
+
+  if (mengeField) mengeField.style.display = nachkaufInputMode === 'shares' ? 'block' : 'none';
+  if (betragField) betragField.style.display = nachkaufInputMode === 'amount' ? 'block' : 'none';
+
+  if (nachkaufInputMode === 'shares') {
+    styleModeButtons(sharesBtn, amountBtn);
+  } else {
+    styleModeButtons(amountBtn, sharesBtn);
+  }
+
+  updateNachkaufPreview();
+}
+
+function getTeilverkaufMenge() {
+  const vp = parseFloat(document.getElementById('verkaufPreis').value) || 0;
+  const mengeInput = document.getElementById('verkaufMenge');
+  const betragInput = document.getElementById('verkaufBetrag');
+  let vm = parseFloat(mengeInput.value) || 0;
+
+  if (teilverkaufInputMode === 'amount') {
+    const betrag = parseFloat(betragInput.value) || 0;
+    vm = vp > 0 ? (betrag / vp) : 0;
+    mengeInput.value = vm.toFixed(4);
+  } else {
+    betragInput.value = (vp * vm).toFixed(2);
+  }
+
+  return vm;
+}
+
+function setTeilverkaufInputMode(mode) {
+  teilverkaufInputMode = mode === 'amount' ? 'amount' : 'shares';
+
+  const mengeField = document.getElementById('verkaufMengeField');
+  const betragField = document.getElementById('verkaufBetragField');
+  const sharesBtn = document.getElementById('teilverkaufModeSharesBtn');
+  const amountBtn = document.getElementById('teilverkaufModeAmountBtn');
+
+  if (mengeField) mengeField.style.display = teilverkaufInputMode === 'shares' ? 'block' : 'none';
+  if (betragField) betragField.style.display = teilverkaufInputMode === 'amount' ? 'block' : 'none';
+
+  if (teilverkaufInputMode === 'shares') {
+    styleModeButtons(sharesBtn, amountBtn);
+  } else {
+    styleModeButtons(amountBtn, sharesBtn);
+  }
+
+  updateTeilverkaufPreview();
+}
+
 
 function berechneTrading() {
   const e = parseFloat(document.getElementById('einstieg').value) || 0;
-  const s = parseFloat(document.getElementById('stueck').value) || 0;
+  const s = syncTradingAmountAndShares();
   const z = parseFloat(document.getElementById('ziel').value) || 0;
   const hebel = parseFloat(document.getElementById('hebel').value) || 1;
   
@@ -3271,7 +3453,7 @@ async function speicherePosition() {
   
   const name = document.getElementById('posname').value || t('unnamedPosition');
   const e = parseFloat(document.getElementById('einstieg').value) || 0;
-  const s = parseFloat(document.getElementById('stueck').value) || 0;
+  const s = syncTradingAmountAndShares();
   const z = parseFloat(document.getElementById('ziel').value) || 0;
   const hebel = parseFloat(document.getElementById('hebel').value) || 1;
   
@@ -3609,6 +3791,7 @@ async function loescheAllePositionen() {
 function nachkauf() {
   const e = parseFloat(document.getElementById('einstieg').value) || 0;
   document.getElementById('nachkaufKurs').value = e.toFixed(2);
+  setNachkaufInputMode('shares');
   document.getElementById('nachkaufModal').classList.add('active');
   updateNachkaufPreview();
 }
@@ -3617,7 +3800,7 @@ function updateNachkaufPreview() {
   const e = parseFloat(document.getElementById('einstieg').value) || 0;
   const s = parseFloat(document.getElementById('stueck').value) || 0;
   const nk = parseFloat(document.getElementById('nachkaufKurs').value) || 0;
-  const nm = parseFloat(document.getElementById('nachkaufMenge').value) || 0;
+  const nm = getNachkaufMenge();
   
   // Alter und neuer Durchschnitt
   document.getElementById('alterDurchschnitt').textContent = e.toFixed(2);
@@ -3630,6 +3813,10 @@ function updateNachkaufPreview() {
   // Investierter Betrag
   const investiert = nk * nm;
   const symbol = getWaehrungsSymbol();
+  const anteileEl = document.getElementById('nachkaufAnteile');
+  if (anteileEl) {
+    anteileEl.textContent = '+ ' + formatSharesDisplay(nm) + ' Stk.';
+  }
   document.getElementById('nachkaufInvestiert').textContent = '+ ' + investiert.toFixed(2) + ' ' + symbol;
 }
 
@@ -3637,12 +3824,13 @@ function bestaetigeNachkauf() {
   const e = parseFloat(document.getElementById('einstieg').value) || 0;
   const s = parseFloat(document.getElementById('stueck').value) || 0;
   const nk = parseFloat(document.getElementById('nachkaufKurs').value) || 0;
-  const nm = parseFloat(document.getElementById('nachkaufMenge').value) || 0;
+  const nm = getNachkaufMenge();
   
   if (nm > 0) {
     const neuKurs = ((e * s) + (nk * nm)) / (s + nm);
     document.getElementById('einstieg').value = neuKurs.toFixed(2);
-    document.getElementById('stueck').value = s + nm;
+    document.getElementById('stueck').value = (s + nm).toFixed(4);
+    syncTradingAmountAndShares();
     closeModal('nachkaufModal');
     berechneTrading();
   }
@@ -3651,8 +3839,9 @@ function bestaetigeNachkauf() {
 function teilverkauf() {
   const s = parseFloat(document.getElementById('stueck').value) || 0;
   const z = parseFloat(document.getElementById('ziel').value) || 0;
-  document.getElementById('verkaufMenge').value = Math.floor(s / 2);
+  document.getElementById('verkaufMenge').value = (s / 2).toFixed(4);
   document.getElementById('verkaufPreis').value = z.toFixed(2);
+  setTeilverkaufInputMode('shares');
   document.getElementById('teilverkaufModal').classList.add('active');
   updateTeilverkaufPreview();
 }
@@ -3661,10 +3850,10 @@ function updateTeilverkaufPreview() {
   const e = parseFloat(document.getElementById('einstieg').value) || 0;
   const s = parseFloat(document.getElementById('stueck').value) || 0;
   const vp = parseFloat(document.getElementById('verkaufPreis').value) || 0;
-  const vm = parseFloat(document.getElementById('verkaufMenge').value) || 0;
+  const vm = getTeilverkaufMenge();
   
   // Verbleibende Stückzahl
-  document.getElementById('verbleibendeStueck').textContent = Math.max(0, s - vm) + ' Stk.';
+  document.getElementById('verbleibendeStueck').textContent = formatSharesDisplay(Math.max(0, s - vm)) + ' Stk.';
   
   // Gewinn aus Verkauf berechnen
   const gewinn = (vp - e) * vm;
@@ -3676,10 +3865,11 @@ function updateTeilverkaufPreview() {
 
 function bestaetigeTeilverkauf() {
   const s = parseFloat(document.getElementById('stueck').value) || 0;
-  const vm = parseFloat(document.getElementById('verkaufMenge').value) || 0;
+  const vm = getTeilverkaufMenge();
   
   if (vm > 0 && vm <= s) {
-    document.getElementById('stueck').value = s - vm;
+    document.getElementById('stueck').value = (s - vm).toFixed(4);
+    syncTradingAmountAndShares();
     closeModal('teilverkaufModal');
     berechneTrading();
   }
@@ -4217,13 +4407,23 @@ function loadTheme() {
 document.addEventListener('DOMContentLoaded', function() {
   const nachkaufKurs = document.getElementById('nachkaufKurs');
   const nachkaufMenge = document.getElementById('nachkaufMenge');
+  const nachkaufBetrag = document.getElementById('nachkaufBetrag');
   const verkaufMenge = document.getElementById('verkaufMenge');
+  const verkaufBetrag = document.getElementById('verkaufBetrag');
   const verkaufPreis = document.getElementById('verkaufPreis');
+  const tradingBetrag = document.getElementById('tradingBetrag');
+  const stueck = document.getElementById('stueck');
+  const einstieg = document.getElementById('einstieg');
   
   if (nachkaufKurs) nachkaufKurs.addEventListener('input', updateNachkaufPreview);
   if (nachkaufMenge) nachkaufMenge.addEventListener('input', updateNachkaufPreview);
+  if (nachkaufBetrag) nachkaufBetrag.addEventListener('input', updateNachkaufPreview);
   if (verkaufMenge) verkaufMenge.addEventListener('input', updateTeilverkaufPreview);
+  if (verkaufBetrag) verkaufBetrag.addEventListener('input', updateTeilverkaufPreview);
   if (verkaufPreis) verkaufPreis.addEventListener('input', updateTeilverkaufPreview);
+  if (tradingBetrag) tradingBetrag.addEventListener('input', berechneTrading);
+  if (stueck) stueck.addEventListener('input', berechneTrading);
+  if (einstieg) einstieg.addEventListener('input', berechneTrading);
   
   // Sprache beim Laden wiederherstellen
   const gespeicherteSprache = localStorage.getItem('sprache');
@@ -4272,6 +4472,10 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // ETF Datenbank initialisieren
   initETFDatenbank();
+
+  setTradingInputMode('shares');
+  setNachkaufInputMode('shares');
+  setTeilverkaufInputMode('shares');
 });
 
 // Button-basierte Sortierung
@@ -5429,28 +5633,28 @@ function renderPremiumBrokerList() {
     const ratingStars = '★'.repeat(Math.floor(broker.rating)) + (broker.rating % 1 >= 0.5 ? '★' : '☆');
     return `
       <div onclick="openPremiumBrokerDetail('${broker.id}')" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;cursor:pointer;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 18px 14px;border-bottom:1px solid rgba(255,255,255,0.08)">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 16px 12px;border-bottom:1px solid rgba(255,255,255,0.08)">
           <div style="display:flex;align-items:center;gap:14px">
-            <div style="width:42px;height:42px;background:${medalColor};border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:${index === 0 ? '#111827' : 'var(--text)'}">${index + 1}</div>
+            <div style="width:34px;height:34px;background:${medalColor};border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:${index === 0 ? '#111827' : 'var(--text)'}">${index + 1}</div>
             <div>
-              <div style="font-size:34px;font-weight:800;color:var(--text);line-height:1.1">${broker.name}</div>
-              <div style="font-size:28px;color:#fbbf24;line-height:1.1">★ <span style="color:var(--muted)">${broker.rating.toFixed(1)}</span></div>
+              <div style="font-size:16px;font-weight:800;color:var(--text);line-height:1.2">${broker.name}</div>
+              <div style="font-size:14px;color:#fbbf24;line-height:1.2">★ <span style="color:var(--muted)">${broker.rating.toFixed(1)}</span></div>
             </div>
           </div>
-          <div style="font-size:34px;color:var(--muted)">›</div>
+          <div style="font-size:22px;color:var(--muted)">›</div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px 16px 16px">
           <div style="text-align:left">
-            <div style="font-size:26px;color:var(--muted)">Ordergebühr</div>
-            <div style="font-size:40px;font-weight:700;color:var(--text)">${broker.orderLabel}</div>
+            <div style="font-size:11px;color:var(--muted)">Ordergebühr</div>
+            <div style="font-size:16px;font-weight:700;color:var(--text)">${broker.orderLabel}</div>
           </div>
           <div style="text-align:left">
-            <div style="font-size:26px;color:var(--muted)">Sparpläne</div>
-            <div style="font-size:40px;font-weight:700;color:var(--text)">${broker.sparplaeneLabel}</div>
+            <div style="font-size:11px;color:var(--muted)">Sparpläne</div>
+            <div style="font-size:16px;font-weight:700;color:var(--text)">${broker.sparplaeneLabel}</div>
           </div>
           <div style="text-align:left">
-            <div style="font-size:26px;color:var(--muted)">Zinsen</div>
-            <div style="font-size:40px;font-weight:700;color:var(--text)">${broker.interest.toFixed(2)}%</div>
+            <div style="font-size:11px;color:var(--muted)">Zinsen</div>
+            <div style="font-size:16px;font-weight:700;color:var(--text)">${broker.interest.toFixed(2)}%</div>
           </div>
         </div>
       </div>
@@ -5484,7 +5688,7 @@ function openPremiumBrokerDetail(brokerId) {
   interestElement.textContent = `${broker.interest.toFixed(2)} % p.a.`;
 
   prosElement.innerHTML = broker.pros.map((entry) => {
-    return `<div style="display:flex;align-items:flex-start;gap:10px"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(34,197,94,0.16);color:#22c55e;font-weight:800">✓</span><span style="font-size:31px;color:var(--text);line-height:1.35">${entry}</span></div>`;
+    return `<div style="display:flex;align-items:flex-start;gap:10px"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(34,197,94,0.16);color:#22c55e;font-weight:800;font-size:12px">✓</span><span style="font-size:14px;color:var(--text);line-height:1.45">${entry}</span></div>`;
   }).join('');
 
   document.getElementById('premiumBrokerDetailModal').classList.add('active');
@@ -9191,13 +9395,29 @@ function aktualisiereSprachAnzeige() {
   const tradingH2 = document.querySelector('#trading h2');
   if (tradingH2) tradingH2.textContent = t('tradeCalculation');
   
-  // Trading Labels - ALLE .label-text Elemente auf Trading-Seite
-  const tradingLabels = document.querySelectorAll('#trading .label-text');
-  if (tradingLabels[0]) tradingLabels[0].textContent = t('entryPrice').toUpperCase();
-  if (tradingLabels[1]) tradingLabels[1].textContent = t('quantity').toUpperCase();
-  if (tradingLabels[2]) tradingLabels[2].textContent = t('targetPrice').toUpperCase();
-  if (tradingLabels[3]) tradingLabels[3].textContent = t('stopLoss').toUpperCase();
-  if (tradingLabels[4]) tradingLabels[4].textContent = t('leverage').toUpperCase();
+  // Trading Labels (gezielt per ID, damit neue Felder nicht falsch überschrieben werden)
+  const tradingEntryLabel = document.getElementById('tradingEntryLabel');
+  if (tradingEntryLabel) tradingEntryLabel.textContent = t('entryPrice').toUpperCase();
+
+  const tradingInputModeLabel = document.getElementById('tradingInputModeLabel');
+  if (tradingInputModeLabel) {
+    const modeLabels = { de: 'Art', en: 'Type', es: 'Tipo', fr: 'Type' };
+    tradingInputModeLabel.textContent = (modeLabels[aktuelleSprache] || modeLabels.de).toUpperCase();
+  }
+
+  const tradingQuantityLabel = document.getElementById('tradingQuantityLabel');
+  if (tradingQuantityLabel) tradingQuantityLabel.textContent = t('quantity').toUpperCase();
+  const tradingSharesFieldLabel = document.querySelector('#tradingSharesField .label-text');
+  if (tradingSharesFieldLabel) tradingSharesFieldLabel.textContent = t('quantity').toUpperCase();
+
+  const tradingTargetLabel = document.getElementById('tradingTargetLabel');
+  if (tradingTargetLabel) tradingTargetLabel.textContent = t('targetPrice').toUpperCase();
+
+  const tradingStopLossLabel = document.getElementById('tradingStopLossLabel');
+  if (tradingStopLossLabel) tradingStopLossLabel.textContent = t('stopLoss').toUpperCase();
+
+  const tradingLeverageLabel = document.getElementById('tradingLeverageLabel');
+  if (tradingLeverageLabel) tradingLeverageLabel.textContent = t('leverage').toUpperCase();
   
   // Position Radio Labels
   const positionLabels = document.querySelectorAll('#trading input[type="radio"] + span');
