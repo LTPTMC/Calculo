@@ -356,7 +356,7 @@ strong{color:var(--text)}
             <div id="statLabel2" style="color:var(--muted);font-size:14px">Steuerfreibetrag</div>
           </div>
           <div>
-            <div style="font-size:2.5rem;font-weight:800;color:var(--purple);margin-bottom:8px">1,99€</div>
+            <div id="homePlanPrice" style="font-size:2.5rem;font-weight:800;color:var(--purple);margin-bottom:8px">1,99€</div>
             <div id="statLabel3" style="color:var(--muted);font-size:14px">Pro / Monat</div>
           </div>
         </div>
@@ -4330,6 +4330,67 @@ function updatePremiumStatus() {
     if (brokerView) brokerView.style.display = 'none';
     if (etfStocksView) etfStocksView.style.display = 'block';
   }
+
+  updateHomePlanPresentation();
+}
+
+function updateHomePlanPresentation() {
+  const featureTitle = document.getElementById('featureProTitle');
+  const featureDesc = document.getElementById('featureProDesc');
+  const planPrice = document.getElementById('homePlanPrice');
+  const statLabel = document.getElementById('statLabel3');
+  if (!featureTitle || !featureDesc || !planPrice || !statLabel) return;
+
+  const isPremiumActive = isPremiumLaunchLive() && localStorage.getItem('isPremium') === 'true';
+  const lang = (aktuelleSprache || 'de');
+
+  const premiumByLang = {
+    de: {
+      title: 'Premium Account',
+      desc: 'Alle Pro-Features inklusive Broker-Vergleich und Premium-Extras – für nur 9,99€/Monat.',
+      price: '9,99€',
+      perMonth: 'Premium / Monat'
+    },
+    en: {
+      title: 'Premium Account',
+      desc: 'All Pro features included plus broker comparison and premium extras – for only €9.99/month.',
+      price: '€9.99',
+      perMonth: 'Premium / Month'
+    },
+    es: {
+      title: 'Cuenta Premium',
+      desc: 'Incluye todas las funciones Pro, comparador de brókers y extras premium – por solo 9,99€/mes.',
+      price: '9,99€',
+      perMonth: 'Premium / mes'
+    },
+    fr: {
+      title: 'Compte Premium',
+      desc: 'Inclut toutes les fonctions Pro, le comparatif de courtiers et des extras premium – pour seulement 9,99€/mois.',
+      price: '9,99€',
+      perMonth: 'Premium / Mois'
+    }
+  };
+
+  const proPriceByLang = {
+    de: '1,99€',
+    en: '€1.99',
+    es: '1,99€',
+    fr: '1,99€'
+  };
+
+  if (isPremiumActive) {
+    const premiumText = premiumByLang[lang] || premiumByLang.de;
+    featureTitle.textContent = premiumText.title;
+    featureDesc.textContent = premiumText.desc;
+    planPrice.textContent = premiumText.price;
+    statLabel.textContent = premiumText.perMonth;
+    return;
+  }
+
+  featureTitle.textContent = t('proAccount');
+  featureDesc.textContent = t('proDesc');
+  planPrice.textContent = proPriceByLang[lang] || proPriceByLang.de;
+  statLabel.textContent = t('proPerMonth');
 }
 
 let premiumEtfMode = 'etf';
@@ -9192,6 +9253,8 @@ function aktualisiereSprachAnzeige() {
   
   const statLabel3 = document.getElementById('statLabel3');
   if (statLabel3) statLabel3.textContent = t('proPerMonth');
+
+  updateHomePlanPresentation();
   
   // Country Label in Settings
   const countryLabel = document.getElementById('countryLabel');
