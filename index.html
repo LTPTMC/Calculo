@@ -1028,7 +1028,7 @@ strong{color:var(--text)}
                 <div style="font-size:18px;font-weight:800;color:var(--text);margin-bottom:6px">Premium: Broker Vergleich</div>
                 <div style="font-size:13px;color:var(--muted)">Detaillierte Broker-Rankings mit Sortierung und Detailansicht.</div>
               </div>
-              <button class="btn upgrade-premium" onclick="upgradeToPremium()" style="background:linear-gradient(90deg,#f59e0b,#fbbf24);color:#111827;padding:10px 18px;font-size:13px">
+              <button id="etfPremiumActivateBtn" class="btn upgrade-premium" onclick="upgradeToPremium()" style="background:linear-gradient(90deg,#f59e0b,#fbbf24);color:#111827;padding:10px 18px;font-size:13px">
                 Premium aktivieren
               </button>
             </div>
@@ -1330,7 +1330,7 @@ strong{color:var(--text)}
                 <div style="background:var(--accent);color:white;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;margin-top:6px;display:inline-block">1,5 Monate geschenkt</div>
               </div>
             </div>
-            <button class="btn upgrade-premium" onclick="upgradeToPremium()" style="width:100%;background:linear-gradient(90deg,#f59e0b,#fbbf24);color:#111827;margin-bottom:12px">
+            <button id="premiumActivateBtnSettings" class="btn upgrade-premium" onclick="upgradeToPremium()" style="width:100%;background:linear-gradient(90deg,#f59e0b,#fbbf24);color:#111827;margin-bottom:12px">
               <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9 12 2"/></svg>
               Premium aktivieren
             </button>
@@ -1350,7 +1350,7 @@ strong{color:var(--text)}
                 <div style="font-size:13px;color:var(--muted);margin-top:4px">Free + Pro sind enthalten. Premium-Bonus folgt.</div>
               </div>
             </div>
-            <button class="btn" onclick="cancelPremium()" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--muted)">
+            <button id="premiumCancelBtn" class="btn" onclick="cancelPremium()" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--muted)">
               Premium kündigen
             </button>
           </div>
@@ -2540,7 +2540,7 @@ strong{color:var(--text)}
   <div id="premiumBrokerDetailModal" class="modal">
     <div class="modal-content" style="max-width:620px">
       <div class="modal-header">
-        <button class="btn" onclick="closeModal('premiumBrokerDetailModal')" style="background:var(--input-bg);border:1px solid var(--border);padding:8px 18px">Schließen</button>
+        <button id="premiumBrokerDetailCloseBtn" class="btn" onclick="closeModal('premiumBrokerDetailModal')" style="background:var(--input-bg);border:1px solid var(--border);padding:8px 18px">Schließen</button>
       </div>
 
       <div style="padding:8px 0 0">
@@ -2556,15 +2556,15 @@ strong{color:var(--text)}
           <a id="premiumBrokerDetailLink" href="#" target="_blank" rel="noopener noreferrer" class="btn" style="background:linear-gradient(90deg,#1890ff,#38bdf8);color:white;padding:10px 18px;font-size:14px;border:none">Zum Angebot</a>
         </div>
 
-        <h3 style="font-size:20px;font-weight:800;color:var(--text);margin:0 0 10px">Produktdetails</h3>
+        <h3 id="premiumBrokerDetailProductTitle" style="font-size:20px;font-weight:800;color:var(--text);margin:0 0 10px">Produktdetails</h3>
         <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:6px 14px;margin-bottom:16px">
-          <div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span style="color:var(--muted);font-size:13px">Depotgebühr</span><strong id="premiumBrokerDetailDepot" style="color:var(--text);font-size:14px"></strong></div>
-          <div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span style="color:var(--muted);font-size:13px">Kosten pro Order</span><strong id="premiumBrokerDetailOrder" style="color:var(--text);font-size:14px"></strong></div>
-          <div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span style="color:var(--muted);font-size:13px">Kostenlose ETFs</span><strong id="premiumBrokerDetailEtf" style="color:var(--text);font-size:14px"></strong></div>
-          <div style="display:flex;justify-content:space-between;padding:11px 0"><span style="color:var(--muted);font-size:13px">Guthabenzinsen</span><strong id="premiumBrokerDetailInterest" style="color:var(--text);font-size:14px"></strong></div>
+          <div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span id="premiumBrokerDetailDepotLabel" style="color:var(--muted);font-size:13px">Depotgebühr</span><strong id="premiumBrokerDetailDepot" style="color:var(--text);font-size:14px"></strong></div>
+          <div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span id="premiumBrokerDetailOrderLabel" style="color:var(--muted);font-size:13px">Kosten pro Order</span><strong id="premiumBrokerDetailOrder" style="color:var(--text);font-size:14px"></strong></div>
+          <div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.08)"><span id="premiumBrokerDetailEtfLabel" style="color:var(--muted);font-size:13px">Kostenlose ETFs</span><strong id="premiumBrokerDetailEtf" style="color:var(--text);font-size:14px"></strong></div>
+          <div style="display:flex;justify-content:space-between;padding:11px 0"><span id="premiumBrokerDetailInterestLabel" style="color:var(--muted);font-size:13px">Guthabenzinsen</span><strong id="premiumBrokerDetailInterest" style="color:var(--text);font-size:14px"></strong></div>
         </div>
 
-        <h3 style="font-size:20px;font-weight:800;color:var(--text);margin:0 0 10px">Vor- und Nachteile</h3>
+        <h3 id="premiumBrokerDetailProsTitle" style="font-size:20px;font-weight:800;color:var(--text);margin:0 0 10px">Vor- und Nachteile</h3>
         <div id="premiumBrokerDetailPros" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px;display:grid;gap:10px"></div>
       </div>
     </div>
@@ -4391,6 +4391,99 @@ function updateHomePlanPresentation() {
   featureDesc.textContent = t('proDesc');
   planPrice.textContent = proPriceByLang[lang] || proPriceByLang.de;
   statLabel.textContent = t('proPerMonth');
+}
+
+function updatePremiumUiTranslations() {
+  const lang = aktuelleSprache || 'de';
+  const textsByLang = {
+    de: {
+      activatePremium: 'Premium aktivieren',
+      cancelPremium: 'Premium kündigen',
+      close: 'Schließen',
+      offer: 'Zum Angebot',
+      productDetails: 'Produktdetails',
+      depotFee: 'Depotgebühr',
+      orderFee: 'Kosten pro Order',
+      freeEtfs: 'Kostenlose ETFs',
+      cashInterest: 'Guthabenzinsen',
+      prosCons: 'Vor- und Nachteile'
+    },
+    en: {
+      activatePremium: 'Activate Premium',
+      cancelPremium: 'Cancel Premium',
+      close: 'Close',
+      offer: 'View offer',
+      productDetails: 'Product details',
+      depotFee: 'Custody fee',
+      orderFee: 'Order fee',
+      freeEtfs: 'Free ETFs',
+      cashInterest: 'Cash interest',
+      prosCons: 'Pros and cons'
+    },
+    es: {
+      activatePremium: 'Activar Premium',
+      cancelPremium: 'Cancelar Premium',
+      close: 'Cerrar',
+      offer: 'Ver oferta',
+      productDetails: 'Detalles del producto',
+      depotFee: 'Comisión de custodia',
+      orderFee: 'Comisión por orden',
+      freeEtfs: 'ETFs gratuitos',
+      cashInterest: 'Interés del saldo',
+      prosCons: 'Ventajas y desventajas'
+    },
+    fr: {
+      activatePremium: 'Activer Premium',
+      cancelPremium: 'Annuler Premium',
+      close: 'Fermer',
+      offer: 'Voir l’offre',
+      productDetails: 'Détails du produit',
+      depotFee: 'Frais de garde',
+      orderFee: 'Frais par ordre',
+      freeEtfs: 'ETF gratuits',
+      cashInterest: 'Intérêts en espèces',
+      prosCons: 'Avantages et inconvénients'
+    }
+  };
+
+  const tx = textsByLang[lang] || textsByLang.de;
+
+  const activateBtnEtf = document.getElementById('etfPremiumActivateBtn');
+  if (activateBtnEtf) activateBtnEtf.textContent = tx.activatePremium;
+
+  const activateBtnSettings = document.getElementById('premiumActivateBtnSettings');
+  if (activateBtnSettings) {
+    const svg = activateBtnSettings.querySelector('svg');
+    activateBtnSettings.textContent = tx.activatePremium;
+    if (svg) activateBtnSettings.prepend(svg);
+  }
+
+  const cancelBtn = document.getElementById('premiumCancelBtn');
+  if (cancelBtn) cancelBtn.textContent = tx.cancelPremium;
+
+  const closeBtn = document.getElementById('premiumBrokerDetailCloseBtn');
+  if (closeBtn) closeBtn.textContent = tx.close;
+
+  const offerBtn = document.getElementById('premiumBrokerDetailLink');
+  if (offerBtn) offerBtn.textContent = tx.offer;
+
+  const productTitle = document.getElementById('premiumBrokerDetailProductTitle');
+  if (productTitle) productTitle.textContent = tx.productDetails;
+
+  const depotLabel = document.getElementById('premiumBrokerDetailDepotLabel');
+  if (depotLabel) depotLabel.textContent = tx.depotFee;
+
+  const orderLabel = document.getElementById('premiumBrokerDetailOrderLabel');
+  if (orderLabel) orderLabel.textContent = tx.orderFee;
+
+  const etfLabel = document.getElementById('premiumBrokerDetailEtfLabel');
+  if (etfLabel) etfLabel.textContent = tx.freeEtfs;
+
+  const interestLabel = document.getElementById('premiumBrokerDetailInterestLabel');
+  if (interestLabel) interestLabel.textContent = tx.cashInterest;
+
+  const prosTitle = document.getElementById('premiumBrokerDetailProsTitle');
+  if (prosTitle) prosTitle.textContent = tx.prosCons;
 }
 
 let premiumEtfMode = 'etf';
@@ -7344,7 +7437,7 @@ const uebersetzungen = {
     category: 'Cat.',
     etfDetailsTitle: 'ETF Details',
     etfSelected: '✓ Selected',
-    toComparison: 'To comparison',
+    toComparison: 'To compare',
     etfTrustedBy: 'Trusted by thousands',
     etfUnlockHeadline: 'Unlock Pro features',
     etfUnlockSubheading: 'Use the full power of 1,247 professional ETFs with 10 years of data, unlimited comparisons and advanced analyses – for less than a coffee per month.',
@@ -7994,7 +8087,7 @@ const uebersetzungen = {
     noteHistorical: 'Nota: Los rendimientos mostrados son promedios históricos y no garantizan resultados futuros. TER = Ratio de Gastos Totales (Total Expense Ratio). Información sin garantía',
     category: 'Cat.',
     etfDetailsTitle: 'Detalles del ETF',
-    etfSelected: '? Seleccionado',
+    etfSelected: '✓ Seleccionado',
     toComparison: 'Ir a comparar',
     etfTrustedBy: 'Confiado por miles',
     etfUnlockHeadline: 'Desbloquea funciones Pro',
@@ -8649,7 +8742,7 @@ const uebersetzungen = {
     category: 'Cat.',
     etfDetailsTitle: 'Détails de l\'ETF',
     toComparison: 'Comparer',
-    etfSelected: '? Sélectionné',
+    etfSelected: '✓ Sélectionné',
     etfTrustedBy: 'Plébiscité par des milliers',
     etfUnlockHeadline: 'Déverrouillez les fonctionnalités Pro',
     etfUnlockSubheading: 'Profitez de toute la puissance de 1 247 ETF professionnels avec 10 ans de données, des comparaisons illimitées et des analyses avancées - pour moins qu\'un café par mois.',
@@ -9420,6 +9513,7 @@ function aktualisiereSprachAnzeige() {
   
   // Update dynamische länderspezifische Texte
   aktualisiereDynamischeTexte();
+  updatePremiumUiTranslations();
   
   // "Wie es funktioniert" Section
   const howItWorksTitle = document.querySelector('#home > div > div:nth-of-type(4) > h2');
@@ -10806,7 +10900,7 @@ function translatePageText() {
     
     // ETF Comparison
     'Zum Vergleich': t('toComparison'),
-    '? Ausgewählt': t('etfSelected'),
+    '✓ Ausgewählt': t('etfSelected'),
     'Was ist TER?': t('whatIsTER'),
     
     // Settings/Common Labels
