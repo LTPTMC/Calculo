@@ -5584,52 +5584,26 @@ function zeigeETFs() {
   }).join('');
 }
 
-const premiumBrokerDaten = [
-  {
-    id: 'scalable-free',
-    name: 'Scalable Capital (Free)',
-    rating: 4.9,
-    depotKosten: 0,
-    orderKosten: 0.99,
-    orderLabel: 'ab 0,99 €',
+let premiumBrokerDaten = [];
+
+const BROKER_VERGLEICH_META = {
+  finanzenzero: {
+    rating: 4.7,
+    interest: 0,
+    kostenloseEtfs: 1500,
     sparplaeneLabel: 'Kostenlos',
-    interest: 2.0,
-    kostenloseEtfs: 2860,
-    offerUrl: 'https://de.scalable.capital/',
+    offerUrl: 'https://www.finanzen.net/zero/',
     pros: [
-      'Dauerhaft kostenlose ETF-Sparpläne',
-      '2% Zinsen (im Prime+ Modell)',
-      'Sehr große ETF-Auswahl (Prime Partner kostenlos)',
-      'Sehr gute App & Desktop-Version'
+      'Sehr günstiger Einstieg ins Investieren',
+      'Viele kostenlose Sparpläne',
+      'Übersichtliche Bedienung'
     ]
   },
-  {
-    id: 'traders-place',
-    name: 'Traders Place',
-    rating: 4.9,
-    depotKosten: 0,
-    orderKosten: 0,
-    orderLabel: '0,00 €',
-    sparplaeneLabel: 'Kostenlos',
-    interest: 1.75,
-    kostenloseEtfs: 2400,
-    offerUrl: 'https://tradersplace.de/',
-    pros: [
-      'Sehr niedrige Handelskosten',
-      'Kostenlose Sparpläne',
-      'Gute Auswahl für aktive Anleger'
-    ]
-  },
-  {
-    id: 'smartbroker-plus',
-    name: 'Smartbroker+',
+  smartbrokerplus: {
     rating: 4.8,
-    depotKosten: 0,
-    orderKosten: 0,
-    orderLabel: '0,00 €',
-    sparplaeneLabel: 'Kostenlos',
     interest: 1.75,
     kostenloseEtfs: 2200,
+    sparplaeneLabel: 'Kostenlos',
     offerUrl: 'https://smartbrokerplus.de/',
     pros: [
       'Klassischer Broker mit moderner App',
@@ -5637,30 +5611,181 @@ const premiumBrokerDaten = [
       'Günstige Sparpläne'
     ]
   },
-  {
-    id: 'trade-republic',
-    name: 'Trade Republic',
-    rating: 4.8,
-    depotKosten: 0,
-    orderKosten: 1.0,
-    orderLabel: '1,00 €',
+  justtrade: {
+    rating: 4.6,
+    interest: 0,
+    kostenloseEtfs: 1800,
     sparplaeneLabel: 'Kostenlos',
+    offerUrl: 'https://www.justtrade.com/',
+    pros: [
+      'Einfaches und schnelles Trading',
+      'Günstige Gebührenstruktur',
+      'Viele handelbare Produkte'
+    ]
+  },
+  traderepublic: {
+    rating: 4.8,
     interest: 2.0,
     kostenloseEtfs: 2500,
+    sparplaeneLabel: 'Kostenlos',
     offerUrl: 'https://traderepublic.com/',
     pros: [
       'Sehr einfache App-Bedienung',
       'Kostenlose Sparpläne',
-      '2% Zinsen auf Cash (modellabhängig)'
+      'Attraktive Cash-Verzinsung (modellabhängig)'
+    ]
+  },
+  scalablecapital: {
+    rating: 4.9,
+    interest: 2.0,
+    kostenloseEtfs: 2860,
+    sparplaeneLabel: 'Kostenlos',
+    offerUrl: 'https://de.scalable.capital/',
+    pros: [
+      'Dauerhaft kostenlose ETF-Sparpläne',
+      'Sehr große ETF-Auswahl',
+      'Starke App und Desktop-Version'
+    ]
+  },
+  flatex: {
+    rating: 4.2,
+    interest: 0,
+    kostenloseEtfs: 800,
+    sparplaeneLabel: 'Teilweise kostenlos',
+    offerUrl: 'https://www.flatex.de/',
+    pros: [
+      'Breite Produktpalette',
+      'Etablierter Broker',
+      'Viele Handelsplätze'
+    ]
+  },
+  comdirect: {
+    rating: 4.4,
+    interest: 0,
+    kostenloseEtfs: 1200,
+    sparplaeneLabel: 'Teilweise kostenlos',
+    offerUrl: 'https://www.comdirect.de/',
+    pros: [
+      'Sehr guter Kundenservice',
+      'Starke Web-Plattform',
+      'Große Auswahl an Wertpapieren'
+    ]
+  },
+  ing: {
+    rating: 4.5,
+    interest: 0,
+    kostenloseEtfs: 1000,
+    sparplaeneLabel: 'Teilweise kostenlos',
+    offerUrl: 'https://www.ing.de/',
+    pros: [
+      'Beliebte Direktbank',
+      'Stabile App und Online-Banking',
+      'Faire ETF-Sparplan-Angebote'
+    ]
+  },
+  consorsbank: {
+    rating: 4.4,
+    interest: 0,
+    kostenloseEtfs: 1100,
+    sparplaeneLabel: 'Teilweise kostenlos',
+    offerUrl: 'https://www.consorsbank.de/',
+    pros: [
+      'Große Marktabdeckung',
+      'Gute Analyse-Tools',
+      'Langjährig etablierter Broker'
+    ]
+  },
+  commerzbank: {
+    rating: 4.1,
+    interest: 0,
+    kostenloseEtfs: 700,
+    sparplaeneLabel: 'Begrenzt kostenlos',
+    offerUrl: 'https://www.commerzbank.de/',
+    pros: [
+      'Filialnetz + Online-Brokerage',
+      'Stabile Handelsplattform',
+      'Gute Integration mit Bankkonto'
+    ]
+  },
+  dkb: {
+    rating: 4.3,
+    interest: 0,
+    kostenloseEtfs: 900,
+    sparplaeneLabel: 'Teilweise kostenlos',
+    offerUrl: 'https://www.dkb.de/',
+    pros: [
+      'Beliebte Direktbank mit Depot',
+      'Einfache Sparplan-Nutzung',
+      'Solide Kostenstruktur'
+    ]
+  },
+  interactivebrokers: {
+    rating: 4.7,
+    interest: 0,
+    kostenloseEtfs: 3000,
+    sparplaeneLabel: 'International stark',
+    offerUrl: 'https://www.interactivebrokers.com/',
+    pros: [
+      'Sehr niedrige Gebühren für aktive Trader',
+      'Internationaler Marktzugang',
+      'Professionelle Trading-Tools'
     ]
   }
-];
+};
+
+function formatEuro(value) {
+  return `${(Number(value) || 0).toFixed(2).replace('.', ',')} €`;
+}
+
+function getBrokerOrderCostForCompare(brokerId) {
+  const modell = BROKER_GEBUEHREN_MODELLE[brokerId];
+  if (!modell) return 0;
+
+  const testOrderWert = 1000;
+  const direkt = berechneOrderGebuehrNachModell(testOrderWert, modell.direkt);
+  const xetra = berechneOrderGebuehrNachModell(testOrderWert, modell.xetra);
+  return Math.min(direkt, xetra);
+}
+
+function refreshPremiumBrokerDaten() {
+  const brokerSelect = document.getElementById('brokerAuswahl');
+  if (!brokerSelect) return;
+
+  const options = Array.from(brokerSelect.options)
+    .filter(option => option.value && option.value !== 'custom');
+
+  premiumBrokerDaten = options.map((option) => {
+    const brokerId = option.value;
+    const meta = BROKER_VERGLEICH_META[brokerId] || {};
+    const orderKosten = getBrokerOrderCostForCompare(brokerId);
+
+    return {
+      id: brokerId,
+      name: option.textContent.trim(),
+      rating: typeof meta.rating === 'number' ? meta.rating : 4.0,
+      depotKosten: 0,
+      orderKosten,
+      orderLabel: orderKosten === 0 ? '0,00 €' : formatEuro(orderKosten),
+      sparplaeneLabel: meta.sparplaeneLabel || 'Verfügbar',
+      interest: typeof meta.interest === 'number' ? meta.interest : 0,
+      kostenloseEtfs: Number.isFinite(meta.kostenloseEtfs) ? meta.kostenloseEtfs : 0,
+      offerUrl: meta.offerUrl || '#',
+      pros: Array.isArray(meta.pros) && meta.pros.length ? meta.pros : [
+        'Broker aus der regulären Auswahl',
+        'Gebührenmodell im Rechner hinterlegt',
+        'Im Vergleich direkt auswählbar'
+      ]
+    };
+  });
+}
 
 function renderPremiumBrokerList() {
   const listElement = document.getElementById('premiumBrokerList');
   const sortElement = document.getElementById('premiumBrokerSort');
   const directionElement = document.getElementById('premiumBrokerDirection');
   if (!listElement || !sortElement || !directionElement) return;
+
+  refreshPremiumBrokerDaten();
 
   const sortBy = sortElement.value;
   const direction = directionElement.value;
